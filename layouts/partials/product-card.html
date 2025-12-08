@@ -1,0 +1,29 @@
+<article class="product-card">
+  {{ with .Params.image }}
+    <div class="product-card__image-wrapper">
+      <img src="{{ . }}" alt="{{ $.Title }}" class="product-card__image">
+    </div>
+  {{ end }}
+
+  <div class="product-card__body">
+    <h2 class="product-card__title">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h2>
+
+    {{ with .Params.price }}
+      <p class="product-card__price">
+        {{ printf "€%.2f" . }}
+      </p>
+    {{ end }}
+
+    <p class="product-card__excerpt">
+      {{ .Summary }}
+    </p>
+
+    {{ with .Params.stripe_url }}
+      <a href="{{ . }}" class="product-card__buy" target="_blank" rel="noopener">
+        Comprar ahora
+      </a>
+    {{ end }}
+  </div>
+</article>

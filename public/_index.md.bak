@@ -1,0 +1,11 @@
+---
+title: "GLB Viewer Test"
+---
+
+# GLB como imagen
+
+Aquí debajo aparece el modelo:
+
+{{< glb src="/models/fox.glb" height="400px" >}}
+
+Más texto de prueba…

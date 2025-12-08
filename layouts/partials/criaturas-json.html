@@ -1,0 +1,23 @@
+<script>
+window.CRIATURAS_3042 = {
+    {{- $data := .Site.Data.criaturas -}}
+    {{- range $categoria, $subcats := $data -}}
+        "{{ $categoria }}": {
+            {{- range $subcat, $items := $subcats -}}
+                "{{ $subcat }}": [
+                    {{- range $key, $item := $items -}}
+                    {
+                        "nombre": "{{ $key }}",
+                        "slug": "{{ $key | urlize }}",
+                        "desc": "{{ $item.desc }}",
+                        "img": "{{ $item.img }}",
+                        "glb": "{{ $item.glb }}",
+                        "tipo": "{{ $item.tipo }}"
+                    },
+                    {{- end -}}
+                ],
+            {{- end -}}
+        },
+    {{- end -}}
+};
+</script>

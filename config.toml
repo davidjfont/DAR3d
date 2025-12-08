@@ -1,0 +1,8 @@
+baseURL = "/"
+languageCode = "es-es"
+title = "DAR3D - Mundos Abiertos a Posibilidades"
+theme = ""
+[[menu.main]]
+  name = "Criaturas"
+  url = "/criaturas/"
+  weight = 10

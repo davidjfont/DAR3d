@@ -1,0 +1,124 @@
+
+<section id="creatures" class="pt-16 md:pt-24 max-w-7xl mx-auto px-4">
+  <div class="grid md:grid-cols-3 gap-8">
+    
+    <h2 class="text-5xl font-title font-bold text-bone-white mb-12">
+    Nuestras Criaturas
+  </h2>
+<div class="text-center mt-16">
+  <a href="/criaturas/" class="inline-block px-6 py-3 text-lg font-semibold rounded-lg bg-fox-red text-bone-white hover:bg-neon-green hover:text-deep-black transition-colors duration-300 shadow-lg">
+    Acceder al árbol de criaturas →
+  </a>
+</div>
+</div>
+  <div class="grid md:grid-cols-3 gap-8">
+
+    {{/* Lista de criaturas */}}
+    {{ $criaturas := slice
+      (dict "nombre" "DE DA" "tipo" "Orgánico" "descripcion" "Humano Mutante del TEMPLO" "img" "de-da.png" "glb" "David Mutante.glb" "color" "text-fox-red")
+      (dict "nombre" "MR-3042" "tipo" "Inorgánico" "descripcion" "Unidad pendiente de actualización" "img" "mr-3042-v3.png" "glb" "mr-3042_V3.glb" "color" "text-neon-green")
+      (dict "nombre" "ALEFAR" "tipo" "Sintético" "descripcion" "Error del sistema" "img" "sintetica.jpg" "glb" "sintetica-pistola2.glb" "color" "text-neon-green")
+    }}
+
+    {{ range $index, $c := $criaturas }}
+    <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20 criatura-container" data-src="/models/{{ $c.glb }}">
+  <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+      <!-- Imagen inicial -->
+      <img src="/images/{{ $c.img }}" alt="{{ $c.nombre }}" class="criatura-ficha rounded-lg w-full h-full object-cover border border-fox-red/50 shadow-xl cursor-pointer">
+
+      <!-- Loader SVG -->
+      <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/90 z-10">
+        <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+          <g transform="rotate(0 50 50)">
+            <circle cx="50" cy="50" r="40" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-dasharray="62.8 62.8" stroke-dashoffset="0">
+              <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/>
+            </circle>
+          </g>
+          <text x="50%" y="50%" text-anchor="middle" fill="#fff" font-size="10" font-family="Orbitron, sans-serif">dar3D.com</text>
+        </svg>
+      </div>
+
+      <!-- Botón "volver" -->
+      <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded hover:bg-white hover:text-black z-20">
+        ← volver
+      </button>
+
+      <!-- Contenedor del visor 3D -->
+      <div class="criatura-3d hidden w-full h-full"></div>
+
+  </div>
+
+  <!-- Título también sirve como botón de volver -->
+  <h3 class="text-2xl font-title cursor-pointer {{ $c.color }}">{{ $c.nombre }}</h3>
+  <p class="text-xs text-neon-green mb-3">TIPO: {{ $c.tipo }}</p>
+  <p class="opacity-80">{{ $c.descripcion }}</p>
+</div>
+
+    {{ end }}
+
+  </div>
+
+  <!-- Inyección dinámica de visor 3D -->
+  <script type="module">
+  import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.criatura-container').forEach(container => {
+      const img = container.querySelector('.criatura-ficha');
+      const loader = container.querySelector('.criatura-loader');
+      const viewerWrapper = container.querySelector('.criatura-3d');
+      const volverBtn = container.querySelector('.volver-btn');
+      const glbSrc = container.dataset.src;
+      const h3 = container.querySelector('h3');
+
+      // Mostrar visor 3D al hacer clic en la imagen
+      img.addEventListener('click', () => {
+        img.classList.add('hidden');
+        loader.classList.remove('hidden');
+
+        setTimeout(() => {
+          loader.classList.add('hidden');
+          viewerWrapper.classList.remove('hidden');
+          volverBtn.classList.remove('hidden');
+
+          // Crear el visor solo si no existe aún
+          if (!viewerWrapper.querySelector('model-viewer')) {
+            const modelViewer = document.createElement('model-viewer');
+            modelViewer.setAttribute('src', glbSrc);
+            modelViewer.setAttribute('style', 'width: 100%; height: 100%;');
+            modelViewer.setAttribute('auto-rotate', '');
+            modelViewer.setAttribute('camera-controls', '');
+            modelViewer.setAttribute('ar', '');
+            modelViewer.setAttribute('exposure', '1');
+            modelViewer.setAttribute('shadow-intensity', '1');
+            modelViewer.setAttribute('alt', 'Modelo 3D');
+            modelViewer.setAttribute('interaction-prompt', 'none');
+            modelViewer.setAttribute('interaction-prompt-style', 'none');
+            if (window.innerWidth <= 768) {
+              modelViewer.setAttribute('disable-zoom', '');
+            }
+            viewerWrapper.appendChild(modelViewer);
+          }
+        }, 1000);
+      });
+
+      // Función para volver a imagen
+      function volverAVistaInicial() {
+        viewerWrapper.classList.add('hidden');
+        volverBtn.classList.add('hidden');
+        img.classList.remove('hidden');
+        viewerWrapper.innerHTML = ''; // Elimina visor para no duplicar
+      }
+
+      // Opción A: clic en título
+      h3.addEventListener('click', volverAVistaInicial);
+
+      // Opción B: clic en botón "volver"
+      volverBtn.addEventListener('click', volverAVistaInicial);
+    });
+  });
+</script>
+
+</section>
+

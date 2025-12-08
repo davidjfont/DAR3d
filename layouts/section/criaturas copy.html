@@ -1,0 +1,207 @@
+{{ define "main" }}
+<section class="max-w-6xl mx-auto px-4 py-10 text-fox-red">
+  <!-- Nivel 0: Universo -->
+  <h1 class="text-4xl font-title text-center mb-12">ÁRBOL DE CRIATURAS</h1>
+
+   <!-- Nivel 1: Ramas principales -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-center">
+    <button class="btn-rama" data-target="#organicos"><img src="/images/de-da.png"> Orgánicas</button>
+    <button class="btn-rama" data-target="#inorganicos"><img src="/images/MR-3042-v3.png"> Inorgánicas</button>
+    <button class="btn-rama" data-target="#sinteticos"><img src="/images/sintetica007.png"> Sintéticas</button>
+  </div>
+
+  <!-- Nivel 2: Subcategorías -->
+  <div id="organicos" class="subrama hidden">
+    <h2 class="text-2xl text-fox-red mb-4 text-center">Orgánicas</h2>
+    <div class="flex  justify-center gap-4">
+     
+            <div class="criatura-container bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20 " >
+               <h3 class="text-2xl font-title cursor-pointer text-fox-red">Humana</h3>
+              <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                <!-- Imagen inicial -->
+                <img src="/images/humana-A1.png" alt="Nombre Criatura" class="criatura-ficha rounded-lg w-full h-full object-cover border border-fox-red/50 shadow-xl cursor-pointer">
+
+                <!-- Loader SVG -->
+                <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/90 z-10">
+                  <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                    <g transform="rotate(0 50 50)">
+                      <circle cx="50" cy="50" r="40" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-dasharray="62.8 62.8" stroke-dashoffset="0">
+                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/>
+                      </circle>
+                    </g>
+                    <text x="50%" y="50%" text-anchor="middle" fill="#fff" font-size="10" font-family="Orbitron, sans-serif">dar3D.com</text>
+                  </svg>
+                </div>
+
+                <!-- Botón volver -->
+                <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded hover:bg-white hover:text-black z-20">← volver</button>
+
+                <!-- Contenedor visor 3D -->
+                <div class="criatura-3d hidden w-full h-full"></div>
+
+              </div>
+
+              <h3 class="text-2xl font-title cursor-pointer text-fox-red">Nombre Criatura</h3>
+              <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+              <p class="opacity-80">Descripción breve de la criatura.</p>
+              <div class="criatura-container bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20 subrama hidden" >
+            </div>
+
+      <div class="criatura-container bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20" data-src="/models/sintetica002.glb">
+               <h3 class="text-2xl font-title cursor-pointer text-fox-red">Mutantes</h3>
+              <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                <!-- Imagen inicial -->
+                <img src="/images/mutante-A1.png" alt="Nombre Criatura" class="criatura-ficha rounded-lg w-full h-full object-cover border border-fox-red/50 shadow-xl cursor-pointer">
+
+                <!-- Loader SVG -->
+                <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/90 z-10">
+                  <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                    <g transform="rotate(0 50 50)">
+                      <circle cx="50" cy="50" r="40" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-dasharray="62.8 62.8" stroke-dashoffset="0">
+                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/>
+                      </circle>
+                    </g>
+                    <text x="50%" y="50%" text-anchor="middle" fill="#fff" font-size="10" font-family="Orbitron, sans-serif">dar3D.com</text>
+                  </svg>
+                </div>
+
+                <!-- Botón volver -->
+                <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded hover:bg-white hover:text-black z-20">← volver</button>
+
+                <!-- Contenedor visor 3D -->
+                <div class="criatura-3d hidden w-full h-full"></div>
+
+              </div>
+
+              <h3 class="text-2xl font-title cursor-pointer text-fox-red">Nombre Criatura</h3>
+              <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+              <p class="opacity-80">Descripción breve de la criatura.</p>
+            </div>
+      <div class="criatura-container bg-deep-black rounded-xl p-4 shadow-xl border" data-src="/models/sintetica002.glb">
+               <h3 class="text-2xl font-title cursor-pointer text-fox-red">Alienígenas</h3>
+              <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                <!-- Imagen inicial -->
+                <img src="/images/alien-A1.png" alt="Nombre Criatura" class="criatura-ficha rounded-lg w-full h-full object-cover border border-fox-red/50 shadow-xl cursor-pointer">
+
+                <!-- Loader SVG -->
+                <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/90 z-10">
+                  <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                    <g transform="rotate(0 50 50)">
+                      <circle cx="50" cy="50" r="40" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-dasharray="62.8 62.8" stroke-dashoffset="0">
+                        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/>
+                      </circle>
+                    </g>
+                    <text x="50%" y="50%" text-anchor="middle" fill="#fff" font-size="10" font-family="Orbitron, sans-serif">dar3D.com</text>
+                  </svg>
+                </div>
+
+                <!-- Botón volver -->
+                <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded hover:bg-white hover:text-black z-20">← volver</button>
+
+                <!-- Contenedor visor 3D -->
+                <div class="criatura-3d hidden w-full h-full"></div>
+
+              </div>
+
+              <h3 class="text-2xl font-title cursor-pointer text-fox-red">Nombre Criatura</h3>
+              <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+              <p class="opacity-80">Descripción breve de la criatura.</p>
+              
+            </div>
+    </div>
+  </div>
+
+  <div id="inorganicos" class="subrama hidden">
+    <h2 class="text-2xl text-neon-green mb-4 text-center">Inorgánicos</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <span class="subcategoria">⚙️ Robots</span>
+    </div>
+  </div>
+
+  <div id="sinteticos" class="subrama hidden">
+    <h2 class="text-2xl text-blue-400 mb-4 text-center">Sintéticos</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <span class="subcategoria">🧪 Clones</span>
+      <span class="subcategoria">🔀 Híbridos</span>
+      <span class="subcategoria">🤖 IAs</span>
+    </div>
+  </div>
+</section>
+
+  <div class="flex justify-center mb-12">
+   <a href="/"> <img src="/images/dar3D-logo.jpg" alt="Universo" class="w-64 h-auto drop-shadow-xl rounded-xl border border-fox-red"></a>
+  </div>
+
+<script>
+  document.querySelectorAll('.btn-rama').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.subrama').forEach(s => s.classList.add('hidden'));
+      const target = document.querySelector(btn.dataset.target);
+      if (target) target.classList.remove('hidden');
+    });
+  });
+</script>
+ <!-- Inyección dinámica de visor 3D -->
+  <script type="module">
+  import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.criatura-container').forEach(container => {
+      const img = container.querySelector('.criatura-ficha');
+      const loader = container.querySelector('.criatura-loader');
+      const viewerWrapper = container.querySelector('.criatura-3d');
+      const volverBtn = container.querySelector('.volver-btn');
+      const glbSrc = container.dataset.src;
+      const h3 = container.querySelector('h3');
+
+      // Mostrar visor 3D al hacer clic en la imagen
+      img.addEventListener('click', () => {
+        img.classList.add('hidden');
+        loader.classList.remove('hidden');
+
+        setTimeout(() => {
+          loader.classList.add('hidden');
+          viewerWrapper.classList.remove('hidden');
+          volverBtn.classList.remove('hidden');
+
+          // Crear el visor solo si no existe aún
+          if (!viewerWrapper.querySelector('model-viewer')) {
+            const modelViewer = document.createElement('model-viewer');
+            modelViewer.setAttribute('src', glbSrc);
+            modelViewer.setAttribute('style', 'width: 100%; height: 100%;');
+            modelViewer.setAttribute('auto-rotate', '');
+            modelViewer.setAttribute('camera-controls', '');
+            modelViewer.setAttribute('ar', '');
+            modelViewer.setAttribute('exposure', '1');
+            modelViewer.setAttribute('shadow-intensity', '1');
+            modelViewer.setAttribute('alt', 'Modelo 3D');
+            modelViewer.setAttribute('interaction-prompt', 'none');
+            modelViewer.setAttribute('interaction-prompt-style', 'none');
+            if (window.innerWidth <= 768) {
+              modelViewer.setAttribute('disable-zoom', '');
+            }
+            viewerWrapper.appendChild(modelViewer);
+          }
+        }, 1000);
+      });
+
+      // Función para volver a imagen
+      function volverAVistaInicial() {
+        viewerWrapper.classList.add('hidden');
+        volverBtn.classList.add('hidden');
+        img.classList.remove('hidden');
+        viewerWrapper.innerHTML = ''; // Elimina visor para no duplicar
+      }
+
+      // Opción A: clic en título
+      h3.addEventListener('click', volverAVistaInicial);
+
+      // Opción B: clic en botón "volver"
+      volverBtn.addEventListener('click', volverAVistaInicial);
+    });
+  });
+</script>
+{{ end }}

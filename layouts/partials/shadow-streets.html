@@ -1,0 +1,110 @@
+<section id="fanart" class="pt-16 md:pt-24 mt-16 md:mt-24 border-t border-neon-green/30 max-w-7xl mx-auto px-4">
+
+    <!-- GRID DE INTRO -->
+    <div class="grid md:grid-cols-5 gap-8 items-center">
+
+        <div class="md:col-span-3">
+            <img src="images/shadowrun-logo.webp" >
+            <h2 class="text-5xl font-title font-bold text-bone-white mb-6">
+                Shadow-Streets
+            </h2>
+            <h3 class="text-3xl font-title text-fox-red mb-6">
+                Un Homenaje al Séptimo Mundo
+            </h3>
+            <p class="text-lg leading-relaxed mb-6">
+                Aquí encontrarás chamanes urbanos, arquetipos reimaginados...
+            </p>
+        </div>
+
+        <div class="md:col-span-2">
+            <img class="rounded-xl shadow-2xl border-4 border-fox-red/50"
+                 src="/images/dancer.png">
+        </div>
+
+    </div> <!-- fin grid -->
+
+
+
+
+<!-- CARRUSEL 3D -->
+<div id="carousel-3d"
+     class="w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative mt-12 bg-bone-white">
+
+    <model-viewer id="carouselModel"
+                  src="/models/shaman_enloquecido.glb"
+                  auto-rotate
+                  camera-controls
+                  interaction-prompt="none"
+                  disable-zoom
+                  style="width:100%; height:100%;">
+    </model-viewer>
+
+    <!-- Flecha izquierda -->
+    <button id="prev3d"
+            class="absolute left-4 top-1/2 -translate-y-1/2
+                   bg-black/40 hover:bg-black/70
+                   text-white text-5xl font-bold
+                   rounded-full w-14 h-14 flex items-center justify-center
+                   z-[999] shadow-xl backdrop-blur-sm select-none">
+        ‹
+    </button>
+
+    <!-- Flecha derecha -->
+    <button id="next3d"
+            class="absolute right-4 top-1/2 -translate-y-1/2
+                   bg-black/40 hover:bg-black/70
+                   text-white text-5xl font-bold
+                   rounded-full w-14 h-14 flex items-center justify-center
+                   z-[999] shadow-xl backdrop-blur-sm select-none">
+        ›
+    </button>
+
+</div>
+
+
+
+
+    <p class="mt-8 text-xs opacity-50 text-center">
+        Descargo legal: fanart no oficial.
+    </p>
+
+</section>
+
+
+<script>
+const models = [
+
+    "/models/shaman_enloquecido.glb",
+    "/models/elfo-guerrero-A1.glb",
+    "/models/orca-tecnomante-a1.glb",
+    "/models/shaman-varón.glb",
+    "/models/neon sprite.glb",
+    "/models/enforcer.glb",
+    "/models/cientifico.glb",
+    "/models/el_chatarrero.glb",
+    "/models/sniper.glb",
+    "/models/time_thief.glb",
+    "/models/dancer.glb",
+    "/models/dancer2.glb"
+];
+
+let current = 0;
+
+const viewer = document.getElementById("carouselModel");
+const prev = document.getElementById("prev3d");
+const next = document.getElementById("next3d");
+
+function updateModel() {
+    viewer.src = models[current];
+}
+
+prev.addEventListener("click", () => {
+    current = (current - 1 + models.length) % models.length;
+    updateModel();
+});
+
+next.addEventListener("click", () => {
+    current = (current + 1) % models.length;
+    updateModel();
+});
+</script>

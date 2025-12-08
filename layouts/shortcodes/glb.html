@@ -1,0 +1,20 @@
+<!-- Load Google Model Viewer -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js"></script>
+
+
+<model-viewer
+    src="{{ .src }}"
+    alt="{{ .alt | default `3D Model` }}"
+    camera-controls
+    auto-rotate
+    auto-rotate-delay="0"
+    shadow-intensity="1"
+    exposure="0.0"
+    tone-mapping="aces"
+    environment-image="https://modelviewer.dev/assets/environments/neutral.hdr"
+    disable-zoom
+    interaction-prompt="none"
+    interaction-prompt-style="none"
+    touch-action="none"
+    style="width:100%; height:100%; z-index:1000;">
+</model-viewer>

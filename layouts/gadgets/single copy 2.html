@@ -1,0 +1,242 @@
+{{ define "main" }}
+
+<article class="gadget-single" style="max-width:900px;margin:0 auto;padding:2rem;">
+
+  <h1>{{ .Title }}</h1>
+
+  <!-- PREVIEW -->
+  <img id="preview" src="{{ .Params.image }}" alt="{{ .Title }}"
+      style="width:100%;border-radius:12px;margin-bottom:20px;cursor:pointer;"
+      onclick="mostrarViewer()">
+
+  <!-- VISOR PRINCIPAL -->
+  <model-viewer id="visor"
+      src="{{ .Params.glb }}"
+      camera-controls
+      auto-rotate
+      disable-pan
+      style="display:none;width:100%;height:500px;border-radius:12px;background:white;">
+  </model-viewer>
+
+  <!-- PANEL -->
+  <div id="panel"
+      style="display:none; margin-top:20px; padding:15px; border-radius:12px;
+              background:#f3f3f3; border:1px solid #ddd; max-width:500px;">
+
+    <h3 style="margin-top:0;">Opciones del visor</h3>
+
+    <!-- MODO VISUAL -->
+    <label><strong>Modo de visualización:</strong></label><br>
+    <button onclick="modoNormal()">Normal</button>
+    <button onclick="modoGris()">Sólido gris</button>
+    <button onclick="modoXray()">X-Ray</button>
+    <br><br>
+
+    <!-- GLB ALTERNATIVO -->
+    <label><strong>Color sólido:</strong></label><br>
+    <button id="btnTexturas" onclick="toggleOverride()">Mostrar color sólido</button>
+    <br><br>
+
+    <!-- PICKER -->
+    <label><strong>Color del modelo:</strong></label><br>
+    <input type="color" id="colorPicker" value="#828282" onchange="cambiarColorOverride()">
+    <br><br>
+
+    <!-- ROUGH / METAL -->
+    <label><strong>Rugosidad:</strong></label><br>
+    <input type="range" min="0" max="1" value="1" step="0.01"
+           id="roughSlider" onchange="cambiarRough()">
+    <br><br>
+
+    <label><strong>Metallic:</strong></label><br>
+    <input type="range" min="0" max="1" value="0" step="0.01"
+           id="metalSlider" onchange="cambiarMetal()">
+    <br><br>
+
+    <!-- GIRO -->
+    <label><input type="checkbox" id="turntableToggle" onchange="toggleTurntable()"> Giro automático</label>
+    <br><br>
+
+    <!-- FONDO -->
+    <label><strong>Fondo:</strong></label><br>
+    <select id="bgSelect" onchange="cambiarFondo()">
+      <option value="white">Blanco</option>
+      <option value="black">Negro</option>
+      <option value="grey">Gris</option>
+      <option value="transparent">Transparente</option>
+    </select>
+    <br><br>
+
+    <button onclick="resetCamara()">Reset cámara</button>
+
+  </div>
+
+  <div style="margin-top:20px;">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.stripe_url }}
+  <a href="{{ . }}" target="_blank"
+    style="display:inline-block;padding:12px 24px;border-radius:8px;background:black;
+            color:white;text-decoration:none;margin-top:20px;">
+    Comprar ahora
+  </a>
+  {{ end }}
+</article>
+
+<script type="module"
+        src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<style>
+  .xray {
+    --model-viewer-material-roughness: 0.1;
+    --model-viewer-material-metalness: 1;
+    --model-viewer-material-opacity: 0.25;
+  }
+</style>
+
+<script>
+const visor = document.getElementById("visor");
+
+// GLB ORIGINAL Y GLB SIN TEXTURAS
+const glbOriginal = "{{ .Params.glb }}";
+const glbClay     = "{{ .Params.glbt }}";
+
+// Estado actual
+let overrideActivo = false;
+
+// Color persistente — comienza con gris 130,130,130
+let currentColor = "#828282";
+
+/* =====================================================
+   MOSTRAR VISOR
+===================================================== */
+function mostrarViewer() {
+  document.getElementById("preview").style.display = "none";
+  visor.style.display = "block";
+  document.getElementById("panel").style.display = "block";
+}
+
+/* =====================================================
+   APLICAR COLOR A UN MODELO (CLAY O NO)
+===================================================== */
+function aplicarColor(colorHex) {
+  if (!visor.model) return;
+
+  const r = parseInt(colorHex.substr(1,2),16)/255;
+  const g = parseInt(colorHex.substr(3,2),16)/255;
+  const b = parseInt(colorHex.substr(5,2),16)/255;
+
+  for (const mat of visor.model.materials) {
+    mat.pbrMetallicRoughness.setBaseColorFactor([r, g, b, 1]);
+    mat.pbrMetallicRoughness.metallicFactor = 0;
+    mat.pbrMetallicRoughness.roughnessFactor = 1;
+  }
+}
+
+/* =====================================================
+   CAMBIAR COLOR DESDE PICKER (GUARDA VALOR)
+===================================================== */
+function cambiarColorOverride() {
+  currentColor = document.getElementById("colorPicker").value;
+
+  // Solo aplicar si estamos en modo sólido
+  if (overrideActivo) {
+    visor.addEventListener("load", () => aplicarColor(currentColor), { once:true });
+    aplicarColor(currentColor);
+  }
+}
+
+/* =====================================================
+   TOGGLE ENTRE ORIGINAL Y "CLAY"
+===================================================== */
+function toggleOverride() {
+  overrideActivo = !overrideActivo;
+
+  if (overrideActivo) {
+    visor.src = glbClay;
+
+    // Aplicamos el color persistente cuando cargue el GLB alternativo
+    visor.addEventListener("load", () => aplicarColor(currentColor), { once:true });
+
+    document.getElementById("btnTexturas").textContent = "Mostrar textura original";
+
+  } else {
+    visor.src = glbOriginal;
+    document.getElementById("btnTexturas").textContent = "Mostrar color sólido";
+  }
+}
+
+/* =====================================================
+   MODO NORMAL
+===================================================== */
+function modoNormal() {
+  visor.classList.remove("xray");
+  visor.src = overrideActivo ? glbClay : glbOriginal;
+
+  if (overrideActivo)
+    visor.addEventListener("load", () => aplicarColor(currentColor), { once:true });
+}
+
+/* =====================================================
+   MODO GRIS (sobre cualquier GLB)
+===================================================== */
+function modoGris() {
+  visor.classList.remove("xray");
+
+  visor.addEventListener("load", () => {
+    if (!visor.model) return;
+
+    visor.environmentImage = "neutral";
+    visor.exposure = 1.2;
+
+    for (const mat of visor.model.materials) {
+      mat.pbrMetallicRoughness.setBaseColorFactor([0.75, 0.75, 0.75, 1]);
+      mat.pbrMetallicRoughness.metallicFactor = 0;
+      mat.pbrMetallicRoughness.roughnessFactor = 1;
+    }
+  }, { once:true });
+
+  visor.src = overrideActivo ? glbClay : glbOriginal;
+}
+
+/* =====================================================
+   MODO XRAY
+===================================================== */
+function modoXray() {
+  visor.classList.add("xray");
+}
+
+/* =====================================================
+   SLIDERS
+===================================================== */
+function cambiarRough() {
+  visor.style.setProperty("--model-viewer-material-roughness",
+    document.getElementById("roughSlider").value);
+}
+
+function cambiarMetal() {
+  visor.style.setProperty("--model-viewer-material-metalness",
+    document.getElementById("metalSlider").value);
+}
+
+/* =====================================================
+   FONDO, GIRO, CÁMARA
+===================================================== */
+function cambiarFondo() {
+  visor.style.background = document.getElementById("bgSelect").value;
+}
+
+function toggleTurntable() {
+  const chk = document.getElementById("turntableToggle").checked;
+  if (chk) visor.setAttribute("auto-rotate","");
+  else visor.removeAttribute("auto-rotate");
+}
+
+function resetCamara() {
+  visor.resetTurntableRotation();
+  visor.cameraOrbit = "0deg 75deg 2.5m";
+}
+</script>
+
+{{ end }}

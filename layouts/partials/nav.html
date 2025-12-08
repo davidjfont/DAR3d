@@ -1,0 +1,64 @@
+<header class="sticky top-0 z-50 bg-ui-dark-gray/90 backdrop-blur-sm shadow-xl border-b border-fox-red/30">
+    <!-- FOX 3D MINI LOGO (arriba a la izquierda) -->
+    <div id="logo-3d" class="w-12 h-12 absolute left-6 top-1/2 -translate-y-1/2 z-50 pointer-events-none"></div>
+
+    <div id="fox-mini-3d"
+        class="fixed top-4 left-4 w-[80px] h-[80px] z-[999] pointer-events-none">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+
+        <!-- MINI LOGO 3D + TEXTO -->
+        <div class="flex items-center space-x-3">
+            <div class="w-[60px] h-[60px] flex items-center justify-center pointer-events-none">
+                {{ partial "glb_viewer_logo.html" (dict "src" "/models/fox.glb" "height" "48px") }}
+            </div>
+
+            <a href="/" class="text-3xl font-title text-bone-white tracking-widest hover:text-fox-red transition duration-300">
+                <span class="logo-text">DAR3D</span>
+            </a>
+        </div>
+
+        <!-- NAV DESKTOP -->
+        <nav class="hidden md:flex space-x-8 font-title text-sm tracking-wide">
+           
+            <a href="/criaturas" class="hover:text-neon-green">Criaturas</a>
+             <a href="/gadgets" class="hover:text-neon-green">Gadgets</a>
+            <a href="/#fanart" class="hover:text-neon-green">Fanart</a>
+            <a href="/lore/" class="hover:text-neon-green">Wiki</a>
+            
+            <!-- ⭐ BOTÓN TIENDA CORREGIDO -->
+            <a href="/products/"
+               class="px-4 py-1.5 text-ui-dark-gray bg-fox-red font-bold rounded-lg hover:bg-bone-white transition duration-200 shadow-md">
+                Tienda →
+            </a>
+<div>    {{ partial "criaturas-json.html" . }}
+    {{ partial "searchbar.html" . }}</div>
+
+
+        </nav>
+
+        <!-- BOTÓN MENÚ MÓVIL -->
+        <button id="menu-toggle" class="md:hidden text-fox-red focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16m-7 6h7">
+                </path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- MENÚ MÓVIL -->
+    <div id="mobile-menu" class="hidden md:hidden bg-ui-dark-gray border-t border-fox-red/30 py-2">
+        <a href="../#creatures" class="block px-4 py-2 hover:bg-fox-red/20">Criaturas</a>
+        <a href="../gadgets" class="block px-4 py-2 hover:bg-fox-red/20">Gadgets</a>
+        <a href="../#fanart" class="block px-4 py-2 hover:bg-fox-red/20">Fanart</a>
+        <a href="../#nft" class="block px-4 py-2 hover:bg-fox-red/20">NFT / Keys</a>
+
+        <!-- ⭐ BOTÓN TIENDA MÓVIL CORREGIDO -->
+        <a href="/products/"
+           class="block px-4 py-2 bg-fox-red font-bold mt-2">
+           Tienda
+        </a>
+    </div>
+</header>

@@ -1,0 +1,131 @@
+Inorganicas:
+  Humanoides:
+    01 Robot Militar:
+      desc: "Unidad militar autónoma."
+      glb: "/models/robot-ia-militarB1.glb"
+      img: "/images/robot-militar-b3.png"
+      tipo: "Inorgánico"
+
+    02 Robot Ciudadano:
+      desc: "Unidad militar autónoma."
+      glb: "/models/mr-3042_V1.glb"
+      img: "/images/MR-3042-v2.png"
+      tipo: "Inorgánico"
+    
+    03 Robot Ciudadano Deprecado  :
+      desc: "Unidad militar autónoma."
+      glb: "/models/mr-3042_V3.glb"
+      img: "/images/MR-3042-v3.png"
+      tipo: "Inorgánico"
+
+  Roboticas:
+    01 Mascota Robótica:
+      desc: "Unidad robótica mascota."
+      glb: "/models/inorganico-mascotaA1.glb"
+      img: "/images/robot-mascota-C2.png"
+      tipo: "Inorgánico"
+
+    02 DRON Terrestre Militar:
+      desc: "Unidad robótica militar."
+      glb: "/models/dron-militar-a1.glb"
+      img: "/images/dron-militar-a1.png"
+      tipo: "Inorgánico"
+    
+    03 Mascota Alienígena:
+      desc: "Unidad robótica mascota."
+      glb: "/models/robot-ia-militarA1.glb"
+      img: "/images/robot-mascota-A1.png"
+      tipo: "Inorgánico"
+
+    04 DRON Alienígena Militar:
+      desc: "Unidad robótica militar."
+      glb: "/models/inorganico-alien-militar.glb"
+      img: "/images/robot-mascota-B1.png"
+      tipo: "Inorgánico"
+
+Organicos:
+  Alienigenas:
+    01 Alien Gris:
+      desc: "Alienígena de tipo gris clásico."
+      glb: "/models/alien-d1.glb"
+      img: "/images/alien-d1.png"
+      tipo: "Orgánico"
+      zip: "alien_d1"
+
+    02 Alien Reptiliano:
+      desc: "Reptiliano con estructura híbrida."
+      glb: "/models/alien-c1.glb"
+      img: "/images/alien-c1.png"
+      tipo: "Orgánico"
+    
+    03 Alien Nebulosa 1:
+      desc: "Reptiliano con estructura híbrida."
+      glb: "/models/alien-a1.glb"
+      img: "/images/alien-b3.png"
+      tipo: "Orgánico"
+
+    03 Alien Oscura:
+      desc: "Reptiliano con estructura híbrida."
+      glb: "/models/alien-b1.glb"
+      img: "/images/alien-a1.png"
+      tipo: "Orgánico"
+              
+  Humanas:
+    01 Alpha:
+      desc: "Subespecie humana variante Alpha."
+      glb: "/models/humana-B1.glb"
+      img: "/images/humana-B1.png"
+      tipo: "Orgánico"
+
+    02 Beta:
+      desc: "Subespecie humana variante Beta."
+      glb: "/models/humano-A1.glb"
+      img: "/images/humano-A1.png"
+      tipo: "Orgánico"
+
+  Mutantes:
+    04 Mutante Adulta varon:
+      desc: "Mutante completamente desarrollada."
+      glb: "/models/mutante-A1.glb"
+      img: "/images/mutante-A1.png"
+      tipo: "Orgánico"
+
+    03 Mutante Adulta hembra:
+      desc: "Mutante completamente desarrollada."
+      glb: "/models/mutanta-b1.glb"
+      img: "/images/mutanta-B1.png"
+      tipo: "Orgánico"
+
+    01 Mutante Ninfa hembra:
+      desc: "Mutante joven de tipo ninfa."
+      glb: "/models/mutanta-A1.glb"
+      img: "/images/mutanta-A2.png"
+      tipo: "Orgánico"
+
+    02 Mutante Ninfa varon:
+      desc: "Mutante joven de tipo ninfa."
+      glb: "/models/mutante-b2.glb"
+      img: "/images/mutante-b1.png"
+      tipo: "Orgánico"
+
+Sinteticas:
+  Adeptas:
+    01 Sintética A1:
+      desc: "Adeptas sintéticas de rango básico."
+      glb: "/models/sintetico-a1.glb"
+      img: "/images/sinteticoA3.png"
+      tipo: "Sintética"
+
+  Disidentes:
+    01 Sintética A1:
+      desc: "Adeptas sintéticas de rango básico."
+      glb: "/models/sintetica002.glb"
+      img: "/images/sintetica007.png"
+      tipo: "Sintética"
+
+  _Errores:
+    01 Sintética A1:
+      desc: "Adeptas sintéticas de rango básico."
+      glb: "/models/sintetico-deprecado-a1.glb"
+      img: "/images/sintetico_error.png"
+      tipo: "Sintética"

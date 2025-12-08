@@ -1,0 +1,286 @@
+
+
+<article class="gadget-single" style="max-width:900px;margin:0 auto;padding:2rem;">
+  <style>
+/* Capa superior de material liso */
+.override-color {
+  --model-viewer-material-color: var(--ov-color, rgba(1,1,1,0));
+  --model-viewer-material-metalness: var(--ov-metal, 0);
+  --model-viewer-material-roughness: var(--ov-rough, 1);
+  --model-viewer-material-emissive-strength: 0;
+}
+</style>
+
+
+  <h1>{{ .Title }}</h1>
+
+  <!-- PREVIEW -->
+  <img id="preview" src="{{ .Params.image }}" alt="{{ .Title }}"
+       style="width:100%;border-radius:12px;margin-bottom:20px;cursor:pointer;"
+       onclick="mostrarViewer()">
+
+  <!-- VISOR PRINCIPAL -->
+  <model-viewer id="visor"
+      src="{{ .Params.glb }}"
+      camera-controls
+      auto-rotate
+      disable-pan
+      style="display:none;width:100%;height:500px;border-radius:12px;background:white;">
+  </model-viewer>
+
+  <!-- PANEL -->
+  <div id="panel"
+       style="display:none; margin-top:20px; padding:15px; border-radius:12px;
+              background:#f3f3f3; border:1px solid #ddd; max-width:500px;">
+
+    <h3 style="margin-top:0;">Opciones del visor</h3>
+
+    <!-- MODO VISUAL -->
+    <label><strong>Modo de visualización:</strong></label><br>
+    <button onclick="modoNormal()">Normal</button>
+    <button onclick="modoGris()">Sólido gris</button>
+    <button onclick="modoXray()">X-Ray</button>
+    <br><br>
+
+    <!-- NUEVO SISTEMA OVERRIDE -->
+    <label><strong>Color sólido:</strong></label><br>
+    <button id="btnTexturas" onclick="toggleOverride()">Mostrar color sólido</button>
+    <br><br>
+
+    <!-- PICKER -->
+    <label><strong>Color del modelo:</strong></label><br>
+    <input type="color" id="colorPicker" value="#ffffff" onchange="cambiarColorOverride()">
+    <br><br>
+
+    <!-- ROUGH / METAL -->
+    <label><strong>Rugosidad:</strong></label><br>
+    <input type="range" min="0" max="1" value="1" step="0.01" id="roughSlider" onchange="cambiarRough()">
+    <br><br>
+
+    <label><strong>Metallic:</strong></label><br>
+    <input type="range" min="0" max="1" value="0" step="0.01" id="metalSlider" onchange="cambiarMetal()">
+    <br><br>
+
+    <!-- GIRO -->
+    <label><input type="checkbox" id="turntableToggle" onchange="toggleTurntable()"> Giro automático</label>
+    <br><br>
+
+    <!-- FONDO -->
+    <label><strong>Fondo:</strong></label><br>
+    <select id="bgSelect" onchange="cambiarFondo()">
+      <option value="white">Blanco</option>
+      <option value="black">Negro</option>
+      <option value="grey">Gris</option>
+      <option value="transparent">Transparente</option>
+    </select>
+    <br><br>
+
+    <button onclick="resetCamara()">Reset cámara</button>
+
+  </div>
+
+  <div style="margin-top:20px;">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.stripe_url }}
+  <a href="{{ . }}" target="_blank"
+     style="display:inline-block;padding:12px 24px;border-radius:8px;background:black;
+            color:white;text-decoration:none;margin-top:20px;">
+     Comprar ahora
+  </a>
+  {{ end }}
+</article>
+
+<!-- MODEL VIEWER -->
+<script type="module"
+        src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+
+
+<script>
+const visor = document.getElementById("visor");
+let overrideActivo = false;
+
+// Variables para guardar las texturas originales
+let savedTextures = new Map();
+
+/* ------------------------------
+   ... (mostrarViewer permanece igual) ...
+------------------------------ */
+function mostrarViewer() {
+    document.getElementById("preview").style.display = "none";
+    visor.style.display = "block";
+    document.getElementById("panel").style.display = "block";
+    // Asegura que las texturas se guarden la primera vez que el modelo carga.
+    if (!visor.model) {
+        visor.addEventListener('load', guardarTexturasOriginales);
+    } else {
+        guardarTexturasOriginales();
+    }
+}
+
+function guardarTexturasOriginales() {
+    if (savedTextures.size === 0 && visor.model) {
+        for (const mat of visor.model.materials) {
+            // Guardamos una referencia a la textura de color base original
+            savedTextures.set(mat, mat.pbrMetallicRoughness.baseColorTexture || null);
+        }
+    }
+}
+
+
+/* ------------------------------
+   SISTEMA OVERRIDE SUPERIOR (CSS + JS)
+------------------------------ */
+
+function toggleOverride() {
+    overrideActivo = !overrideActivo;
+
+    if (overrideActivo) {
+        aplicarOverrideColor();
+        visor.classList.add("override-color");
+        document.getElementById("btnTexturas").textContent = "Mostrar textura original";
+        
+        // 🔥 PASO CLAVE: Eliminar las texturas al activar el override
+        if (visor.model) {
+            for (const mat of visor.model.materials) {
+                mat.pbrMetallicRoughness.baseColorTexture = null;
+            }
+        }
+    } else {
+        visor.classList.remove("override-color");
+        document.getElementById("btnTexturas").textContent = "Mostrar color sólido";
+        
+        // 🔥 PASO CLAVE: Restaurar las texturas al desactivar el override
+        if (visor.model) {
+            for (const mat of visor.model.materials) {
+                const originalTexture = savedTextures.get(mat);
+                if (originalTexture) {
+                    mat.pbrMetallicRoughness.baseColorTexture = originalTexture;
+                }
+            }
+        }
+    }
+}
+
+/* 🔥 APLICAR COLOR AL OVERRIDE */
+function aplicarOverrideColor() {
+    const hex = document.getElementById("colorPicker").value;
+    const r = parseInt(hex.substr(1,2),16);
+    const g = parseInt(hex.substr(3,2),16);
+    const b = parseInt(hex.substr(5,2),16);
+
+    // El CSS override (clase override-color) se encarga de aplicar este color
+    visor.style.setProperty("--ov-color", `rgba(${r},${g},${b},1)`);
+    // También se actualiza el factor de color base en los materiales si el override está activo
+    if (visor.model && overrideActivo) {
+        for (const mat of visor.model.materials) {
+            mat.pbrMetallicRoughness.setBaseColorFactor([r/255, g/255, b/255, 1]);
+        }
+    }
+}
+
+/* Cambiar color en tiempo real si override está activo */
+function cambiarColorOverride() {
+    // Llama a aplicarOverrideColor que ahora actualiza tanto el CSS como el material JS
+    aplicarOverrideColor(); 
+}
+
+/* ------------------------------
+   MODOS BÁSICOS: Gris, Normal, Xray
+------------------------------ */
+
+function modoNormal() {
+    // Limpiar override CSS
+    visor.classList.remove("override-color");
+    
+    // Si estaba activo el override de color, restaurar las texturas
+    if (overrideActivo) {
+        toggleOverride(); // Llama a toggleOverride para restaurar texturas
+    }
+    
+    // Asegurarse de que el factor de color base vuelva a ser blanco (si se usó cambiarColorOverride)
+    if (visor.model) {
+        for (const mat of visor.model.materials) {
+            mat.pbrMetallicRoughness.setBaseColorFactor([1, 1, 1, 1]);
+        }
+    }
+    
+    overrideActivo = false;
+    document.getElementById("btnTexturas").textContent = "Mostrar color sólido";
+}
+
+function modoGris() {
+    // Desactivar override de color liso si está activo, para no interferir
+    if (overrideActivo) toggleOverride();
+    
+    // Usar la clase override para establecer el gris. (Esto funciona bien porque no hay texturas complejas)
+    visor.classList.add("override-color");
+    visor.style.setProperty("--ov-color", "rgba(200,200,200,1)");
+    // Para mayor seguridad, también anula la textura base
+    if (visor.model) {
+        for (const mat of visor.model.materials) {
+            mat.pbrMetallicRoughness.baseColorTexture = null;
+            mat.pbrMetallicRoughness.setBaseColorFactor([0.78, 0.78, 0.78, 1]); // Gris
+            mat.pbrMetallicRoughness.metallicFactor = 0;
+            mat.pbrMetallicRoughness.roughnessFactor = 1;
+        }
+    }
+}
+
+function modoXray() {
+    // Desactivar override de color liso si está activo, para no interferir
+    if (overrideActivo) toggleOverride();
+    
+    visor.classList.add("override-color");
+    visor.style.setProperty("--ov-color", "rgba(0,150,255,0.2)"); // Transparente azul
+    // Para mayor seguridad, anula la textura base
+    if (visor.model) {
+        for (const mat of visor.model.materials) {
+            mat.pbrMetallicRoughness.baseColorTexture = null;
+            mat.pbrMetallicRoughness.setBaseColorFactor([0, 0.58, 1, 0.2]); // Azul transparente
+            mat.pbrMetallicRoughness.metallicFactor = 0;
+            mat.pbrMetallicRoughness.roughnessFactor = 1;
+        }
+    }
+}
+
+/* ------------------------------
+   ROUGHNESS / METALNESS (override)
+------------------------------ */
+// Estas funciones ahora solo afectan al CSS override, lo cual funciona bien con la clase override-color.
+
+function cambiarRough() {
+    const val = document.getElementById("roughSlider").value;
+    visor.style.setProperty("--ov-rough", val);
+}
+
+function cambiarMetal() {
+    const val = document.getElementById("metalSlider").value;
+    visor.style.setProperty("--ov-metal", val);
+}
+
+/* ------------------------------
+   ... (funciones de fondo, giro, cámara permanecen iguales) ...
+------------------------------ */
+function cambiarFondo() {
+    const bg = document.getElementById("bgSelect").value;
+    visor.style.background =
+        bg === "white" ? "white" :
+        bg === "black" ? "black" :
+        bg === "grey"  ? "#222" :
+        "transparent";
+}
+
+function toggleTurntable() {
+    const chk = document.getElementById("turntableToggle").checked;
+    if (chk) visor.setAttribute("auto-rotate","");
+    else visor.removeAttribute("auto-rotate");
+}
+
+function resetCamara() {
+    visor.resetTurntableRotation();
+    visor.cameraOrbit = "0deg 75deg 2.5m";
+}
+</script>

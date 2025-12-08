@@ -1,0 +1,35 @@
+<script type="module"
+        src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">
+</script>
+
+<model-viewer id="logo3d"
+              src="{{ .src }}"
+              alt="{{ .alt | default "3D Model" }}"
+              
+              auto-rotate-delay="0"
+              shadow-intensity="1"
+              exposure="1"
+              interaction-prompt="none"
+              interaction-prompt-style="none"
+              disable-zoom
+              touch-action="none"
+              camera-controls
+              style="width:100%; height:100%;min-width: 90%; z-index:1000;">
+</model-viewer>
+<script>
+document.addEventListener("mousemove", (event) => {
+    const viewer = document.getElementById("logo3d");
+
+    if (!viewer) return;
+
+    // Cursor X normalizado (0 → izquierda, 1 → derecha)
+    const x = event.clientX / window.innerWidth;
+
+    // Ángulo entre -30° y +30°
+    const rotation = (x - 0.5) * (-90);
+
+    // Suaviza rotación
+    viewer.cameraOrbit = `${rotation}deg 75deg 2.5m`;
+});
+</script>
+

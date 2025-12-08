@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GLB RAW Viewer DEBUG (ESM)</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #0e0e0e;
+            font-family: monospace;
+            color: #fff;
+        }
+        #viewer { width: 100%; height: 100%; }
+        #logs {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0,0,0,0.85);
+            padding: 10px 15px;
+            font-size: 12px;
+            border-radius: 6px;
+            z-index: 20;
+            width: 360px;
+            max-height: 320px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="logs">LOGS INICIALES…</div>
+<div id="viewer"></div>
+
+<script type="module">
+
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js";
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/loaders/GLTFLoader.js";
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/controls/OrbitControls.js";
+
+const logs = document.getElementById('logs');
+const log = (m)=>{ logs.textContent += "\n" + m; logs.scrollTop = logs.scrollHeight; };
+
+log("✔ Módulos ESM cargados desde CDN");
+
+// leer modelo
+const params = new URLSearchParams(window.location.search);
+const modelPath = params.get('model');
+if (!modelPath){ log("❌ Falta ?model=/ruta/model.glb"); throw ""; }
+log("📦 Cargando GLB: " + modelPath);
+
+// escena
+const container = document.getElementById('viewer');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
+
+const camera = new THREE.PerspectiveCamera(45, container.clientWidth/container.clientHeight,0.1,100);
+camera.position.set(0,1.5,3);
+
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(container.clientWidth, container.clientHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+container.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x222222,1.3));
+
+const loader = new GLTFLoader();
+loader.load(
+    modelPath,
+    (gltf)=>{ scene.add(gltf.scene); log("✔ GLB cargado correctamente"); },
+    (xhr)=>{ log("Progreso " + ((xhr.loaded/xhr.total)*100).toFixed(1)+"%"); },
+    (err)=>{ log("❌ ERROR GLB: " + err); }
+);
+
+function animate(){
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene,camera);
+}
+animate();
+
+log("🟢 Animación iniciada");
+</script>
+
+</body>
+</html>

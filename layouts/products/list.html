@@ -1,0 +1,14 @@
+{{ define "main" }}
+<section class="products-page">
+  <header class="products-page__header">
+    <h1 style="font-size:3rem;">Colección DAR3D</h1>
+    <p>Modelos 3D, criaturas y arte digital listos para descargar.</p>
+  </header>
+
+  <div class="products-grid">
+    {{ range .Pages }}
+      {{ partial "product-card.html" . }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}

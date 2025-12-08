@@ -1,0 +1,44 @@
+{{ define "main" }}
+<article class="product-single">
+  <header class="product-single__header">
+    <h1>{{ .Title }}</h1>
+  </header>
+
+  <div class="product-single__layout">
+
+    {{ with .Params.image }}
+      <div class="product-single__image-wrapper">
+        <img src="{{ . }}" alt="{{ $.Title }}" class="product-single__image">
+      </div>
+    {{ end }}
+
+    <!-- GLB AUTOMÁTICO SEGÚN NOMBRE DEL ARCHIVO -->
+    <model-viewer
+        src="/models/{{ .File.BaseFileName }}.glb"
+        camera-controls
+        auto-rotate
+        class="w-full h-[30rem] bg-black rounded-xl">
+    </model-viewer>
+
+    <div class="product-single__content">
+
+      {{ with .Params.price }}
+        <p class="product-single__price">
+          {{ printf "€%.2f" . }}
+        </p>
+      {{ end }}
+
+      <div class="product-single__description">
+        {{ .Content }}
+      </div>
+
+      {{ with .Params.stripe_url }}
+        <a href="{{ . }}" class="product-single__buy" target="_blank" rel="noopener">
+          Comprar ahora
+        </a>
+      {{ end }}
+
+    </div>
+  </div>
+</article>
+{{ end }}

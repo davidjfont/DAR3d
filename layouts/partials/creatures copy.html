@@ -1,0 +1,355 @@
+<section id="creatures" class="pt-16 md:pt-24 max-w-7xl mx-auto px-4">
+    <h2 class="text-5xl font-title font-bold text-bone-white mb-12">
+        Nuestras Criaturas
+    </h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+        {{/* CRIATURA 1 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+            
+            <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/David Mutante.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-fox-red">DE DA</h3>
+            <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+            <p class="opacity-80">Humano Mutante deL TEMPLO</p>
+        </div>
+
+        {{/* CRIATURA 2 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+           <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/mr-3042_V3.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">MR-3042</h3>
+            <p class="text-xs text-fox-red mb-3">TIPO: Inorgánico</p>
+            <p class="opacity-80">Unidad pendiente de actualización</p>
+        </div>
+
+        {{/* CRIATURA 3 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+            <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+                <img src="/images/sintetica.jpg" class="rounded-lg mb-4 h-full aspect-video object-cover border border-fox-red/50 shadow-xl" style="max-height: 700px;">
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">ALEFAR</h3>
+            <p class="text-xs text-neon-green mb-3">TIPO: Sintético</p>
+            <p class="opacity-80">Error del sistema</p>
+        </div>
+
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+
+        {{/* CRIATURA 4 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+            
+            <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/inorganico-mascotaA1.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-fox-red">PETTIT</h3>
+            <p class="text-xs text-neon-green mb-3">TIPO: Inorgánico</p>
+            <p class="opacity-80">Mascotas de Robot</p>
+        </div>
+
+        {{/* CRIATURA 5 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+           <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/robot-ia-militarA1.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-neon-green"></h3>
+            <p class="text-xs text-fox-red mb-3">TIPO: Inorgánico</p>
+            <p class="opacity-80"></p>
+        </div>
+
+        {{/* CRIATURA 6 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+            <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+                <img src="/images/sintetica005.png" class="rounded-lg mb-4 h-full aspect-video object-cover border border-fox-red/50 shadow-xl" style="max-height: 700px;">
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">ALEFAR</h3>
+            <p class="text-xs text-neon-green mb-3">TIPO: Sintético</p>
+            <p class="opacity-80">Error del sistema</p>
+        </div>
+
+    </div>
+    /*------------------------------
+     <div class="grid md:grid-cols-3 gap-8">
+
+        {{/* CRIATURA 7 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+            
+            <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/sintetica002.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-fox-red">DE DA</h3>
+            <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+            <p class="opacity-80">Humano Mutante deL TEMPLO</p>
+        </div>
+
+        {{/* CRIATURA 8 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+           <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/sintetica003.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">MR-3042</h3>
+            <p class="text-xs text-fox-red mb-3">TIPO: Inorgánico</p>
+            <p class="opacity-80">Unidad pendiente de actualización</p>
+        </div>
+
+        {{/* CRIATURA 9 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+            <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+                <img src="/images/sintetica007.png" class="rounded-lg mb-4 h-full aspect-video object-cover border border-fox-red/50 shadow-xl" style="max-height: 700px;">
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">ALEFAR</h3>
+            <p class="text-xs text-neon-green mb-3">TIPO: Sintético</p>
+            <p class="opacity-80">Error del sistema</p>
+        </div>
+
+    </div>
+     <div class="grid md:grid-cols-3 gap-8">
+
+        {{/* CRIATURA 10 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+            
+            <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/robot-ia-militarB1.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-fox-red">DE DA</h3>
+            <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+            <p class="opacity-80">Humano Mutante deL TEMPLO</p>
+        </div>
+
+        {{/* CRIATURA 11 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+           <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/mr-3042_V1.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">MR-3042</h3>
+            <p class="text-xs text-fox-red mb-3">TIPO: Inorgánico</p>
+            <p class="opacity-80">Unidad pendiente de actualización</p>
+        </div>
+
+        {{/* CRIATURA 12 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+           <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/alefar-madre.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">MR-3042</h3>
+            <p class="text-xs text-fox-red mb-3">TIPO: Inorgánico</p>
+            <p class="opacity-80">Unidad pendiente de actualización</p>
+        </div>
+
+    </div>
+     <div class="grid md:grid-cols-3 gap-8">
+
+        {{/* CRIATURA 13 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+            
+            <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/David Mutante.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-fox-red">DE DA</h3>
+            <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+            <p class="opacity-80">Humano Mutante deL TEMPLO</p>
+        </div>
+
+        {{/* CRIATURA 3 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+           <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/mr-3042_V3.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">MR-3042</h3>
+            <p class="text-xs text-fox-red mb-3">TIPO: Inorgánico</p>
+            <p class="opacity-80">Unidad pendiente de actualización</p>
+        </div>
+
+        {{/* CRIATURA 3 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+            <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+                <img src="/images/sintetica.jpg" class="rounded-lg mb-4 h-full aspect-video object-cover border border-fox-red/50 shadow-xl" style="max-height: 700px;">
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">ALEFAR</h3>
+            <p class="text-xs text-neon-green mb-3">TIPO: Sintético</p>
+            <p class="opacity-80">Error del sistema</p>
+        </div>
+
+    </div>
+     <div class="grid md:grid-cols-3 gap-8">
+
+        {{/* CRIATURA 3 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+            
+            <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/sintetica-pistola3.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-fox-red">DE DA</h3>
+            <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+            <p class="opacity-80">Humano Mutante deL TEMPLO</p>
+        </div>
+
+        {{/* CRIATURA 3 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+           <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/sintetica-pistola2.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">MR-3042</h3>
+            <p class="text-xs text-fox-red mb-3">TIPO: Inorgánico</p>
+            <p class="opacity-80">Unidad pendiente de actualización</p>
+        </div>
+
+        {{/* CRIATURA 18 */}}
+        <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20">
+           <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+                {{ partial "glb_viewer.html" (dict "src" "/models/sintetica-pistola.glb" "height" "100%") }}
+
+            </div>
+            <h3 class="text-2xl font-title text-neon-green">MR-3042</h3>
+            <p class="text-xs text-fox-red mb-3">TIPO: Inorgánico</p>
+            <p class="opacity-80">Unidad pendiente de actualización</p>
+        </div>
+
+    </div>
+</section>
+<section id="creatures" class="pt-16 md:pt-24 max-w-7xl mx-auto px-4">
+  <h2 class="text-5xl font-title font-bold text-bone-white mb-12">
+    Nuestras Criaturas
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-8">
+
+    {{/* Lista de criaturas */}}
+    {{ $criaturas := slice
+      (dict "nombre" "DE DA" "tipo" "Orgánico" "descripcion" "Humano Mutante del TEMPLO" "img" "de-da.png" "glb" "David Mutante.glb" "color" "text-fox-red")
+      (dict "nombre" "MR-3042" "tipo" "Inorgánico" "descripcion" "Unidad pendiente de actualización" "img" "mr-3042.png" "glb" "mr-3042_V3.glb" "color" "text-neon-green")
+      (dict "nombre" "ALEFAR" "tipo" "Sintético" "descripcion" "Error del sistema" "img" "sintetica.jpg" "glb" "alefar-madre.glb" "color" "text-neon-green")
+    }}
+
+    {{ range $index, $c := $criaturas }}
+    <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20 criatura-container" data-src="/models/{{ $c.glb }}">
+  <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+
+    <!-- Imagen inicial -->
+    <img src="/images/{{ $c.img }}" alt="{{ $c.nombre }}" class="criatura-ficha rounded-lg w-full h-full object-cover border border-fox-red/50 shadow-xl cursor-pointer">
+
+    <!-- Loader SVG -->
+    <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/90 z-10">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+        <g transform="rotate(0 50 50)">
+          <circle cx="50" cy="50" r="40" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-dasharray="62.8 62.8" stroke-dashoffset="0">
+            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+        <text x="50%" y="50%" text-anchor="middle" fill="#fff" font-size="10" font-family="Orbitron, sans-serif">dar3D.com</text>
+      </svg>
+    </div>
+
+    <!-- Botón "volver" -->
+    <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded hover:bg-white hover:text-black z-20">
+      ← volver
+    </button>
+
+    <!-- Contenedor del visor 3D -->
+    <div class="criatura-3d hidden w-full h-full"></div>
+
+  </div>
+
+  <!-- Título también sirve como botón de volver -->
+  <h3 class="text-2xl font-title cursor-pointer {{ $c.color }}">{{ $c.nombre }}</h3>
+  <p class="text-xs text-neon-green mb-3">TIPO: {{ $c.tipo }}</p>
+  <p class="opacity-80">{{ $c.descripcion }}</p>
+</div>
+
+    {{ end }}
+
+  </div>
+
+  <!-- Inyección dinámica de visor 3D -->
+  <script type="module">
+  import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.criatura-container').forEach(container => {
+      const img = container.querySelector('.criatura-ficha');
+      const loader = container.querySelector('.criatura-loader');
+      const viewerWrapper = container.querySelector('.criatura-3d');
+      const volverBtn = container.querySelector('.volver-btn');
+      const glbSrc = container.dataset.src;
+      const h3 = container.querySelector('h3');
+
+      // Mostrar visor 3D al hacer clic en la imagen
+      img.addEventListener('click', () => {
+        img.classList.add('hidden');
+        loader.classList.remove('hidden');
+
+        setTimeout(() => {
+          loader.classList.add('hidden');
+          viewerWrapper.classList.remove('hidden');
+          volverBtn.classList.remove('hidden');
+
+          // Crear el visor solo si no existe aún
+          if (!viewerWrapper.querySelector('model-viewer')) {
+            const modelViewer = document.createElement('model-viewer');
+            modelViewer.setAttribute('src', glbSrc);
+            modelViewer.setAttribute('style', 'width: 100%; height: 100%;');
+            modelViewer.setAttribute('auto-rotate', '');
+            modelViewer.setAttribute('camera-controls', '');
+            modelViewer.setAttribute('ar', '');
+            modelViewer.setAttribute('exposure', '1');
+            modelViewer.setAttribute('shadow-intensity', '1');
+            modelViewer.setAttribute('alt', 'Modelo 3D');
+            modelViewer.setAttribute('interaction-prompt', 'none');
+            modelViewer.setAttribute('interaction-prompt-style', 'none');
+            if (window.innerWidth <= 768) {
+              modelViewer.setAttribute('disable-zoom', '');
+            }
+            viewerWrapper.appendChild(modelViewer);
+          }
+        }, 1000);
+      });
+
+      // Función para volver a imagen
+      function volverAVistaInicial() {
+        viewerWrapper.classList.add('hidden');
+        volverBtn.classList.add('hidden');
+        img.classList.remove('hidden');
+        viewerWrapper.innerHTML = ''; // Elimina visor para no duplicar
+      }
+
+      // Opción A: clic en título
+      h3.addEventListener('click', volverAVistaInicial);
+
+      // Opción B: clic en botón "volver"
+      volverBtn.addEventListener('click', volverAVistaInicial);
+    });
+  });
+</script>
+
+</section>
+

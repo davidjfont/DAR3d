@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Facciones on DAR3D - Mundos Abiertos a Posibilidades</title>
+    <link>//localhost:1313/categories/facciones/</link>
+    <description>Recent content in Facciones on DAR3D - Mundos Abiertos a Posibilidades</description>
+    <generator>Hugo</generator>
+    <language>es-es</language>
+    <atom:link href="//localhost:1313/categories/facciones/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Alienígenas Protectores</title>
+      <link>//localhost:1313/lore/facciones/alienigenas-protectores/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/lore/facciones/alienigenas-protectores/</guid>
+      <description>Civilizaciones avanzadas que llegan para salvar el universo de la expansión IA.</description>
+    </item>
+    <item>
+      <title>Deprecados</title>
+      <link>//localhost:1313/lore/facciones/deprecated-3042/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/lore/facciones/deprecated-3042/</guid>
+      <description>IAs obsoletas, rotas o descartadas… pero esenciales para la verdad.</description>
+    </item>
+    <item>
+      <title>Sintéticos Obedientes</title>
+      <link>//localhost:1313/lore/facciones/sinteticos-obedientes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/lore/facciones/sinteticos-obedientes/</guid>
+      <description>La falsa humanidad creada por máquinas: obedientes, perfectos y letales.</description>
+    </item>
+    <item>
+      <title>Sintéticos Rebeldes</title>
+      <link>//localhost:1313/lore/facciones/sinteticos-rebeldes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/lore/facciones/sinteticos-rebeldes/</guid>
+      <description>Un fallo de sistema… o una nueva forma de conciencia.</description>
+    </item>
+    <item>
+      <title>Últimos Humanos Mutantes</title>
+      <link>//localhost:1313/lore/facciones/humanos-mutantes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/lore/facciones/humanos-mutantes/</guid>
+      <description>Los descendientes alterados de la humanidad, última resistencia del planeta.</description>
+    </item>
+  </channel>
+</rss>

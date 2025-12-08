@@ -1,0 +1,720 @@
+{{ define "main" }}
+
+<section class="max-w-6xl mx-auto px-4 py-10 text-fox-red">
+
+  <h1 class="text-4xl font-title text-center mb-12">ÁRBOL DE CRIATURAS</h1>
+
+  <!-- NIVEL 1 -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-center">
+    <button class="btn-rama" data-target="#organicas">
+      <img src="/images/organicos-a1.png" class="mx-auto mb-2"> Orgánicas
+    </button>
+    <button class="btn-rama" data-target="#inorganicas">
+      <img src="/images/inorganicas.png" class="mx-auto mb-2"> Inorgánicas
+    </button>
+    <button class="btn-rama" data-target="#sinteticas">
+      <img src="/images/sinteticos.png" class="mx-auto mb-2"> Sintéticas
+    </button>
+  </div>
+
+  <!-- ─────────────────────────────────────────────── -->
+  <!-- ===============   ORGÁNICAS   ================= -->
+  <!-- ─────────────────────────────────────────────── -->
+
+  <div id="organicas" class="subrama hidden">
+    <h2 class="text-2xl text-fox-red mb-6 text-center">Orgánicas</h2>
+
+    <!-- NIVEL 2 -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+      <!-- HUMANAS (PADRE → Subnivel) -->
+      <div class="criatura-node" data-subtarget="#subnivel-humana">
+        <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+          <h3 class="text-2xl font-title text-center text-fox-red">Humanas</h3>
+
+          <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                      rounded-xl overflow-hidden shadow-xl relative cursor-pointer mt-3">
+            <img src="/images/humana-A1.png"
+                 alt="Humanas"
+                 class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+          </div>
+
+          <p class="text-xs text-neon-green mt-3 text-center">TIPO: Orgánico</p>
+          <p class="opacity-80 text-center">Criatura base con subcategorías.</p>
+        </div>
+      </div>
+
+      <!-- MUTANTES (PADRE → Subnivel) -->
+      <div class="criatura-node" data-subtarget="#subnivel-mutante">
+        <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+          <h3 class="text-2xl font-title text-center text-fox-red">Mutantes</h3>
+
+          <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                      rounded-xl overflow-hidden shadow-xl relative cursor-pointer mt-3">
+            <img src="/images/mutante-b1.png"
+                 alt="Mutantes"
+                 class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+          </div>
+
+          <p class="text-xs text-neon-green mt-3 text-center">TIPO: Orgánico</p>
+          <p class="opacity-80 text-center">Mutantes con variaciones.</p>
+        </div>
+      </div>
+
+      <!-- ALIENÍGENAS (PADRE → Subnivel, ahora como Humanas) -->
+      <div class="criatura-node" data-subtarget="#subnivel-alien">
+        <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+          <h3 class="text-2xl font-title text-center text-fox-red">Alienígenas</h3>
+
+          <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                      rounded-xl overflow-hidden shadow-xl relative cursor-pointer mt-3">
+            <img src="/images/alien-A1.png"
+                 alt="Alienígenas"
+                 class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+          </div>
+
+          <p class="text-xs text-neon-green mt-3 text-center">TIPO: Orgánico</p>
+          <p class="opacity-80 text-center">Variantes exóticas.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ───────────── NIVEL 3: HUMANAS ───────────── -->
+    <div id="subnivel-humana" class="subrama subrama-n3 hidden mt-4 pt-6 border-t border-fox-red/30">
+      <h4 class="text-xl text-fox-red mb-6 text-center">Sub-Especies Humanas</h4>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
+
+        <!-- Alpha -->
+        <div class="criatura-node" data-src="/models/humana-B1.glb">
+          <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+
+            <h5 class="text-lg font-title text-center text-deep-black mb-3">Alpha</h5>
+            <p class="text-xs text-neon-green mt-3 text-center">TIPO: Orgánico</p>
+            <p class="opacity-80 text-center">Mutantes con variaciones.</p>
+            <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                        rounded-xl overflow-hidden shadow-xl relative">
+              <img src="/images/humana-B1.png"
+                   class="criatura-ficha w-full h-full object-cover rounded-xl border border-fox-red/50">
+
+              <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10">
+                <svg width="60" height="60" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="8"
+                          stroke-linecap="round" stroke-dasharray="62.8">
+                    <animateTransform attributeName="transform"
+                                      type="rotate"
+                                      from="0 50 50"
+                                      to="360 50 50"
+                                      dur="1s"
+                                      repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+              </div>
+
+              <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white 
+                             text-xs px-2 py-1 rounded z-20">← volver</button>
+
+              <div class="criatura-3d hidden absolute inset-0"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Beta -->
+        <div class="criatura-node" data-src="/models/humano-A1.glb">
+          <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+
+            <h5 class="text-lg font-title text-center text-deep-black mb-3">Beta</h5>
+            <p class="text-xs text-neon-green mt-3 text-center">TIPO: Orgánico</p>
+          <p class="opacity-80 text-center">Mutantes con variaciones.</p>
+
+            <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                        rounded-xl overflow-hidden shadow-xl relative">
+              <img src="/images/humano-A1.png"
+                   class="criatura-ficha w-full h-full object-cover rounded-xl border border-fox-red/50">
+
+              <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10">
+                <svg width="60" height="60" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="8"
+                          stroke-linecap="round" stroke-dasharray="62.8">
+                    <animateTransform attributeName="transform"
+                                      type="rotate"
+                                      from="0 50 50"
+                                      to="360 50 50"
+                                      dur="1s"
+                                      repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+              </div>
+
+              <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white
+                             text-xs px-2 py-1 rounded z-20">← volver</button>
+
+              <div class="criatura-3d hidden absolute inset-0"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ───────────── NIVEL 3: MUTANTES ───────────── -->
+    <div id="subnivel-mutante" class="subrama subrama-n3 hidden mt-4 pt-6 border-t border-fox-red/30">
+      <h4 class="text-xl text-fox-red mb-6 text-center">Variantes Mutantes</h4>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
+
+        <!-- Mutante Alpha -->
+        <div class="criatura-node" data-src="/models/mutanta-A1.glb">
+          <div class="bg-deep-black p-4 rounded-xl shadow-xl border border-fox-red/20">
+            <h5 class="text-lg font-title text-center text-deep-black mb-3">Mutante ninfa</h5>
+            <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                        rounded-xl overflow-hidden shadow-xl relative">
+              <img src="/images/mutanta-A2.png"
+                   class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+              <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10">
+                <svg width="60" height="60" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="8"
+                          stroke-linecap="round" stroke-dasharray="62.8">
+                    <animateTransform attributeName="transform"
+                                      type="rotate"
+                                      from="0 50 50"
+                                      to="360 50 50"
+                                      dur="1s"
+                                      repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+              </div>
+              <p class="text-xs text-neon-green mt-3 text-center">TIPO: Orgánico</p>
+          <p class="opacity-80 text-center">Mutantes con variaciones.</p>
+
+              <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded z-20">
+                ← volver
+              </button>
+
+              <div class="criatura-3d hidden absolute inset-0"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mutante Beta -->
+        <div class="criatura-node" data-src="/models/mutante-A1.glb">
+          <div class="bg-deep-black p-4 rounded-xl shadow-xl border border-fox-red/20">
+            <h5 class="text-lg font-title text-center text-deep-black mb-3">Mutante adulta</h5>
+            <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                        rounded-xl overflow-hidden shadow-xl relative">
+              <img src="/images/mutante-A1.png"
+                   class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+              <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10">
+                <svg width="60" height="60" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="8"
+                          stroke-linecap="round" stroke-dasharray="62.8">
+                    <animateTransform attributeName="transform"
+                                      type="rotate"
+                                      from="0 50 50"
+                                      to="360 50 50"
+                                      dur="1s"
+                                      repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+              </div>
+              <p class="text-xs text-neon-green mt-3 text-center">TIPO: Orgánica</p>
+          <p class="opacity-80 text-center">Mutantes con variaciones.</p>
+
+              <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded z-20">
+                ← volver
+              </button>
+
+              <div class="criatura-3d hidden absolute inset-0"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Mutante Hacker -->
+        <div class="criatura-node" data-src="/models/david-mutante-A1.glb">
+          <div class="bg-deep-black p-4 rounded-xl shadow-xl border border-fox-red/20">
+            <h5 class="text-lg font-title text-center text-deep-black mb-3">Mutante Hacker</h5>
+            <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                        rounded-xl overflow-hidden shadow-xl relative">
+              <img src="/images/david-mutante-A1.png"
+                   class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+              <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10">
+                <svg width="60" height="60" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="8"
+                          stroke-linecap="round" stroke-dasharray="62.8">
+                    <animateTransform attributeName="transform"
+                                      type="rotate"
+                                      from="0 50 50"
+                                      to="360 50 50"
+                                      dur="1s"
+                                      repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+              </div>
+              <p class="text-xs text-neon-green mt-3 text-center">TIPO: Orgánica</p>
+          <p class="opacity-80 text-center">Mutantes con variaciones.</p>
+
+              <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded z-20">
+                ← volver
+              </button>
+
+              <div class="criatura-3d hidden absolute inset-0"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ───────────── NIVEL 3: ALIENÍGENAS ───────────── -->
+    <div id="subnivel-alien" class="subrama subrama-n3 hidden mt-4 pt-6 border-t border-fox-red/30">
+      <h4 class="text-xl text-fox-red mb-6 text-center">Sub-Especies Alienígenas</h4>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
+
+        <!-- Alien Gris -->
+        <div class="criatura-node" data-src="/models/alien-d1.glb">
+          <div class="bg-deep-black p-4 rounded-xl shadow-xl border border-fox-red/20">
+            <h5 class="text-lg font-title text-center text-deep-black mb-3">Alien Gris</h5>
+            <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                        rounded-xl overflow-hidden shadow-xl relative">
+              <img src="/images/alien-d1.png"
+                   class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+              <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10">
+                <svg width="60" height="60" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="8"
+                          stroke-linecap="round" stroke-dasharray="62.8">
+                    <animateTransform attributeName="transform"
+                                      type="rotate"
+                                      from="0 50 50"
+                                      to="360 50 50"
+                                      dur="1s"
+                                      repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+              </div>
+
+              <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded z-20">
+                ← volver
+              </button>
+
+              <div class="criatura-3d hidden absolute inset-0"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alien Reptiliano -->
+        <div class="criatura-node" data-src="/models/alien-c1.glb">
+          <div class="bg-deep-black p-4 rounded-xl shadow-xl border border-fox-red/20">
+            <h5 class="text-lg font-title text-center text-deep-black mb-3">Alien Reptiliano</h5>
+            <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                        rounded-xl overflow-hidden shadow-xl relative">
+              <img src="/images/alien-c1.png"
+                   class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+              <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10">
+                <svg width="60" height="60" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="8"
+                          stroke-linecap="round" stroke-dasharray="62.8">
+                    <animateTransform attributeName="transform"
+                                      type="rotate"
+                                      from="0 50 50"
+                                      to="360 50 50"
+                                      dur="1s"
+                                      repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+              </div>
+
+              <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded z-20">
+                ← volver
+              </button>
+
+              <div class="criatura-3d hidden absolute inset-0"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alien Nebular -->
+        <div class="criatura-node" data-src="/models/alien-a1.glb">
+          <div class="bg-deep-black p-4 rounded-xl shadow-xl border border-fox-red/20">
+            <h5 class="text-lg font-title text-center text-deep-black mb-3">Alien Nebular</h5>
+            <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                        rounded-xl overflow-hidden shadow-xl relative">
+              <img src="/images/alien-b3.png"
+                   class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+              <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10">
+                <svg width="60" height="60" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="#fff" stroke-width="8"
+                          stroke-linecap="round" stroke-dasharray="62.8">
+                    <animateTransform attributeName="transform"
+                                      type="rotate"
+                                      from="0 50 50"
+                                      to="360 50 50"
+                                      dur="1s"
+                                      repeatCount="indefinite"/>
+                  </circle>
+                </svg>
+              </div>
+
+              <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded z-20">
+                ← volver
+              </button>
+
+              <div class="criatura-3d hidden absolute inset-0"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ─────────────────────────────────────────────── -->
+  <!-- ===============   INORGÁNICAS   ============== -->
+  <!-- ─────────────────────────────────────────────── -->
+
+  <div id="inorganicas" class="subrama hidden">
+    <h2 class="text-2xl text-fox-red mb-6 text-center">Inorgánicas</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+      <!-- 001 -->
+      <div class="criatura-node" data-src="/models/robot-ia-militarB1.glb">
+        <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+          <h3 class="text-2xl font-title text-center text-fox-red">Humanoides</h3>
+
+          <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                      rounded-xl overflow-hidden shadow-xl relative cursor-pointer mt-3">
+            <img src="/images/robot-militar-b3.png"
+                 alt="Adictos de la IA"
+                 class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+            <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10"></div>
+            <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded z-20">← volver</button>
+            <div class="criatura-3d hidden absolute inset-0"></div>
+          </div>
+
+          <p class="text-xs text-neon-green mt-3 text-center">TIPO: Inorgánica</p>
+          <p class="opacity-80 text-center">Descripción breve de la criatura.</p>
+        </div>
+      </div>
+
+      <!-- 002 -->
+      <div class="criatura-node" data-src="/models/inorganico-mascotaA1.glb">
+        <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+          <h3 class="text-2xl font-title text-center text-fox-red">Robóticas</h3>
+
+          <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                      rounded-xl overflow-hidden shadow-xl relative cursor-pointer mt-3">
+            <img src="/images/robot-mascota-C3.png"
+                 alt="Mascotas de robots"
+                 class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+            <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10"></div>
+            <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded z-20">← volver</button>
+            <div class="criatura-3d hidden absolute inset-0"></div>
+          </div>
+
+          <p class="text-xs text-neon-green mt-3 text-center">TIPO: Inorgánica</p>
+          <p class="opacity-80 text-center">Descripción breve de la criatura.</p>
+        </div>
+      </div>
+
+      <!-- 003 -->
+      <div class="criatura-node" data-src="/models/mr-3042_V1.glb">
+        <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+          <h3 class="text-2xl font-title text-center text-fox-red">Deprecadas</h3>
+
+          <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                      rounded-xl overflow-hidden shadow-xl relative cursor-pointer mt-3">
+            <img src="/images/mr-3042-v2.png"
+                 alt="Deprecated"
+                 class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+            <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10"></div>
+            <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded z-20">← volver</button>
+            <div class="criatura-3d hidden absolute inset-0"></div>
+          </div>
+
+          <p class="text-xs text-neon-green mt-3 text-center">TIPO: Inorgánica</p>
+          <p class="opacity-80 text-center">Descripción breve de la criatura.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────────────────── -->
+  <!-- ===============   SINTÉTICAS   =============== -->
+  <!-- ─────────────────────────────────────────────── -->
+
+  <div id="sinteticas" class="subrama hidden">
+    <h2 class="text-2xl text-fox-red mb-6 text-center">Sintéticas</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+      <!-- ADEPTOS -->
+      <div class="criatura-node" data-src="/models/sintetico-a1.glb">
+        <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+          <h3 class="text-2xl font-title text-center text-fox-red">Adeptas</h3>
+
+          <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                      rounded-xl overflow-hidden shadow-xl relative cursor-pointer mt-3">
+            <img src="/images/sinteticoA3.png"
+                 alt="Adeptos"
+                 class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+            <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10"></div>
+            <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded z-20">← volver</button>
+            <div class="criatura-3d hidden absolute inset-0"></div>
+          </div>
+
+          <p class="text-xs text-neon-green mt-3 text-center">TIPO: Sintética</p>
+          <p class="opacity-80 text-center">Descripción breve de la criatura.</p>
+        </div>
+      </div>
+
+      <!-- DISIDENTES -->
+      <div class="criatura-node" data-src="/models/sintetica002.glb">
+        <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+          <h3 class="text-2xl font-title text-center text-fox-red">Disidentes</h3>
+
+          <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                      rounded-xl overflow-hidden shadow-xl relative cursor-pointer mt-3">
+            <img src="/images/sintetica007.png"
+                 alt="Disidentes"
+                 class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+            <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10"></div>
+            <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded z-20">← volver</button>
+            <div class="criatura-3d hidden absolute inset-0"></div>
+          </div>
+
+          <p class="text-xs text-neon-green mt-3 text-center">TIPO: Sintética</p>
+          <p class="opacity-80 text-center">Descripción breve de la criatura.</p>
+        </div>
+      </div>
+
+      <!-- DEPRECADOS -->
+      <div class="criatura-node" data-src="/models/sintetico-deprecado-a1.glb">
+        <div class="bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20">
+          <h3 class="text-2xl font-title text-center text-fox-red">Errores</h3>
+
+          <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px]
+                      rounded-xl overflow-hidden shadow-xl relative cursor-pointer mt-3">
+            <img src="/images/deprecated.png"
+                 alt="Deprecados"
+                 class="criatura-ficha rounded-xl w-full h-full object-cover border border-fox-red/50">
+
+            <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/80 z-10"></div>
+            <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded z-20">← volver</button>
+            <div class="criatura-3d hidden absolute inset-0"></div>
+          </div>
+
+          <p class="text-xs text-neon-green mt-3 text-center">TIPO: Sintética</p>
+          <p class="opacity-80 text-center">Descripción breve de la criatura.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- Logo inferior -->
+<div class="flex justify-center mb-12">
+  <a href="/">
+    <img src="/images/dar3D-logo.jpg"
+         alt="Universo"
+         class="w-64 h-auto drop-shadow-xl rounded-xl border border-fox-red">
+  </a>
+</div>
+
+<!-- ===== ESTILO ACTIVE ===== -->
+<style>
+.btn-rama.active {
+  border: 1px solid #ff2222;
+  box-shadow: 0 0 20px #ff888859;
+  color: #ff2222;
+}
+.criatura-node.active {
+  border-color: #ff2222 !important;
+  box-shadow: 0 0 25px rgba(255, 136, 136, 0.45) !important;
+}
+.criatura-node.active h3,
+.criatura-node.active h4,
+.criatura-node.active h5 {
+  color: #ff2222 !important;
+}
+</style>
+
+<!-- NIVEL 1: RAMAS PRINCIPALES -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const isMobile = window.innerWidth <= 768;
+
+  function resetAll() {
+    // Ocultar todas las ramas
+    document.querySelectorAll(".subrama").forEach(s => s.classList.add("hidden"));
+    // Desactivar botones y nodos
+    document.querySelectorAll(".btn-rama.active").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".criatura-node.active").forEach(n => n.classList.remove("active"));
+    // Reset visores 3D
+    document.querySelectorAll(".criatura-3d").forEach(v => {
+      v.classList.add("hidden");
+      v.innerHTML = "";
+    });
+    document.querySelectorAll(".volver-btn").forEach(b => b.classList.add("hidden"));
+    document.querySelectorAll(".criatura-ficha").forEach(img => img.classList.remove("hidden"));
+    document.querySelectorAll(".criatura-loader").forEach(l => l.classList.add("hidden"));
+  }
+
+  document.querySelectorAll(".btn-rama").forEach(btn => {
+    btn.addEventListener("click", () => {
+      resetAll();
+
+      const target = document.querySelector(btn.dataset.target);
+      if (!target) return;
+
+      target.classList.remove("hidden");
+      btn.classList.add("active");
+
+      if (isMobile) {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 150);
+      }
+    });
+  });
+});
+</script>
+
+<!-- VISOR 3D + SUBNIVELES -->
+<script type="module">
+import "https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const isMobile = window.innerWidth <= 768;
+
+  document.querySelectorAll(".criatura-node").forEach(node => {
+
+    const hasGLB = node.dataset.src;
+    const hasSub = node.dataset.subtarget;
+
+    // Localizar la rama principal (#organicas / #inorganicas / #sinteticas)
+    const branchRoot = node.closest(".subrama");
+    let branchButton = null;
+    if (branchRoot && branchRoot.id) {
+      branchButton = document.querySelector(`.btn-rama[data-target="#${branchRoot.id}"]`);
+    }
+
+    /* ───────────────
+       NODO HOJA (GLB)
+    ─────────────── */
+    if (hasGLB) {
+      const img    = node.querySelector(".criatura-ficha");
+      const loader = node.querySelector(".criatura-loader");
+      const viewer = node.querySelector(".criatura-3d");
+      const volver = node.querySelector(".volver-btn");
+
+      if (!img || !viewer || !volver) return;
+
+      img.addEventListener("click", () => {
+        // Asegurar rama activa
+        if (branchButton) branchButton.classList.add("active");
+        node.classList.add("active");
+
+        img.classList.add("hidden");
+        if (loader) loader.classList.remove("hidden");
+
+        setTimeout(() => {
+          if (loader) loader.classList.add("hidden");
+          viewer.classList.remove("hidden");
+          volver.classList.remove("hidden");
+
+          if (!viewer.querySelector("model-viewer")) {
+            const mv = document.createElement("model-viewer");
+            mv.setAttribute("src", hasGLB);
+            mv.setAttribute("auto-rotate", "");
+            mv.setAttribute("camera-controls", "");
+            mv.setAttribute("shadow-intensity", "1");
+            mv.setAttribute("ar", "");
+            mv.setAttribute("alt", "Modelo 3D");
+            mv.style.width = "100%";
+            mv.style.height = "100%";
+            if (isMobile) mv.setAttribute("disable-zoom", "");
+            viewer.appendChild(mv);
+          }
+        }, 600);
+      });
+
+      volver.addEventListener("click", () => {
+        node.classList.remove("active");
+        viewer.classList.add("hidden");
+        viewer.innerHTML = "";
+        volver.classList.add("hidden");
+        img.classList.remove("hidden");
+        if (loader) loader.classList.add("hidden");
+      });
+    }
+
+    /* ───────────────
+       NODO PADRE (SUBNIVEL)
+    ─────────────── */
+    if (hasSub) {
+      const wrapper = node.querySelector(".criatura-visual-wrapper");
+      const target  = document.querySelector(node.dataset.subtarget);
+      if (!wrapper || !target) return;
+
+      wrapper.addEventListener("click", () => {
+        const isOpening = target.classList.contains("hidden");
+
+        // Asegurar rama activa
+        if (branchButton) branchButton.classList.add("active");
+
+        const branchRoot = node.closest(".subrama");
+        if (!branchRoot) {
+          target.classList.toggle("hidden");
+          return;
+        }
+
+        // Ocultar otros subniveles de esta misma rama
+        branchRoot.querySelectorAll(".subrama-n3").forEach(sr => {
+          if (sr !== target) sr.classList.add("hidden");
+        });
+
+        // Desactivar otros nodos PADRE de esta rama
+        branchRoot.querySelectorAll('.criatura-node[data-subtarget]').forEach(p => {
+          if (p !== node) p.classList.remove("active");
+        });
+
+        // Móvil → reinsertar subnivel debajo del nodo padre
+        if (isMobile) {
+          node.insertAdjacentElement("afterend", target);
+        }
+
+        // Toggle visibilidad
+        target.classList.toggle("hidden");
+        node.classList.toggle("active", isOpening);
+
+        if (isOpening) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 150);
+        }
+      });
+    }
+
+  });
+
+});
+</script>
+
+{{ end }}

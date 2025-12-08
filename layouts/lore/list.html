@@ -1,0 +1,74 @@
+{{ define "main" }}
+
+<article class="wikibody">
+  {{ .Content }}
+
+  <style>
+    .wiki-section {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #fafafa;
+      border-left: 4px solid #c00;
+      display: none;
+    }
+    .wiki-loading {
+      color: #666;
+      font-style: italic;
+    }
+  </style>
+
+  <div id="wiki-container"></div>
+
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("wiki-container");
+
+  document.body.addEventListener("click", async function (e) {
+    const link = e.target.closest("a[href^='/lore/']");
+    if (!link) return;
+
+    e.preventDefault();
+
+    const url = link.href;
+    const id = "section-" + btoa(url).replace(/=/g, "");
+
+    // Encontrar el <li> más cercano (si existe)
+    const li = link.closest("li") || link;
+
+    // Si ya existe la sección → alternamos visibilidad
+    let existing = document.getElementById(id);
+    if (existing) {
+      existing.style.display = existing.style.display === "none" ? "block" : "none";
+      return;
+    }
+
+    // Crear contenedor nuevo debajo del enlace
+    const section = document.createElement("div");
+    section.id = id;
+    section.className = "wiki-section";
+    section.innerHTML = "<p class='wiki-loading'>Cargando…</p>";
+    li.insertAdjacentElement("afterend", section);
+
+    try {
+      const response = await fetch(url);
+      const text = await response.text();
+
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, "text/html");
+      const article = doc.querySelector("article");
+
+      section.innerHTML = article ? article.innerHTML : "<p>Error al cargar.</p>";
+      section.style.display = "block";
+
+    } catch (err) {
+      console.error(err);
+      section.innerHTML = "<p>Error cargando contenido.</p>";
+    }
+  });
+});
+</script>
+
+
+</article>
+
+{{ end }}
