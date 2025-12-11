@@ -15,13 +15,13 @@
 
     {{/* Lista de criaturas */}}
     {{ $criaturas := slice
-      (dict "nombre" "DE DA" "tipo" "Orgánico" "descripcion" "Humano Mutante del TEMPLO" "img" "de-da.png" "glb" "David Mutante.glb" "color" "text-fox-red")
+      (dict "nombre" "DE DA" "tipo" "Orgánico" "descripcion" "Humano Mutante del TEMPLO" "img" "de-da.png" "glb" "david%20mutante.glb" "color" "text-fox-red")
       (dict "nombre" "MR-3042" "tipo" "Inorgánico" "descripcion" "Unidad pendiente de actualización" "img" "mr-3042-v3.png" "glb" "mr-3042_V3.glb" "color" "text-neon-green")
       (dict "nombre" "ALEFAR" "tipo" "Sintético" "descripcion" "Error del sistema" "img" "sintetica.jpg" "glb" "sintetica-pistola2.glb" "color" "text-neon-green")
     }}
 
     {{ range $index, $c := $criaturas }}
-    <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20 criatura-container" data-src="/models/{{ $c.glb }}">
+    <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20 criatura-container" data-src="https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/{{ $c.glb }}">
   <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
 
       <!-- Imagen inicial -->

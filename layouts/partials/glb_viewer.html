@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.GLBS = [
             {{- range readDir "static/models" -}}
                 {{- if eq (lower (path.Ext .Name)) ".glb" -}}
-                    "/models/{{ .Name }}",
+                    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/{{ .Name }}",
                 {{- end -}}
             {{- end -}}
         ];

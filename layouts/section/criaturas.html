@@ -17,10 +17,24 @@
 
 <!-- 1) Definir CRIATURAS ANTES del JS principal -->
 <script>
-  const CRIATURAS = {{ .Site.Data.criaturas | jsonify | safeJS }};
+  window.CRIATURAS = {{ .Site.Data.criaturas | jsonify | safeJS }};
 </script>
+<script>
+const IPFS_BASE = "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/";
 
+for (const cat in window.CRIATURAS) {
+    for (const sub in window.CRIATURAS[cat]) {
+        for (const name in window.CRIATURAS[cat][sub]) {
 
+            const item = window.CRIATURAS[cat][sub][name];
+
+            if (item.glb_name) {
+                item.glb = IPFS_BASE + item.glb_name;   // 🔥 AFEGIM GLB FINAL
+            }
+        }
+    }
+}
+</script>
 <!-- 2) Cargar model-viewer -->
 <script type="module"
         src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">

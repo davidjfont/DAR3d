@@ -2,7 +2,19 @@ baseURL = "/"
 languageCode = "es-es"
 title = "DAR3D - Mundos Abiertos a Posibilidades"
 theme = ""
+
 [[menu.main]]
   name = "Criaturas"
   url = "/criaturas/"
   weight = 10
+
+# ignoreFiles = []
+staticDir = ["static"]
+
+
+[params]
+glb_cid = "bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq"   # CID global per a tots els models
+ipfsBase = "https://w3s.link/ipfs/"
+
+
+

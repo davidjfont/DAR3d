@@ -1,60 +1,19 @@
-{{/* layouts/partials/glb_viewer.html */}}
-
-{{- $id := .id | default "glb-viewer-hero" -}}
-{{- $alt := .alt | default "3D Model" -}}
-{{- $height := .height | default "100%" -}}
-{{- $src := .src -}}
-
-<!-- Carga de model-viewer (solo hace efecto la primera vez que se incluye) -->
-<script type="module"
-        src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">
-</script>
-
-<model-viewer
-    id="{{ $id }}"
-    src="{{ $src }}"
-    alt="{{ $alt }}"
-    camera-controls
-    auto-rotate
-    auto-rotate-delay="0"
-    shadow-intensity="1"
-    exposure="1"
-    interaction-prompt="none"
-    interaction-prompt-style="none"
-    disable-zoom
-    touch-action="none"
-    style="width:100%; height:{{ $height }}; z-index:1000;">
-</model-viewer>
-
-{{/* Si NO se ha pasado .src, hacemos que sea aleatorio con JS */}}
-{{- if not $src }}
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+    window.GLBS = [
+        {{- $cid := site.Params.glb_cid -}}
+        {{- $base := site.Params.ipfsBase -}}
 
-    // Si aún no hemos creado la lista global de modelos, la creamos ahora
-    if (!window.GLBS || !window.GLBS.length) {
-        window.GLBS = [
-            {{- range readDir "static/models" -}}
-                {{- if eq (lower (path.Ext .Name)) ".glb" -}}
-                    "/models/{{ .Name }}",
+        {{/* Recorrem TOT l’arbre de criatures */}}
+        {{- $data := site.Data.criaturas -}}
+
+        {{- range $categoria, $subcats := $data -}}
+            {{- range $subcat, $items := $subcats -}}
+                {{- range $name, $item := $items -}}
+                    {{- with $item.glb_name -}}
+                        "{{ $base }}{{ $cid }}/{{ . }}",
+                    {{- end -}}
                 {{- end -}}
             {{- end -}}
-        ];
-    }
-
-    const modelos = window.GLBS || [];
-    if (!modelos.length) {
-        console.error("No se encontraron modelos .glb en static/models");
-        return;
-    }
-
-    const randomModel = modelos[Math.floor(Math.random() * modelos.length)];
-    console.log("Model-viewer aleatorio:", randomModel);
-
-    const el = document.getElementById("{{ $id }}");
-    if (el) {
-        el.src = randomModel;
-    }
-});
+        {{- end -}}
+    ];
 </script>
-{{- end }}

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>DAR3D - Mundos Abiertos a Posibilidades – Creatures From Another Timeline</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/custom.css">
+
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<link rel="icon" type="image/jpeg" href="/images/favicon.png">
+<link rel="apple-touch-icon" href="/images/favicon.png">
+<meta name="theme-color" content="#000000">
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    'fox-red': '#E5442A',
+                    'deep-black': '#0A0A0A',
+                    'bone-white': '#F5F3EE',
+                    'neon-green': '#5CFFBF',
+                    'ui-dark-gray': '#202326',
+                },
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    title: ['Orbitron', 'sans-serif'],
+                },
+            }
+        }
+    };
+</style>
+
+</head>
+
+<body class="antialiased min-h-screen bg-ui-dark-gray text-bone-white">
+
+    
+    <header class="sticky top-0 z-50 bg-ui-dark-gray/90 backdrop-blur-sm shadow-xl border-b border-fox-red/30">
+    
+    <div id="logo-3d" class="w-12 h-12 absolute left-6 top-1/2 -translate-y-1/2 z-50 pointer-events-none"></div>
+
+    <div id="fox-mini-3d"
+        class="fixed top-4 left-4 w-[80px] h-[80px] z-[999] pointer-events-none">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+
+        
+        <div class="flex items-center space-x-3">
+            <div class="w-[60px] h-[60px] flex items-center justify-center pointer-events-none">
+                <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">
+</script>
+
+<model-viewer id="logo3d"
+              src="https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/fox.glb"
+              alt="3D Model"
+              
+              auto-rotate-delay="0"
+              shadow-intensity="1"
+              exposure="1"
+              interaction-prompt="none"
+              interaction-prompt-style="none"
+              disable-zoom
+              touch-action="none"
+              camera-controls
+              style="width:100%; height:100%;min-width: 90%; z-index:1000;">
+</model-viewer>
+<script>
+document.addEventListener("mousemove", (event) => {
+    const viewer = document.getElementById("logo3d");
+
+    if (!viewer) return;
+
+    
+    const x = event.clientX / window.innerWidth;
+
+    
+    const rotation = (x - 0.5) * (-90);
+
+    
+    viewer.cameraOrbit = `${rotation}deg 75deg 2.5m`;
+});
+</script>
+
+
+            </div>
+
+            <a href="/" class="text-3xl font-title text-bone-white tracking-widest hover:text-fox-red transition duration-300">
+                <span class="logo-text">DAR3D</span>
+            </a>
+        </div>
+
+        
+        <nav class="hidden md:flex space-x-8 font-title text-sm tracking-wide">
+           
+            <a href="/criaturas" class="hover:text-neon-green">Criaturas</a>
+             <a href="/gadgets" class="hover:text-neon-green">Gadgets</a>
+            <a href="/#fanart" class="hover:text-neon-green">Fanart</a>
+            <a href="/lore/" class="hover:text-neon-green">Wiki</a>
+            
+            
+            <a href="/products/"
+               class="px-4 py-1.5 text-ui-dark-gray bg-fox-red font-bold rounded-lg hover:bg-bone-white transition duration-200 shadow-md">
+                Tienda →
+            </a>
+<div>    <script>
+window.CRIATURAS_3042 = {"Inorganicas": {"Humanoides": [{
+                "nombre": "01 Robot Militar",
+                "slug": "01-robot-militar",
+                "desc": "Unidad militar autónoma.",
+                "img": "\/images\/robot-militar-b3.png",
+
+                "glb_name": "robot-ia-militarB1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/robot-ia-militarB1.glb",
+
+                "tipo": "Inorgánico"
+            },{
+                "nombre": "02 Robot Ciudadano",
+                "slug": "02-robot-ciudadano",
+                "desc": "Unidad militar autónoma.",
+                "img": "\/images\/MR-3042-v2.png",
+
+                "glb_name": "mr-3042_V1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/mr-3042_V1.glb",
+
+                "tipo": "Inorgánico"
+            },{
+                "nombre": "03 Robot Ciudadano Deprecado",
+                "slug": "03-robot-ciudadano-deprecado",
+                "desc": "Unidad militar autónoma.",
+                "img": "\/images\/MR-3042-v3.png",
+
+                "glb_name": "mr-3042_V3.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/mr-3042_V3.glb",
+
+                "tipo": "Inorgánico"
+            },],"Roboticas": [{
+                "nombre": "01 Mascota Robótica",
+                "slug": "01-mascota-rob%C3%B3tica",
+                "desc": "Unidad robótica mascota.",
+                "img": "\/images\/robot-mascota-C2.png",
+
+                "glb_name": "inorganico-mascotaA1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/inorganico-mascotaA1.glb",
+
+                "tipo": "Inorgánico"
+            },{
+                "nombre": "02 DRON Terrestre Militar",
+                "slug": "02-dron-terrestre-militar",
+                "desc": "Unidad robótica militar.",
+                "img": "\/images\/dron-militar-a1.png",
+
+                "glb_name": "dron-militar-a1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/dron-militar-a1.glb",
+
+                "tipo": "Inorgánico"
+            },{
+                "nombre": "03 Mascota Alienígena",
+                "slug": "03-mascota-alien%C3%ADgena",
+                "desc": "Unidad robótica mascota.",
+                "img": "\/images\/robot-mascota-A1.png",
+
+                "glb_name": "robot-ia-militarA1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/robot-ia-militarA1.glb",
+
+                "tipo": "Inorgánico"
+            },{
+                "nombre": "04 DRON Alienígena Militar",
+                "slug": "04-dron-alien%C3%ADgena-militar",
+                "desc": "Unidad robótica militar.",
+                "img": "\/images\/robot-mascota-B1.png",
+
+                "glb_name": "inorganico-alien-militar.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/inorganico-alien-militar.glb",
+
+                "tipo": "Inorgánico"
+            },],},"Organicos": {"Alienigenas": [{
+                "nombre": "01 Alien Gris",
+                "slug": "01-alien-gris",
+                "desc": "Alienígena de tipo gris clásico.",
+                "img": "\/images\/alien-d1.png",
+
+                "glb_name": "alien-d1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/alien-d1.glb",
+
+                "tipo": "Orgánico"
+            },{
+                "nombre": "02 Alien Reptiliano",
+                "slug": "02-alien-reptiliano",
+                "desc": "Reptiliano con estructura híbrida.",
+                "img": "\/images\/alien-c1.png",
+
+                "glb_name": "alien-c1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/alien-c1.glb",
+
+                "tipo": "Orgánico"
+            },{
+                "nombre": "03 Alien Nebulosa 1",
+                "slug": "03-alien-nebulosa-1",
+                "desc": "Reptiliano con estructura híbrida.",
+                "img": "\/images\/alien-b3.png",
+
+                "glb_name": "alien-a1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/alien-a1.glb",
+
+                "tipo": "Orgánico"
+            },{
+                "nombre": "04 Alien Oscura",
+                "slug": "04-alien-oscura",
+                "desc": "Reptiliano con estructura híbrida.",
+                "img": "\/images\/alien-a1.png",
+
+                "glb_name": "alien-b1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/alien-b1.glb",
+
+                "tipo": "Orgánico"
+            },],"Humanas": [{
+                "nombre": "01 Alpha",
+                "slug": "01-alpha",
+                "desc": "Subespecie humana variante Alpha.",
+                "img": "\/images\/humana-B1.png",
+
+                "glb_name": "humana-B1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/humana-B1.glb",
+
+                "tipo": "Orgánico"
+            },{
+                "nombre": "02 Beta",
+                "slug": "02-beta",
+                "desc": "Subespecie humana variante Beta.",
+                "img": "\/images\/humano-A1.png",
+
+                "glb_name": "humano-A1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/humano-A1.glb",
+
+                "tipo": "Orgánico"
+            },],"Mutantes": [{
+                "nombre": "01 Mutante Ninfa hembra",
+                "slug": "01-mutante-ninfa-hembra",
+                "desc": "Mutante joven de tipo ninfa.",
+                "img": "\/images\/mutanta-A2.png",
+
+                "glb_name": "mutanta-A1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/mutanta-A1.glb",
+
+                "tipo": "Orgánico"
+            },{
+                "nombre": "02 Mutante Ninfa varon",
+                "slug": "02-mutante-ninfa-varon",
+                "desc": "Mutante joven de tipo ninfa.",
+                "img": "\/images\/mutante-b1.png",
+
+                "glb_name": "mutante-b2.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/mutante-b2.glb",
+
+                "tipo": "Orgánico"
+            },{
+                "nombre": "03 Mutante Adulta hembra",
+                "slug": "03-mutante-adulta-hembra",
+                "desc": "Mutante completamente desarrollada.",
+                "img": "\/images\/mutanta-B1.png",
+
+                "glb_name": "mutanta-b1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/mutanta-b1.glb",
+
+                "tipo": "Orgánico"
+            },{
+                "nombre": "04 Mutante Adulta varon",
+                "slug": "04-mutante-adulta-varon",
+                "desc": "Mutante completamente desarrollada.",
+                "img": "\/images\/mutante-A1.png",
+
+                "glb_name": "mutante-A1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/mutante-A1.glb",
+
+                "tipo": "Orgánico"
+            },],},"Sinteticas": {"Adeptas": [{
+                "nombre": "01 Sintética A1",
+                "slug": "01-sint%C3%A9tica-a1",
+                "desc": "Adeptas sintéticas de rango básico.",
+                "img": "\/images\/sinteticoA3.png",
+
+                "glb_name": "sintetico-a1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/sintetico-a1.glb",
+
+                "tipo": "Sintética"
+            },],"Disidentes": [{
+                "nombre": "01 Sintética A1",
+                "slug": "01-sint%C3%A9tica-a1",
+                "desc": "Adeptas sintéticas de rango básico.",
+                "img": "\/images\/sintetica007.png",
+
+                "glb_name": "sintetica002.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/sintetica002.glb",
+
+                "tipo": "Sintética"
+            },],"_Errores": [{
+                "nombre": "01 Sintética A1",
+                "slug": "01-sint%C3%A9tica-a1",
+                "desc": "Adeptas sintéticas de rango básico.",
+                "img": "\/images\/sintetico_error.png",
+
+                "glb_name": "sintetico-deprecado-a1.glb",
+                "glb_url": "https:\/\/w3s.link\/ipfs\/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/sintetico-deprecado-a1.glb",
+
+                "tipo": "Sintética"
+            },],},};
+</script>
+
+    <div class="w-full flex justify-center my-10">
+    <div class="relative w-full max-w-xl">
+
+        <input id="search-input"
+               type="text"
+               placeholder="🔍 Buscar criaturas, razas, robots..."
+               class="w-full px-5 py-3 rounded-xl border border-cyan-400/70
+                      focus:outline-none focus:ring-2 focus:ring-cyan-300
+                      bg-white shadow-md text-gray-700" />
+
+        <div id="search-results"
+             class="absolute w-full bg-white border border-gray-200 rounded-xl mt-2 shadow-xl hidden">
+        </div>
+
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const input = document.getElementById("search-input");
+    const resultsBox = document.getElementById("search-results");
+
+    input.addEventListener("input", () => {
+        const query = input.value.toLowerCase().trim();
+
+        if (!query) {
+            resultsBox.classList.add("hidden");
+            resultsBox.innerHTML = "";
+            return;
+        }
+
+        const matches = [];
+
+        
+        for (const cat in window.CRIATURAS_3042) {
+            for (const sub in window.CRIATURAS_3042[cat]) {
+                for (const item of window.CRIATURAS_3042[cat][sub]) {
+                    if (
+                        item.nombre.toLowerCase().includes(query) ||
+                        item.desc.toLowerCase().includes(query) ||
+                        item.tipo.toLowerCase().includes(query)
+                    ) {
+                        matches.push(item);
+                    }
+                }
+            }
+        }
+
+        renderResults(matches);
+    });
+
+
+    function renderResults(list) {
+        if (!list.length) {
+            resultsBox.classList.remove("hidden");
+            resultsBox.innerHTML = "<div class='p-3 text-gray-500'>Sin resultados</div>";
+            return;
+        }
+
+        const html = list.map(item => `
+            <a href="/criaturas/${item.slug}/" class="flex items-center ...">
+
+                <img src="${item.img}" class="w-12 h-12 rounded-md mr-3" />
+                <div>
+                    <p class="font-semibold">${item.nombre}</p>
+                    <p class="text-sm text-gray-600">${item.tipo}</p>
+                </div>
+            </a>
+        `).join("");
+
+        resultsBox.innerHTML = html;
+        resultsBox.classList.remove("hidden");
+    }
+});
+</script>
+</div>
+
+
+        </nav>
+
+        
+        <button id="menu-toggle" class="md:hidden text-fox-red focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16m-7 6h7">
+                </path>
+            </svg>
+        </button>
+    </div>
+
+    
+    <div id="mobile-menu" class="hidden md:hidden bg-ui-dark-gray border-t border-fox-red/30 py-2">
+        <a href="../#creatures" class="block px-4 py-2 hover:bg-fox-red/20">Criaturas</a>
+        <a href="../gadgets" class="block px-4 py-2 hover:bg-fox-red/20">Gadgets</a>
+        <a href="../#fanart" class="block px-4 py-2 hover:bg-fox-red/20">Fanart</a>
+        <a href="../#nft" class="block px-4 py-2 hover:bg-fox-red/20">NFT / Keys</a>
+
+        
+        <a href="/products/"
+           class="block px-4 py-2 bg-fox-red font-bold mt-2">
+           Tienda
+        </a>
+    </div>
+</header>
+
+
+    
+    
+<div class="max-w-3xl mx-auto py-16">
+    <h1 class="text-5xl font-title mb-6">Nanotec Híbrida</h1>
+    <article class="prose prose-invert max-w-none">
+        <p>Sistema de nanobots mezclados con materia orgánica.</p>
+
+    </article>
+</div>
+
+
+    
+    <footer class="bg-deep-black mt-20 py-12 border-t-4 border-neon-green/10">
+
+    <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+
+        <div>
+            <p class="text-3xl font-title text-fox-red">DAR3D</p>
+            <p class="text-sm opacity-70">Bestias que no existen… todavía.</p>
+        </div>
+
+        <div>
+            <h4 class="font-title text-bone-white mb-3">Principal</h4>
+            <ul class="space-y-2 text-sm opacity-80">
+                <li><a href="#about">About</a></li>
+                <li><a href="#creatures">Creatures</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 class="font-title text-bone-white mb-3">Tienda</h4>
+            <ul class="space-y-2 text-sm opacity-80">
+                <li><a href="/products/">3D Models</a></li>
+                <li><a href="/products/3dprint/">Bundles</a></li>
+                <li><a href="#nft">NFT Keys</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 class="font-title text-bone-white mb-3">Información</h4>
+            <ul class="space-y-2 text-sm opacity-80">
+                <li><a href="../lore">Wiki</a></li>
+                <li><a href="#">Tutorials</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <p class="mt-10 text-xs text-center opacity-60">&copy; 2025 DAR3D.</p>
+</footer>
+
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+
+                    if (this.getAttribute('href') !== "#") {
+                        e.preventDefault();
+
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
