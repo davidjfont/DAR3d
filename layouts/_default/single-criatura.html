@@ -1,65 +1,82 @@
 {{ define "main" }}
-{{ $slug := .Params.slug }}
-{{ $data := index site.Data.criaturas }}
+  {{ $slug := .Params.slug }}
+  {{ $data := site.Data.criaturas }}
 
-{{/* Buscar en TODAS las categorías y subcategorías */}}
-{{ $found := dict }}
+  {{/* Buscar en TODAS las categorías y subcategorías */}}
+  {{ $found := dict }}
 
-{{ range $cat, $subs := $data }}
-  {{ range $sub, $items := $subs }}
-    {{ range $name, $item := $items }}
-      {{ if eq (urlize $name) $slug }}
-        {{ $found = merge $item (dict "nombre" $name "categoria" $cat "subcategoria" $sub) }}
+  {{ range $cat, $subs := $data }}
+    {{ range $sub, $items := $subs }}
+      {{ range $name, $item := $items }}
+        {{ if eq (urlize $name) $slug }}
+          {{ $found = merge $item (dict "nombre" $name "categoria" $cat "subcategoria" $sub) }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
-{{ end }}
 
-<section class="max-w-6xl mx-auto p-8">
+  {{/* BASE IPFS – cambia esto si usas otro CID o gateway */}}
+  {{ $ipfsBase := "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/" }}
 
-  <!-- TÍTULO -->
-  <h1 class="text-4xl font-title font-bold mb-2 text-deep-black">
-    {{ $found.nombre }}
-  </h1>
-  <p class="text-ui-dark-gray mb-10 text-lg">
-    {{ $found.desc }}
-  </p>
+  {{/* Nombre del GLB desde el YAML (glb_name) */}}
+  {{ $glbName := index $found "glb_name" }}
 
-  <!-- IMAGEN + 3D EN TARJETAS -->
-  <div class="grid md:grid-cols-2 gap-10">
+  {{/* Construimos la URL completa al GLB en IPFS */}}
+  {{ $glbURL := "" }}
+  {{ if $glbName }}
+    {{ $glbURL = printf "%s%s" $ipfsBase $glbName }}
+  {{ end }}
 
-    <!-- PNG -->
-    <div class="bg-white rounded-2xl shadow-xl p-4">
-      <img src="{{ $found.img }}" alt="{{ $found.nombre }}"
-           class="w-full rounded-xl object-cover">
+  <section class="max-w-6xl mx-auto p-8">
+
+    <!-- TÍTULO -->
+    <h1 class="text-4xl font-title font-bold mb-2 text-deep-black">
+      {{ $found.nombre }}
+    </h1>
+    <p class="text-ui-dark-gray mb-10 text-lg">
+      {{ $found.desc }}
+    </p>
+
+    <!-- IMAGEN + 3D EN TARJETAS -->
+    <div class="grid md:grid-cols-2 gap-10">
+
+      <!-- PNG -->
+      <div class="bg-white rounded-2xl shadow-xl p-4">
+        <img src="{{ $found.img }}" alt="{{ $found.nombre }}"
+             class="w-full rounded-xl object-cover">
+      </div>
+
+      <!-- GLB VIEWER -->
+      <div class="bg-white rounded-2xl shadow-xl p-4">
+        <model-viewer
+          src="{{ $glbURL }}"
+          alt="Modelo 3D de {{ $found.nombre }}"
+          camera-controls
+          auto-rotate
+          auto-rotate-delay="0"
+          shadow-intensity="1"
+          exposure="1"
+          interaction-prompt="none"
+          ar
+          class="w-full h-[500px] rounded-xl bg-black">
+        </model-viewer>
+      </div>
+
     </div>
 
-    <!-- GLB VIEWER -->
-    <div class="bg-white rounded-2xl shadow-xl p-4">
-      <model-viewer
-        src="{{ $found.glb }}"
-        alt="Modelo 3D de {{ $found.nombre }}"
-        camera-controls
-        auto-rotate
-        auto-rotate-delay="0"
-        shadow-intensity="1"
-        exposure="1"
-        interaction-prompt="none"
-        ar
-        class="w-full h-[500px] rounded-xl">
-      </model-viewer>
+    <!-- INFO -->
+    <div class="mt-12 text-gray-700 text-lg leading-relaxed">
+      <p><strong>Categoría:</strong> {{ $found.categoria }}</p>
+      <p><strong>Subcategoría:</strong> {{ $found.subcategoria }}</p>
+      <p><strong>Tipo:</strong> {{ $found.tipo }}</p>
     </div>
 
-  </div>
+    {{/* DEBUG opcional: quita esto cuando veas que funciona */}}
+    <!--
+    <p style="margin-top:2rem;color:red;">
+      DEBUG GLB URL: {{ $glbURL }}
+    </p>
+    -->
 
-  <!-- INFO -->
-  <div class="mt-12 text-gray-700 text-lg leading-relaxed">
-    <p><strong>Categoría:</strong> {{ $found.categoria }}</p>
-    <p><strong>Subcategoría:</strong> {{ $found.subcategoria }}</p>
-    <p><strong>Tipo:</strong> {{ $found.tipo }}</p>
-  </div>
-
-</section>
-
-
+  </section>
 {{ end }}

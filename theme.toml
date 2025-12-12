@@ -1,0 +1,12 @@
+name = "DAR3D"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "Tema oficial DAR3D — Creatures From Another Timeline"
+homepage = "https://dar3d.com"
+tags = ["3d", "model-viewer", "ipfs", "scifi"]
+features = ["tailwind", "3d-viewer", "darkmode"]
+min_version = "0.120.0"
+
+[author]
+  name = "Fdfont – DAR3D"
+  homepage = "https://dar3d.com"
