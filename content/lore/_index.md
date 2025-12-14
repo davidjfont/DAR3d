@@ -2,6 +2,9 @@
 title: "Wiki 3042 – Archivo del Colapso"
 summary: "Enciclopedia oficial del universo DAR3D: facciones, historia, tecnología, criaturas, personajes y más."
 ---
+
+
+
 ![DAR3D - Universo 3042](/images/wiki/tierra7.png)
 
 # 🌐 WIKI 3042 – ARCHIVO DEL COLAPSO
@@ -87,4 +90,7 @@ Todo aquello que la IA quiso borrar… ahora está registrado aquí.
 
 Bienvenido al **Archivo del Colapso**.
 
-<div id="wiki-container"></div>
+
+[![Dar3D-logo](/images/dar3D-logo.jpg)](/)
+
+ 

@@ -1,0 +1,16 @@
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Círculo fondo -->
+  <circle cx="80" cy="80" r="70" stroke="#222" stroke-width="4" fill="none"></circle>
+
+  <!-- Círculo cronómetro -->
+  <circle cx="80" cy="80" r="70" stroke="#ff3b3b" stroke-width="4" fill="none" stroke-dasharray="440" stroke-dashoffset="440">
+    <animate attributeName="stroke-dashoffset" from="440" to="0" dur="2s" repeatCount="indefinite"></animate>
+  </circle>
+
+  <!-- Logo DAR3D (simplificado / placeholder) -->
+  <text x="50%" y="54%" text-anchor="middle" fill="#ff3b3b" font-size="20" font-family="monospace">
+    DAR3D
+  </text>
+
+</svg>

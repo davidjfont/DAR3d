@@ -39,6 +39,10 @@ Sus habilidades son puramente humanas:
 - lectura emocional extremadamente intuitiva,  
 - capacidad de pasar desapercibida incluso entre sintéticos.
 
+
+![La humana pura 2](/images/wiki/humana-pura.png)
+
+
 Viste un **traje casero de francotiradora**, hecho con:
 
 - lonas térmicas recuperadas,  

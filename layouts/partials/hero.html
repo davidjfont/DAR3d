@@ -1,60 +1,151 @@
 <section id="home"
-    class="relative min-h-screen w-full bg-cover bg-center bg-no-repeat"
-    style="background-image:url('/images/hero_bg.jpg');">
+  class="relative min-h-screen w-full bg-cover bg-center bg-no-repeat"
+  style="background-image:url('/images/hero_bg.jpg');">
 
-    <div class="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-12 p-8 md:p-12 z-20">
+  <div class="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-12 p-8 md:p-12 z-20">
 
-        <!-- PANEL BLANCO -->
-        <div class="bg-white/65 backdrop-blur-sm p-8 sm:p-12 rounded-xl shadow-2xl relative z-40">
+    <!-- PANEL BLANCO -->
+    <div class="bg-white/65 backdrop-blur-sm p-8 sm:p-12 rounded-xl shadow-2xl relative z-40">
 
-            <p class="font-title text-sm tracking-widest text-fox-red mb-3">
-                DAR3Dv2 – Imported From Other Realities
-            </p>
+      <p class="font-title text-sm tracking-widest text-fox-red mb-3">
+        DAR3D – Imported From Other Realities
+      </p>
 
-            <h1 class="text-5xl sm:text-7xl font-title font-bold leading-tight text-deep-black">
-                Creatures<br>From Another<br>Timeline
-            </h1>
+      <h1 class="text-5xl sm:text-7xl font-title font-bold leading-tight text-deep-black">
+        Creatures<br>From Another<br>Timeline
+      </h1>
 
-            <p class="mt-6 text-lg text-ui-dark-gray">
-                Arte 3D, criaturas imposibles y fanart cyberpunk nacido entre la naturaleza y el neón.
-            </p>
+      <p class="mt-6 text-lg text-ui-dark-gray">
+        Arte 3D, criaturas imposibles y fanart cyberpunk nacido entre la naturaleza y el neón.
+      </p>
 
-            <div class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="#creatures"
-                class="wireframe-border text-center px-8 py-3 bg-fox-red text-grey rounded-lg shadow-lg hover:bg-fox-red/90">
-                    Explorar criaturas
-                </a>
+      <div class="mt-10 flex flex-col sm:flex-row gap-4">
+        <a href="#creatures"
+           class="wireframe-border text-center px-8 py-3 bg-fox-red text-grey rounded-lg shadow-lg hover:bg-fox-red/90">
+          Explorar criaturas
+        </a>
 
-                <a href="https://store.dar3d.com"
-                class="text-center px-8 py-3 bg-deep-black text-neon-green border border-neon-green/50 rounded-lg">
-                    Entrar en la tienda
-                </a>
-            </div>
-        </div>
+        <a href="/products/"
+           class="text-center px-8 py-3 bg-deep-black text-neon-green border border-neon-green/50 rounded-lg">
+          Entrar en la tienda
+        </a>
+      </div>
+    </div>
 
-        <!-- IMAGEN DERECHA / MODELO -->
-        <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
-            {{ partial "glb_viewer.html" (dict "src" "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/sewer_monster.glb" "height" "100%") }}
-            {{ partial "random_glb_list.html" }}
-        </div>
+    <!-- HERO VISUAL DERECHO -->
+    <div class="relative w-full h-[480px] md:h-[700px]
+                rounded-xl overflow-hidden shadow-xl">
 
-        <!-- Imagen de fondo extra -->
-        <img src=""
-            class="w-full h-full object-cover absolute inset-0 z-0"
-            style="background-color: rgba(240, 248, 255, 0.75);" alt="">
+      <!-- IMAGEN PLACEHOLDER -->
+      <img id="hero-placeholder"
+           src="/images/hero.png"
+           class="absolute inset-0 h-full object-cover z-10
+                  transition-opacity duration-700">
 
-        <!-- Modelo 3D animado del HERO -->
-        <div id="hero-3d-viewer"
-            class="absolute inset-0 z-20 pointer-events-auto"></div>
+      <!-- VISOR 3D -->
+      <div id="hero-3d-container"
+           class="absolute inset-0 z-20 opacity-0
+                  transition-opacity duration-700 pointer-events-auto">
+      </div>
 
     </div>
 
+  </div>
+
 </section>
+<script type="module">
+import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
 
-<!-- INCLUIMOS EL partial QUE GENERA AUTO-LISTA DE MODELS -->
-{{ partial "random_glb_list.html" }}
+document.addEventListener("DOMContentLoaded", () => {
 
-<!-- THREE.js y loaders -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/controls/OrbitControls.js"></script>
+  const MODELS = [
+    {
+      name: "Sewer Monster",
+      glb: "sewer_monster.glb"
+    },
+    {
+      name: "Alien Gris",
+      glb: "alien-d1.glb"
+    },
+    {
+      name: "Dark Synth",
+      glb: "dron-militar-a1.glb"
+    },
+    {
+      name: "David el Mutante",
+      glb: "david-mutante-a1.glb"
+    },
+    {
+      name: "Sintetica Disidente",
+      glb: "sintetica-pistola2.glb"
+    },
+    {
+      name: "Escalopendra Gigantae",
+      glb: "scolopendrae_gigantae.glb"
+    }
+  ];
+
+  const IPFS_BASE =
+    "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/";
+
+  const container = document.getElementById("hero-3d-container");
+  const placeholder = document.getElementById("hero-placeholder");
+
+  let index = 0;
+  let viewer = null;
+
+  function loadModel(i) {
+
+    const model = MODELS[i];
+
+    if (!model) return;
+
+    darEvent("hero_load_model", {
+      model: model.name,
+      index: i
+    });
+
+    // destruir visor anterior
+    container.innerHTML = "";
+
+    const mv = document.createElement("model-viewer");
+    mv.src = IPFS_BASE + model.glb;
+    mv.style.width = "100%";
+    mv.style.height = "100%";
+    mv.setAttribute("auto-rotate", "");
+    mv.setAttribute("camera-controls", "");
+    mv.setAttribute("interaction-prompt", "none");
+    mv.setAttribute("shadow-intensity", "1");
+
+    container.appendChild(mv);
+
+    mv.addEventListener("load", () => {
+
+      // fade imagen → 3D
+      placeholder.classList.add("opacity-0");
+      container.classList.remove("opacity-0");
+      container.classList.add("opacity-100");
+
+      darEvent("hero_model_visible", {
+        model: model.name
+      });
+    });
+
+    mv.addEventListener("camera-change", () => {
+      darEvent("hero_interact_model", {
+        model: model.name
+      });
+    });
+  }
+
+  // primer modelo tras pequeño delay (hero respira)
+  setTimeout(() => loadModel(index), 800);
+
+  // carrusel automático
+  setInterval(() => {
+    index = (index + 1) % MODELS.length;
+    loadModel(index);
+  }, 9000);
+
+});
+</script>

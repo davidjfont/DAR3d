@@ -1,17 +1,17 @@
 <!-- Load Google Model Viewer -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js"></script>
+<script type="module"
+  src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">
+</script>
 
 {{/* ----- RESOLUCIÓ DEL SRC ----- */}}
 {{ $src := .src }}
 {{ $cid := site.Params.glb_cid }}
 {{ $base := site.Params.ipfsBase }}
 
-{{/* Si no comença per http, assumim que és un glb_name */}}
 {{ if and (not (hasPrefix $src "http")) (ne $src "") }}
   {{ $src = printf "%s%s/%s" $base $cid $src }}
 {{ end }}
 
-{{/* Evitar undefined / buit */}}
 {{ if eq $src "" }}
   {{ $src = "/images/placeholder.glb" }}
 {{ end }}
@@ -29,5 +29,14 @@
     interaction-prompt="none"
     interaction-prompt-style="none"
     touch-action="none"
-    style="width:100%; height:100%; z-index:1000;">
+    style="width:100%; height:100%; z-index:1000;"
+>
+
+    <!-- 🧬 LOADER DAR3D -->
+    <div slot="poster" class="dar3d-loader">
+      <img src="/svg/dar3d-loader.svg" alt="Cargando DAR3D">
+      <span>Inicializando artefacto 3D…</span>
+      <span>Cargando {{ path.Base $src }}…</span>
+    </div>
+
 </model-viewer>

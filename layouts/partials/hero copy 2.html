@@ -1,0 +1,60 @@
+<section id="home"
+    class="relative min-h-screen w-full bg-cover bg-center bg-no-repeat"
+    style="background-image:url('/images/hero_bg.jpg');">
+
+    <div class="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-12 p-8 md:p-12 z-20">
+
+        <!-- PANEL BLANCO -->
+        <div class="bg-white/65 backdrop-blur-sm p-8 sm:p-12 rounded-xl shadow-2xl relative z-40">
+
+            <p class="font-title text-sm tracking-widest text-fox-red mb-3">
+                DAR3Dv2 – Imported From Other Realities
+            </p>
+
+            <h1 class="text-5xl sm:text-7xl font-title font-bold leading-tight text-deep-black">
+                Creatures<br>From Another<br>Timeline
+            </h1>
+
+            <p class="mt-6 text-lg text-ui-dark-gray">
+                Arte 3D, criaturas imposibles y fanart cyberpunk nacido entre la naturaleza y el neón.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#creatures"
+                class="wireframe-border text-center px-8 py-3 bg-fox-red text-grey rounded-lg shadow-lg hover:bg-fox-red/90">
+                    Explorar criaturas
+                </a>
+
+                <a href="https://store.dar3d.com"
+                class="text-center px-8 py-3 bg-deep-black text-neon-green border border-neon-green/50 rounded-lg">
+                    Entrar en la tienda
+                </a>
+            </div>
+        </div>
+
+        <!-- IMAGEN DERECHA / MODELO -->
+        <div class="block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+            {{ partial "glb_viewer.html" (dict "src" "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/sewer_monster.glb" "height" "100%") }}
+            {{ partial "random_glb_list.html" }}
+        </div>
+
+        <!-- Imagen de fondo extra -->
+        <img src=""
+            class="w-full h-full object-cover absolute inset-0 z-0"
+            style="background-color: rgba(240, 248, 255, 0.75);" alt="">
+
+        <!-- Modelo 3D animado del HERO -->
+        <div id="hero-3d-viewer"
+            class="absolute inset-0 z-20 pointer-events-auto"></div>
+
+    </div>
+
+</section>
+
+<!-- INCLUIMOS EL partial QUE GENERA AUTO-LISTA DE MODELS -->
+{{ partial "random_glb_list.html" }}
+
+<!-- THREE.js y loaders -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r155/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/controls/OrbitControls.js"></script>

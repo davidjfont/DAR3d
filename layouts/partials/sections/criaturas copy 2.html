@@ -1,0 +1,204 @@
+{{ define "main" }}
+<section class="max-w-6xl mx-auto px-4 py-10 text-fox-red">
+  <h1 class="text-4xl font-title text-center mb-12">ÁRBOL DE CRIATURAS</h1>
+
+   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 text-center">
+    <button class="btn-rama" data-target="#organicos"><img src="/images/de-da.png"> Orgánicas</button>
+    <button class="btn-rama" data-target="#inorganicos"><img src="/images/MR-3042-v3.png"> Inorgánicas</button>
+    <button class="btn-rama" data-target="#sinteticos"><img src="/images/sintetica007.png"> Sintéticas</button>
+  </div>
+
+  <div id="organicos" class="subrama hidden">
+    <h2 class="text-2xl text-fox-red mb-4 text-center">Orgánicas</h2>
+    <div class="flex justify-center gap-4">
+     
+      <div class="criatura-node criatura-container bg-deep-black rounded-xl p-4 shadow-xl border border-fox-red/20" data-subtarget="#subnivel-humana">
+        <h3 class="text-2xl font-title cursor-pointer text-fox-red">Humana</h3>
+        
+        <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative cursor-pointer">
+          <img src="/images/humana-A1.png" alt="Criatura Humana" class="criatura-ficha rounded-lg w-full h-full object-cover border border-fox-red/50 shadow-xl">
+        </div>
+        
+        <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+        <p class="opacity-80">Criatura base con subcategorías.</p>
+
+        <div id="subnivel-humana" class="subrama hidden mt-6 border-t border-fox-red/30 pt-4 w-full">
+          <h4 class="text-xl text-fox-red mb-4 text-center">Sub-Especies Humanas (Nivel 3)</h4>
+          <div class="flex justify-center gap-4 flex-wrap">
+            
+            <div class="criatura-node criatura-container sub-3 bg-black/50 rounded-lg p-3 text-center" data-src="https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/subhumana-1.glb">
+              <h5 class="text-lg font-title text-white">Sub-Humana 1</h5>
+              <div class="criatura-visual-wrapper block w-32 h-32 rounded-lg overflow-hidden relative mx-auto">
+                <img src="/images/subhumana-1.png" class="criatura-ficha rounded w-full h-full object-cover cursor-pointer">
+                <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/90 z-10">...</div>
+                <button class="volver-btn hidden absolute top-1 right-1 bg-black/60 text-white text-xs px-1 py-0.5 rounded z-20">← volver</button>
+                <div class="criatura-3d hidden w-full h-full absolute inset-0"></div>
+              </div>
+            </div>
+            
+            <div class="criatura-node criatura-container sub-3 bg-black/50 rounded-lg p-3 text-center" data-subtarget="#subnivel-humana-2">
+              <h5 class="text-lg font-title text-white">Sub-Humana 2</h5>
+              <div class="criatura-visual-wrapper block w-32 h-32 rounded-lg overflow-hidden relative mx-auto cursor-pointer">
+                <img src="/images/subhumana-2.png" class="criatura-ficha rounded w-full h-full object-cover">
+              </div>
+
+              <div id="subnivel-humana-2" class="subrama hidden mt-4 p-2 border-t border-white/20 w-full">
+                <h6 class="text-base text-neon-green mb-2">Variantes (Nivel 4)</h6>
+                <div class="flex flex-wrap justify-center gap-2">
+                  <span class="subcategoria-final bg-black/70 px-2 py-1 rounded text-xs border border-blue-400">Variante Alpha</span>
+                  <span class="subcategoria-final bg-black/70 px-2 py-1 rounded text-xs border border-blue-400">Variante Beta</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="criatura-node criatura-container bg-deep-black block h-[480px] md:h-[700px] rounded-xl p-4 shadow-xl border border-fox-red/20" data-src="https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/mutante-A1.glb">
+        <h3 class="text-2xl font-title cursor-pointer text-fox-red">Mutantes</h3>
+        <div class="criatura-visual-wrapper block w-full h-full rounded-xl object-cover overflow-hidden shadow-xl relative">
+          <img src="/images/mutante-A1.png" alt="Mutantes" class="criatura-ficha rounded-lg w-full h-full object-cover border border-fox-red/50 shadow-xl cursor-pointer">
+          <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/90 z-10">
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">...</svg>
+          </div>
+          <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded hover:bg-white hover:text-black z-20">← volver</button>
+          <div class="criatura-3d hidden w-full h-full"></div>
+        </div>
+        <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+        <p class="opacity-80">Descripción breve de la criatura Mutante.</p>
+      </div>
+      
+      <div class="criatura-node criatura-container bg-deep-black rounded-xl p-4 shadow-xl border" data-src="https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/sintetica002.glb">
+        <h3 class="text-2xl font-title cursor-pointer text-fox-red">Alienígenas</h3>
+        <div class="criatura-visual-wrapper block w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative">
+          <img src="/images/alien-A1.png" alt="Alienígenas" class="criatura-ficha rounded-lg w-full h-full object-cover border border-fox-red/50 shadow-xl cursor-pointer">
+          <div class="criatura-loader hidden absolute inset-0 flex items-center justify-center bg-black/90 z-10">
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">...</svg>
+          </div>
+          <button class="volver-btn hidden absolute top-3 right-3 bg-black/60 text-white text-sm px-2 py-1 rounded hover:bg-white hover:text-black z-20">← volver</button>
+          <div class="criatura-3d hidden w-full h-full"></div>
+        </div>
+        <p class="text-xs text-neon-green mb-3">TIPO: Orgánico</p>
+        <p class="opacity-80">Descripción breve de la criatura Alienígena.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="inorganicos" class="subrama hidden">
+    <h2 class="text-2xl text-neon-green mb-4 text-center">Inorgánicos</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <span class="subcategoria">⚙️ Robots</span>
+    </div>
+  </div>
+
+  <div id="sinteticos" class="subrama hidden">
+    <h2 class="text-2xl text-blue-400 mb-4 text-center">Sintéticos</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <span class="subcategoria">🧪 Clones</span>
+      <span class="subcategoria">🔀 Híbridos</span>
+      <span class="subcategoria">🤖 IAs</span>
+    </div>
+  </div>
+</section>
+
+  <div class="flex justify-center mb-12">
+   <a href="/"> <img src="/images/dar3D-logo.jpg" alt="Universo" class="w-64 h-auto drop-shadow-xl rounded-xl border border-fox-red"></a>
+  </div>
+
+<script>
+  // Lógica de Nivel 1 (Ramificación principal)
+  document.querySelectorAll('.btn-rama').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.subrama').forEach(s => s.classList.add('hidden'));
+      const target = document.querySelector(btn.dataset.target);
+      if (target) target.classList.remove('hidden');
+    });
+  });
+</script>
+
+ <script type="module">
+  import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.criatura-node').forEach(container => {
+      const img = container.querySelector('.criatura-ficha');
+      const visualWrapper = container.querySelector('.criatura-visual-wrapper');
+      
+      // Lógica de Visor 3D (para NODOS HOJA)
+      if (container.hasAttribute('data-src')) {
+        const loader = container.querySelector('.criatura-loader');
+        const viewerWrapper = container.querySelector('.criatura-3d');
+        const volverBtn = container.querySelector('.volver-btn');
+        const glbSrc = container.dataset.src;
+        const h3 = container.querySelector('h3');
+
+        // Función para volver a imagen
+        function volverAVistaInicial() {
+          viewerWrapper.classList.add('hidden');
+          volverBtn.classList.add('hidden');
+          img.classList.remove('hidden');
+          viewerWrapper.innerHTML = ''; // Elimina visor para no duplicar
+          if (loader) loader.classList.add('hidden');
+        }
+
+        // Mostrar visor 3D al hacer clic en la imagen
+        img.addEventListener('click', () => {
+          if (!glbSrc) return; // Si no hay src, ignora la lógica 3D
+
+          img.classList.add('hidden');
+          if (loader) loader.classList.remove('hidden');
+
+          setTimeout(() => {
+            if (loader) loader.classList.add('hidden');
+            viewerWrapper.classList.remove('hidden');
+            volverBtn.classList.remove('hidden');
+
+            // Crear el visor solo si no existe aún
+            if (!viewerWrapper.querySelector('model-viewer')) {
+              const modelViewer = document.createElement('model-viewer');
+              // ... (atributos de model-viewer)
+              modelViewer.setAttribute('src', glbSrc);
+              modelViewer.setAttribute('style', 'width: 100%; height: 100%;');
+              modelViewer.setAttribute('auto-rotate', '');
+              modelViewer.setAttribute('camera-controls', '');
+              modelViewer.setAttribute('ar', '');
+              modelViewer.setAttribute('alt', 'Modelo 3D');
+              viewerWrapper.appendChild(modelViewer);
+            }
+          }, 1000);
+        });
+
+        // Clic en título o botón volver
+        if (h3) h3.addEventListener('click', volverAVistaInicial);
+        if (volverBtn) volverBtn.addEventListener('click', volverAVistaInicial);
+      } 
+      
+      // Lógica de Subniveles (para NODOS PADRE)
+      else if (container.hasAttribute('data-subtarget')) {
+        const targetId = container.dataset.subtarget;
+        const targetDiv = document.querySelector(targetId);
+        
+        if (visualWrapper && targetDiv) {
+          visualWrapper.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+
+            // Ocultar todos los otros subniveles en el mismo nivel (elegancia)
+            container.parentElement.querySelectorAll('.subrama').forEach(s => {
+                // Solo ocultamos si NO es un hijo directo del contenedor actual 
+                // y es visible (para evitar ocultar niveles superiores/inferiores).
+                if(s !== targetDiv && s.classList.contains('hidden') === false) {
+                     s.classList.add('hidden');
+                }
+            });
+
+            // Alternar la visibilidad del subnivel objetivo
+            targetDiv.classList.toggle('hidden');
+          });
+        }
+      }
+      
+    });
+  });
+</script>
+{{ end }}

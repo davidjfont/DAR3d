@@ -7,3 +7,15 @@
 
   gtag('config', 'G-MYM83H0X5Q');
 </script>
+
+<script>
+  function darEvent(name, params = {}) {
+    if (typeof gtag === "function") {
+      gtag("event", name, {
+        ...params,
+        page_location: window.location.href,
+        page_title: document.title
+      });
+    }
+  }
+</script>

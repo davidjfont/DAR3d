@@ -24,6 +24,13 @@
     disable-zoom
     touch-action="none"
     style="width:100%; height:{{ $height }}; z-index:1000;">
+
+    <!-- 🧬 LOADER DAR3D -->
+    <div slot="poster" class="dar3d-loader">
+      <img src="/svg/dar3d-loader.svg" alt="Cargando DAR3D">
+      <span>Inicializando artefacto 3D…</span>
+      <span>Cargando ${name}…</span>
+    </div>
 </model-viewer>
 
 {{/* Si NO se ha pasado .src, hacemos que sea aleatorio con JS */}}
@@ -36,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.GLBS = [
             {{- range readDir "static/models" -}}
                 {{- if eq (lower (path.Ext .Name)) ".glb" -}}
-                    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/{{ .Name }}",
+                    "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/{{ .Name }}",
                 {{- end -}}
             {{- end -}}
         ];

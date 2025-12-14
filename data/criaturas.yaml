@@ -2,26 +2,26 @@ Inorganicas:
   Humanoides:
     01 Robot Militar:
       desc: "Unidad militar autónoma."
-      glb_name: "robot-ia-militarB1.glb"
+      glb_name: "robot-ia-militarb1.glb"
       img: "/images/robot-militar-b3.png"
       tipo: "Inorgánico"
 
     02 Robot Ciudadano:
       desc: "Unidad militar autónoma."
-      glb_name: "mr-3042_V1.glb"
+      glb_name: "mr-3042_v1.glb"
       img: "/images/mr-3042-v2.png"
       tipo: "Inorgánico"
     
     03 Robot Ciudadano Deprecado:
       desc: "Unidad militar autónoma."
-      glb_name: "mr-3042_V3.glb"
+      glb_name: "mr-3042_v3.glb"
       img: "/images/mr-3042-v3.png"
       tipo: "Inorgánico"
 
   Roboticas:
-    01 Mascota Robótica:
+    01 Mascota Robotica:
       desc: "Unidad robótica mascota."
-      glb_name: "inorganico-mascotaA1.glb"
+      glb_name: "inorganico-mascotaa1.glb"
       img: "/images/robot-mascota-c2.png"
       tipo: "Inorgánico"
 
@@ -31,13 +31,13 @@ Inorganicas:
       img: "/images/dron-militar-a1.png"
       tipo: "Inorgánico"
     
-    03 Mascota Alienígena:
+    03 Mascota Alienigena:
       desc: "Unidad robótica mascota."
-      glb_name: "robot-ia-militarA1.glb"
+      glb_name: "robot-ia-militara1.glb"
       img: "/images/robot-mascota-a1.png"
       tipo: "Inorgánico"
 
-    04 DRON Alienígena Militar:
+    04 DRON Alienigena Militar:
       desc: "Unidad robótica militar."
       glb_name: "inorganico-alien-militar.glb"
       img: "/images/robot-mascota-b1.png"
@@ -75,13 +75,13 @@ Organicos:
   Humanas:
     01 Alpha:
       desc: "Subespecie humana variante Alpha."
-      glb_name: "humana-B1.glb"
+      glb_name: "humana-b1.glb"
       img: "/images/humana-b1.png"
       tipo: "Orgánico"
 
     02 Beta:
       desc: "Subespecie humana variante Beta."
-      glb_name: "humano-A1.glb"
+      glb_name: "humano-a1.glb"
       img: "/images/humano-a1.png"
       tipo: "Orgánico"
 
@@ -89,7 +89,7 @@ Organicos:
   Mutantes:
     04 Mutante Adulta varon:
       desc: "Mutante completamente desarrollada."
-      glb_name: "mutante-A1.glb"
+      glb_name: "mutante-a1.glb"
       img: "/images/mutante-a1.png"
       tipo: "Orgánico"
 
@@ -101,7 +101,7 @@ Organicos:
 
     01 Mutante Ninfa hembra:
       desc: "Mutante joven de tipo ninfa."
-      glb_name: "mutanta-A1.glb"
+      glb_name: "mutanta-a1.glb"
       img: "/images/mutanta-a2.png"
       tipo: "Orgánico"
 
@@ -114,21 +114,21 @@ Organicos:
 
 Sinteticas:
   Adeptas:
-    01 Sintética A1:
+    01 sintetica ciudadana:
       desc: "Adeptas sintéticas de rango básico."
       glb_name: "sintetico-a1.glb"
       img: "/images/sinteticoa3.png"
       tipo: "Sintética"
 
   Disidentes:
-    01 Sintética A1:
+    02 Sintetica disidente:
       desc: "Adeptas sintéticas de rango básico."
       glb_name: "sintetica002.glb"
       img: "/images/sintetica007.png"
       tipo: "Sintética"
 
   _Errores:
-    01 Sintética A1:
+    03 Sintetica Deprecada:
       desc: "Adeptas sintéticas de rango básico."
       glb_name: "sintetico-deprecado-a1.glb"
       img: "/images/sintetico_error.png"

@@ -1,110 +1,187 @@
-<section id="fanart" class="pt-16 md:pt-24 mt-16 md:mt-24 border-t border-neon-green/30 max-w-7xl mx-auto px-4">
+<section id="fanart"
+  class="pt-16 md:pt-24 mt-16 md:mt-24 border-t border-neon-green/30 max-w-7xl mx-auto px-4">
 
-    <!-- GRID DE INTRO -->
-    <div class="grid md:grid-cols-5 gap-8 items-center">
+  <!-- INTRO -->
+  <div class="grid md:grid-cols-5 gap-8 items-center mb-16">
 
-        <div class="md:col-span-3">
-            <img src="images/shadowrun-logo.webp" >
-            <h2 class="text-5xl font-title font-bold text-bone-white mb-6">
-                Shadow-Streets
-            </h2>
-            <h3 class="text-3xl font-title text-fox-red mb-6">
-                Un Homenaje al Séptimo Mundo
-            </h3>
-            <p class="text-lg leading-relaxed mb-6">
-                Aquí encontrarás chamanes urbanos, arquetipos reimaginados...
-            </p>
-        </div>
+    <div class="md:col-span-3">
+      <img src="/images/shadowrun-logo.webp" class="mb-6">
+      <h2 class="text-5xl font-title font-bold text-bone-white mb-6">
+        Shadow-Streets
+      </h2>
+      <h3 class="text-3xl font-title text-fox-red mb-6">
+        Un Homenaje al Séptimo Mundo
+      </h3>
+      <p class="text-lg leading-relaxed mb-6">
+        Aquí encontrarás chamanes urbanos, arquetipos reimaginados y fanart 3D
+        inspirados en el universo Shadowrun.
+      </p>
+    </div>
 
-        <div class="md:col-span-2">
-            <img class="rounded-xl shadow-2xl border-4 border-fox-red/50"
-                 src="/images/dancer.png">
-        </div>
+    <div class="md:col-span-2">
+      <img class="rounded-xl shadow-2xl border-4 border-fox-red/50"
+           src="/images/dancer.png">
+    </div>
+  </div>
 
-    </div> <!-- fin grid -->
+  <!-- GRID FANART -->
+  <div id="fanart-grid"
+       class="grid grid-cols-2 md:grid-cols-4 gap-8">
 
+    {{/* FANART CON PNG Y GLB DIFERENTES */}}
+    {{ $fanarts := slice
+      (dict "name" "Troll" "png" "troll.png" "glb" "troll.glb")
+      (dict "name" "Elfo Guerrero" "png" "elfo-tecnomante.png" "glb" "elfo-guerrero-a1.glb")
+      (dict "name" "Orca Tecnomante" "png" "orca-tecnomante.png" "glb" "orca-tecnomante-a1.glb")
+      (dict "name" "Indio Shaman" "png" "shaman.png" "glb" "shaman-varon.glb")
+      (dict "name" "Police" "png" "police.png" "glb" "police.glb")
+      (dict "name" "Punky Ares Predator" "png" "punky-ares2.png" "glb" "punky-ares2.glb")
+      (dict "name" "Dancer" "png" "dancer.png" "glb" "dancer.glb")
+      (dict "name" "Dunkelzahn" "png" "dunkelzahn.png" "glb" "dunkelzahn.glb")
+      
+    }}
 
+    {{ range $fanarts }}
+    <div class="fanart-item cursor-pointer"
+         data-name="{{ .name }}"
+         data-glb="{{ .glb }}">
 
+      <img src="/images/fanart/{{ .png }}"
+           class="rounded-xl shadow-xl border border-fox-red/30
+                  hover:scale-[1.03] transition-transform duration-300">
+    </div>
+    {{ end }}
 
-<!-- CARRUSEL 3D -->
-<div id="carousel-3d"
-     class="w-full h-[480px] md:h-[700px] rounded-xl overflow-hidden shadow-xl relative mt-12 bg-bone-white">
+  </div>
 
-    <model-viewer id="carouselModel"
-                  src="https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/shaman_enloquecido.glb"
-                  auto-rotate
-                  camera-controls
-                  interaction-prompt="none"
-                  disable-zoom
-                  style="width:100%; height:100%;">
-    </model-viewer>
-
-    <!-- Flecha izquierda -->
-    <button id="prev3d"
-            class="absolute left-4 top-1/2 -translate-y-1/2
-                   bg-black/40 hover:bg-black/70
-                   text-white text-5xl font-bold
-                   rounded-full w-14 h-14 flex items-center justify-center
-                   z-[999] shadow-xl backdrop-blur-sm select-none">
-        ‹
-    </button>
-
-    <!-- Flecha derecha -->
-    <button id="next3d"
-            class="absolute right-4 top-1/2 -translate-y-1/2
-                   bg-black/40 hover:bg-black/70
-                   text-white text-5xl font-bold
-                   rounded-full w-14 h-14 flex items-center justify-center
-                   z-[999] shadow-xl backdrop-blur-sm select-none">
-        ›
-    </button>
-
-</div>
-
-
-
-
-    <p class="mt-8 text-xs opacity-50 text-center">
-        Descargo legal: fanart no oficial.
-    </p>
+  <p class="mt-8 text-xs opacity-50 text-center">
+    Descargo legal: fanart no oficial.
+  </p>
 
 </section>
+<div id="fanart-overlay"
+     class="fixed inset-0 hidden bg-black/90 backdrop-blur-md
+            flex items-center justify-center z-[2000]">
+
+  <div id="fanart-overlay-inner"
+       class="relative w-[92vw] h-[92vh]
+              bg-black rounded-xl overflow-hidden
+              scale-90 opacity-0 transition-all duration-300">
+
+    <!-- BOTÓN VOLVER -->
+    <button id="fanart-close"
+            class="absolute top-4 right-4 z-[3000]
+                   bg-black/70 text-white px-3 py-1 rounded
+                   hover:bg-white hover:text-black">
+      ← volver
+    </button>
+
+    <!-- VISOR -->
+    <div id="fanart-overlay-viewer" class="w-full h-full"></div>
+  </div>
+</div>
+<script type="module">
+import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const IPFS_BASE =
+    "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/";
+
+  const overlay = document.getElementById("fanart-overlay");
+  const inner = document.getElementById("fanart-overlay-inner");
+  const viewerBox = document.getElementById("fanart-overlay-viewer");
+  const closeBtn = document.getElementById("fanart-close");
+
+  let interacted = false;
+  let currentModel = null;
+
+  function openOverlay(glb, name) {
+
+    darEvent("fanart_open_lightbox", {
+      model: name
+    });
+
+    overlay.classList.remove("hidden");
+
+    requestAnimationFrame(() => {
+      inner.classList.remove("scale-90", "opacity-0");
+      inner.classList.add("scale-100", "opacity-100");
+    });
+
+    const mv = document.createElement("model-viewer");
+    mv.src = IPFS_BASE + glb;
+    mv.style.width = "100%";
+    mv.style.height = "100%";
+    mv.setAttribute("auto-rotate", "");
+    mv.setAttribute("camera-controls", "");
+    mv.setAttribute("interaction-prompt", "none");
+    mv.setAttribute("shadow-intensity", "1");
+
+    if (window.innerWidth <= 768) {
+      mv.setAttribute("disable-zoom", "");
+    }
+
+    /* 🧬 CARGADOR DAR3D */
+    const loader = document.createElement("div");
+    loader.setAttribute("slot", "poster");
+    loader.className = "dar3d-loader";
+    loader.innerHTML = `
+      <img src="/svg/dar3d-loader.svg" alt="Cargando DAR3D">
+      <span>Cargando artefacto 3D…</span>
+      <span>Cargando ${name}…</span>
+    `;
+
+    mv.appendChild(loader);
+    viewerBox.appendChild(mv);
 
 
-<script>
-const models = [
+    darEvent("fanart_open_3d_viewer", {
+      model: name
+    });
 
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/shaman_enloquecido.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/elfo-guerrero-A1.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/orca-tecnomante-a1.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/shaman-varón.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/neon%20sprite.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/enforcer.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/cientifico.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/el_chatarrero.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/sniper.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/time_thief.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/dancer.glb",
-    "https://w3s.link/ipfs/bafybeib6a7dzgprashrdflr7p6ukx34tw3nvocqxc7mjw5paxwnhcsiqqq/dancer2.glb"
-];
+    mv.addEventListener("camera-change", () => {
+      if (!interacted) {
+        interacted = true;
+        darEvent("fanart_interact_3d", {
+          model: name
+        });
+      }
+    });
 
-let current = 0;
+    currentModel = name;
+  }
 
-const viewer = document.getElementById("carouselModel");
-const prev = document.getElementById("prev3d");
-const next = document.getElementById("next3d");
+  function closeOverlay() {
 
-function updateModel() {
-    viewer.src = models[current];
-}
+    darEvent("fanart_close_lightbox", {
+      model: currentModel
+    });
 
-prev.addEventListener("click", () => {
-    current = (current - 1 + models.length) % models.length;
-    updateModel();
-});
+    inner.classList.add("scale-90", "opacity-0");
 
-next.addEventListener("click", () => {
-    current = (current + 1) % models.length;
-    updateModel();
+    setTimeout(() => {
+      overlay.classList.add("hidden");
+      viewerBox.innerHTML = "";
+      interacted = false;
+      currentModel = null;
+    }, 300);
+  }
+
+  // GRID CLICK
+  document.querySelectorAll(".fanart-item").forEach(item => {
+    item.addEventListener("click", () => {
+      openOverlay(item.dataset.glb, item.dataset.name);
+    });
+  });
+
+  // VOLVER
+  closeBtn.addEventListener("click", closeOverlay);
+
+  // CLIC FUERA
+  overlay.addEventListener("click", e => {
+    if (e.target === overlay) closeOverlay();
+  });
+
 });
 </script>

@@ -1,0 +1,156 @@
+<section id="fanart"
+  class="pt-16 md:pt-24 mt-16 md:mt-24 border-t border-neon-green/30 max-w-7xl mx-auto px-4">
+
+  <!-- INTRO -->
+  <div class="grid md:grid-cols-5 gap-8 items-center mb-16">
+
+    <div class="md:col-span-3">
+      <img src="/images/shadowrun-logo.webp" class="mb-6">
+      <h2 class="text-5xl font-title font-bold text-bone-white mb-6">
+        Shadow-Streets
+      </h2>
+      <h3 class="text-3xl font-title text-fox-red mb-6">
+        Un Homenaje al Séptimo Mundo
+      </h3>
+      <p class="text-lg leading-relaxed mb-6">
+        Aquí encontrarás chamanes urbanos, arquetipos reimaginados y fanart 3D
+        inspirados en el universo Shadowrun.
+      </p>
+    </div>
+
+    <div class="md:col-span-2">
+      <img class="rounded-xl shadow-2xl border-4 border-fox-red/50"
+           src="/images/dancer.png">
+    </div>
+  </div>
+
+  <!-- GRID FANART -->
+  <div id="fanart-grid"
+       class="grid grid-cols-2 md:grid-cols-4 gap-8">
+
+    {{/* LISTA FANART (MISMO NOMBRE PNG / GLB) */}}
+    {{ $fanarts := slice
+      "shaman_enloquecido"
+      "elfo-guerrero-A1"
+      "orca-tecnomante-a1"
+      "shaman-varón"
+      "neon sprite"
+      "enforcer"
+      "cientifico"
+      "el_chatarrero"
+      "sniper"
+      "time_thief"
+      "dancer"
+      "dancer2"
+    }}
+
+    {{ range $fanarts }}
+    <div class="fanart-item relative bg-black rounded-xl overflow-hidden
+                shadow-xl border border-fox-red/30"
+         data-name="{{ . }}">
+
+      <!-- PNG -->
+      <img src="/images/fanart/{{ . }}.png"
+           class="fanart-png w-full h-[360px] md:h-[420px]
+                  object-cover cursor-pointer">
+
+      <!-- VISOR -->
+      <div class="fanart-3d hidden absolute inset-0"></div>
+
+      <!-- BOTÓN VOLVER -->
+      <button class="fanart-back hidden absolute top-3 right-3
+                     bg-black/70 text-white px-2 py-1 rounded
+                     z-[1000] hover:bg-white hover:text-black">
+        ← volver
+      </button>
+    </div>
+    {{ end }}
+
+  </div>
+
+  <p class="mt-8 text-xs opacity-50 text-center">
+    Descargo legal: fanart no oficial.
+  </p>
+
+</section>
+
+
+
+<script type="module">
+import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const IPFS_BASE =
+    "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/";
+
+  document.querySelectorAll(".fanart-item").forEach(item => {
+
+    const name = item.dataset.name;
+    const png = item.querySelector(".fanart-png");
+    const viewerBox = item.querySelector(".fanart-3d");
+    const backBtn = item.querySelector(".fanart-back");
+
+    const glbSrc = IPFS_BASE + encodeURIComponent(name) + ".glb";
+
+    let interacted = false;
+
+    // ABRIR VISOR 3D
+    png.addEventListener("click", () => {
+
+      darEvent("fanart_open_card", {
+        model: name,
+        source: "fanart_grid"
+      });
+
+      png.classList.add("hidden");
+      viewerBox.classList.remove("hidden");
+      backBtn.classList.remove("hidden");
+
+      const mv = document.createElement("model-viewer");
+      mv.src = glbSrc;
+      mv.style.width = "100%";
+      mv.style.height = "100%";
+      mv.setAttribute("auto-rotate", "");
+      mv.setAttribute("camera-controls", "");
+      mv.setAttribute("interaction-prompt", "none");
+      mv.setAttribute("shadow-intensity", "1");
+
+      if (window.innerWidth <= 768) {
+        mv.setAttribute("disable-zoom", "");
+      }
+
+      viewerBox.appendChild(mv);
+
+      darEvent("fanart_open_3d_viewer", {
+        model: name
+      });
+
+      mv.addEventListener("camera-change", () => {
+        if (!interacted) {
+          interacted = true;
+          darEvent("fanart_interact_3d", {
+            model: name
+          });
+        }
+      });
+    });
+
+    // VOLVER A PNG
+    backBtn.addEventListener("click", () => {
+
+      darEvent("fanart_close_3d_viewer", {
+        model: name
+      });
+
+      viewerBox.innerHTML = "";
+      viewerBox.classList.add("hidden");
+      backBtn.classList.add("hidden");
+      png.classList.remove("hidden");
+      interacted = false;
+    });
+
+  });
+});
+</script>
+

@@ -167,3 +167,5 @@ Y David todavía no sabe si quiere ser quien la tome.
 A veces pienso que nunca fui humano.  
 A veces pienso que debo destruirlo todo para empezar de nuevo.”  
 — David, Registro Personal 04, Año 3039
+
+![David el Mutante](/images/wiki/david-el-mutante1.png)
