@@ -106,7 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
              data-name="${name}"
              data-type="${data.tipo}"
              data-category="${categoria}"
-             data-subcategory="${subcategoria}">
+             data-subcategory="${subcategoria}"
+             data-zip="${data.zip || ""}">
           <div class="bg-deep-black p-4 rounded-xl border border-fox-red/20 hover:border-neon-green/50 transition">
             <h5 class="text-lg text-center mb-3">${name}</h5>
             <p class="text-xs text-neon-green text-center">${data.tipo}</p>
@@ -206,6 +207,20 @@ function activarInteracciones() {
         creature_name: name
       });
 
+      // 📥 BOTÓN SOLICITAR 3D (Si tiene ZIP)
+      const zip = node.dataset.zip;
+      if (zip && zip.length > 1) {
+        const btnRequest = document.createElement("a");
+        btnRequest.href = `https://docs.google.com/forms/d/e/1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q/viewform?entry.1908425380=${zip}`;
+        btnRequest.target = "_blank";
+        // Position: bottom-3 left-3
+        btnRequest.className = "btn-solicitar-3d absolute bottom-3 left-3 bg-black/70 text-white px-3 py-2 rounded z-[1000] text-sm hover:bg-black transition";
+        btnRequest.innerText = "Solicitar 3D Gratuito ->";
+        btnRequest.onclick = () => darEvent('click_request_3d', { creature_name: name });
+
+        viewer.appendChild(btnRequest);
+      }
+
       mv.addEventListener("camera-change", () => {
         if (!interacted) {
           interacted = true;
@@ -229,6 +244,10 @@ function activarInteracciones() {
       volver.classList.add("hidden");
       img.classList.remove("hidden");
       interacted = false;
+
+      // Limpiar botón solicitar si existe
+      const btnReq = viewer.querySelector(".btn-solicitar-3d");
+      if (btnReq) btnReq.remove();
     });
   });
 

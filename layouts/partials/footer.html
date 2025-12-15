@@ -10,26 +10,34 @@
         <div>
             <h4 class="font-title text-bone-white mb-3">Principal</h4>
             <ul class="space-y-2 text-sm opacity-80">
-                <li><a href="#about">About</a></li>
-                <li><a href="#creatures">Creatures</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about" onclick="darEvent('click_nav', { label: 'About', location: 'footer' })">About</a>
+                </li>
+                <li><a href="#creatures"
+                        onclick="darEvent('click_nav', { label: 'Creatures', location: 'footer' })">Creatures</a></li>
+                <li><a href="#contact"
+                        onclick="darEvent('click_nav', { label: 'Contact', location: 'footer' })">Contact</a></li>
             </ul>
         </div>
 
         <div>
             <h4 class="font-title text-bone-white mb-3">Tienda</h4>
             <ul class="space-y-2 text-sm opacity-80">
-                <li><a href="/products/">3D Models</a></li>
-                <li><a href="/products/3dprint/">Bundles</a></li>
-                <li><a href="#nft">NFT Keys</a></li>
+                <li><a href="/products/" onclick="darEvent('click_nav', { label: '3D Models', location: 'footer' })">3D
+                        Models</a></li>
+                <li><a href="/products/3dprint/"
+                        onclick="darEvent('click_nav', { label: 'Bundles', location: 'footer' })">Bundles</a></li>
+                <li><a href="#nft" onclick="darEvent('click_nav', { label: 'NFT Keys', location: 'footer' })">NFT
+                        Keys</a></li>
             </ul>
         </div>
 
         <div>
             <h4 class="font-title text-bone-white mb-3">Información</h4>
             <ul class="space-y-2 text-sm opacity-80">
-                <li><a href="../lore">Wiki</a></li>
-                <li><a href="#">Tutorials</a></li>
+                <li><a href="../lore" onclick="darEvent('click_nav', { label: 'Wiki', location: 'footer' })">Wiki</a>
+                </li>
+                <li><a href="#"
+                        onclick="darEvent('click_nav', { label: 'Tutorials', location: 'footer' })">Tutorials</a></li>
             </ul>
         </div>
 

@@ -6,62 +6,50 @@
 {{- $src := .src -}}
 
 <!-- Carga de model-viewer (solo hace efecto la primera vez que se incluye) -->
-<script type="module"
-        src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">
 </script>
 
-<model-viewer
-    id="{{ $id }}"
-    src="{{ $src }}"
-    alt="{{ $alt }}"
-    camera-controls
-    auto-rotate
-    auto-rotate-delay="0"
-    shadow-intensity="1"
-    exposure="1"
-    interaction-prompt="none"
-    interaction-prompt-style="none"
-    disable-zoom
-    touch-action="none"
-    style="width:100%; height:{{ $height }}; z-index:1000;">
+<model-viewer id="{{ $id }}" src="{{ $src }}" alt="{{ $alt }}" camera-controls auto-rotate auto-rotate-delay="0"
+    shadow-intensity="1" exposure="1" interaction-prompt="none" interaction-prompt-style="none" disable-zoom
+    touch-action="none" style="width:100%; height:{{ $height }}; z-index:1000;">
 
     <!-- 🧬 LOADER DAR3D -->
     <div slot="poster" class="dar3d-loader">
-      <img src="/svg/dar3d-loader.svg" alt="Cargando DAR3D">
-      <span>Inicializando artefacto 3D…</span>
-      <span>Cargando ${name}…</span>
+        <img src="/svg/dar3d-loader.svg" alt="Cargando DAR3D">
+        <span>Inicializando artefacto 3D…</span>
+        <span>Cargando...</span>
     </div>
 </model-viewer>
 
-{{/* Si NO se ha pasado .src, hacemos que sea aleatorio con JS */}}
-{{- if not $src }}
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+    (function () {
+        const mv = document.getElementById('{{ $id }}');
+        let interacted = false; // Local state per instantiation
 
-    // Si aún no hemos creado la lista global de modelos, la creamos ahora
-    if (!window.GLBS || !window.GLBS.length) {
-        window.GLBS = [
-            {{- range readDir "static/models" -}}
-                {{- if eq (lower (path.Ext .Name)) ".glb" -}}
-                    "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/{{ .Name }}",
-                {{- end -}}
-            {{- end -}}
-        ];
-    }
+        if (mv) {
+            mv.addEventListener('load', () => {
+                // Read current src from element in case it was set dynamically (random mode)
+                // mv.src returns full URL, so it might differ slightly from {{ $src }} but is accurate for tracking
+                const currentSrc = mv.src || '{{ $src }}';
 
-    const modelos = window.GLBS || [];
-    if (!modelos.length) {
-        console.error("No se encontraron modelos .glb en static/models");
-        return;
-    }
+                darEvent('open_3d_viewer', {
+                    model_src: currentSrc,
+                    model_id: '{{ $id }}',
+                    viewer_type: 'generic_partial'
+                });
+            });
 
-    const randomModel = modelos[Math.floor(Math.random() * modelos.length)];
-    console.log("Model-viewer aleatorio:", randomModel);
-
-    const el = document.getElementById("{{ $id }}");
-    if (el) {
-        el.src = randomModel;
-    }
-});
+            mv.addEventListener('camera-change', () => {
+                if (!interacted) {
+                    interacted = true;
+                    // Read current src
+                    const currentSrc = mv.src || '{{ $src }}';
+                    darEvent('interact_3d_model', {
+                        model_src: currentSrc,
+                        model_id: '{{ $id }}'
+                    });
+                }
+            });
+        }
+    })();
 </script>
-{{- end }}

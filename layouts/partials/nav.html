@@ -14,7 +14,7 @@
                 {{ partial "glb_viewer_logo.html" (dict "src" "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/fox.glb" "height" "48px") }}
             </div>
 
-            <a href="/" class="text-3xl font-title text-bone-white tracking-widest hover:text-fox-red transition duration-300">
+            <a href="/" class="text-3xl font-title text-bone-white tracking-widest hover:text-fox-red transition duration-300" onclick="darEvent('click_nav', { label: 'Logo Home', location: 'header' })">
                 <span class="logo-text">DAR3D</span>
             </a>
         </div>
@@ -22,14 +22,15 @@
         <!-- NAV DESKTOP -->
         <nav class="hidden md:flex space-x-8 font-title text-sm tracking-wide">
            
-            <a href="/#criaturaTree" class="hover:text-neon-green">Criaturas</a>
-             <a href="/#gadgets" class="hover:text-neon-green">Gadgets</a>
-            <a href="/#fanart" class="hover:text-neon-green">Fanart</a>
-            <a href="/lore/" class="hover:text-neon-green">Wiki</a>
+            <a href="/#criaturaTree" class="hover:text-neon-green" onclick="darEvent('click_nav', { label: 'Criaturas', location: 'header' })">Criaturas</a>
+             <a href="/#gadgets" class="hover:text-neon-green" onclick="darEvent('click_nav', { label: 'Gadgets', location: 'header' })">Gadgets</a>
+            <a href="/#fanart" class="hover:text-neon-green" onclick="darEvent('click_nav', { label: 'Fanart', location: 'header' })">Fanart</a>
+            <a href="/lore/" class="hover:text-neon-green" onclick="darEvent('click_nav', { label: 'Wiki', location: 'header' })">Wiki</a>
             
             <!-- ⭐ BOTÓN TIENDA CORREGIDO -->
             <a href="/products/"
-               class="px-4 py-1.5 text-ui-dark-gray bg-fox-red font-bold rounded-lg hover:bg-bone-white transition duration-200 shadow-md">
+               class="px-4 py-1.5 text-ui-dark-gray bg-fox-red font-bold rounded-lg hover:bg-bone-white transition duration-200 shadow-md"
+               onclick="darEvent('click_nav', { label: 'Tienda Button', location: 'header' })">
                 Tienda →
             </a>
 <div>    {{ partial "criaturas-json.html" . }}
@@ -50,14 +51,15 @@
 
     <!-- MENÚ MÓVIL -->
     <div id="mobile-menu" class="hidden md:hidden bg-ui-dark-gray border-t border-fox-red/30 py-2">
-        <a href="../#creatures" class="block px-4 py-2 hover:bg-fox-red/20">Criaturas</a>
-        <a href="../gadgets" class="block px-4 py-2 hover:bg-fox-red/20">Gadgets</a>
-        <a href="../#fanart" class="block px-4 py-2 hover:bg-fox-red/20">Fanart</a>
-        <a href="../#nft" class="block px-4 py-2 hover:bg-fox-red/20">NFT / Keys</a>
+        <a href="../#creatures" class="block px-4 py-2 hover:bg-fox-red/20" onclick="darEvent('click_nav', { label: 'Criaturas', location: 'mobile_menu' })">Criaturas</a>
+        <a href="../gadgets" class="block px-4 py-2 hover:bg-fox-red/20" onclick="darEvent('click_nav', { label: 'Gadgets', location: 'mobile_menu' })">Gadgets</a>
+        <a href="../#fanart" class="block px-4 py-2 hover:bg-fox-red/20" onclick="darEvent('click_nav', { label: 'Fanart', location: 'mobile_menu' })">Fanart</a>
+        <a href="../#nft" class="block px-4 py-2 hover:bg-fox-red/20" onclick="darEvent('click_nav', { label: 'NFT', location: 'mobile_menu' })">NFT / Keys</a>
 
         <!-- ⭐ BOTÓN TIENDA MÓVIL CORREGIDO -->
         <a href="/products/"
-           class="block px-4 py-2 bg-fox-red font-bold mt-2">
+           class="block px-4 py-2 bg-fox-red font-bold mt-2"
+           onclick="darEvent('click_nav', { label: 'Tienda', location: 'mobile_menu' })">
            Tienda
         </a>
     </div>

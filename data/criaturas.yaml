@@ -5,18 +5,21 @@ Inorganicas:
       glb_name: "robot-ia-militarb1.glb"
       img: "/images/robot-militar-b3.png"
       tipo: "Inorgánico"
-
+      zip: "robot_ia_militar_b1"
+      
     02 Robot Ciudadano:
       desc: "Unidad militar autónoma."
       glb_name: "mr-3042_v1.glb"
       img: "/images/mr-3042-v2.png"
       tipo: "Inorgánico"
+      zip: "mr-3042_v1"
     
     03 Robot Ciudadano Deprecado:
       desc: "Unidad militar autónoma."
       glb_name: "mr-3042_v3.glb"
       img: "/images/mr-3042-v3.png"
       tipo: "Inorgánico"
+      zip: "mr-3042_v3"
 
   Roboticas:
     01 Mascota Robotica:
@@ -24,24 +27,28 @@ Inorganicas:
       glb_name: "inorganico-mascotaa1.glb"
       img: "/images/robot-mascota-c2.png"
       tipo: "Inorgánico"
+      zip: "inorganico-mascotaa1"
 
     02 DRON Terrestre Militar:
       desc: "Unidad robótica militar."
       glb_name: "dron-militar-a1.glb"
       img: "/images/dron-militar-a1.png"
       tipo: "Inorgánico"
+      zip: "dron-militar-a1"
     
     03 Mascota Alienigena:
       desc: "Unidad robótica mascota."
       glb_name: "robot-ia-militara1.glb"
       img: "/images/robot-mascota-a1.png"
       tipo: "Inorgánico"
+      ZIP: "robot-ia-militara1"
 
     04 DRON Alienigena Militar:
       desc: "Unidad robótica militar."
       glb_name: "inorganico-alien-militar.glb"
       img: "/images/robot-mascota-b1.png"
       tipo: "Inorgánico"
+      ZIP: "inorganico-alien-militar"
 
 
 Organicos:
@@ -58,18 +65,21 @@ Organicos:
       glb_name: "alien-c1.glb"
       img: "/images/alien-c1.png"
       tipo: "Orgánico"
+      zip: "alien-c1"
     
     03 Alien Nebulosa 1:
       desc: "Reptiliano con estructura híbrida."
       glb_name: "alien-a1.glb"
       img: "/images/alien-b3.png"
       tipo: "Orgánico"
+      zip: "alien-a1"
 
     04 Alien Oscura:
       desc: "Reptiliano con estructura híbrida."
       glb_name: "alien-b1.glb"
       img: "/images/alien-a1.png"
       tipo: "Orgánico"
+      zip: "alien-b1"
               
 
   Humanas:
@@ -78,12 +88,14 @@ Organicos:
       glb_name: "humana-b1.glb"
       img: "/images/humana-b1.png"
       tipo: "Orgánico"
+      zip: "humana-b1"
 
     02 Beta:
       desc: "Subespecie humana variante Beta."
       glb_name: "humano-a1.glb"
       img: "/images/humano-a1.png"
       tipo: "Orgánico"
+      zip: "humano-a1"
 
 
   Mutantes:
@@ -92,24 +104,28 @@ Organicos:
       glb_name: "mutante-a1.glb"
       img: "/images/mutante-a1.png"
       tipo: "Orgánico"
+      zip: "mutante-a1"
 
     03 Mutante Adulta hembra:
       desc: "Mutante completamente desarrollada."
       glb_name: "mutanta-b1.glb"
       img: "/images/mutanta-b1.png"
       tipo: "Orgánico"
+      zip: "mutanta-b1"
 
     01 Mutante Ninfa hembra:
       desc: "Mutante joven de tipo ninfa."
       glb_name: "mutanta-a1.glb"
       img: "/images/mutanta-a2.png"
       tipo: "Orgánico"
+      zip: "mutanta-a1"
 
     02 Mutante Ninfa varon:
       desc: "Mutante joven de tipo ninfa."
       glb_name: "mutante-b2.glb"
       img: "/images/mutante-b1.png"
       tipo: "Orgánico"
+      zip: "mutante-b2"
 
 
 Sinteticas:
@@ -119,6 +135,7 @@ Sinteticas:
       glb_name: "sintetico-a1.glb"
       img: "/images/sinteticoa3.png"
       tipo: "Sintética"
+      zip: "sintetico-a1"
 
   Disidentes:
     02 Sintetica disidente:
@@ -126,6 +143,7 @@ Sinteticas:
       glb_name: "sintetica002.glb"
       img: "/images/sintetica007.png"
       tipo: "Sintética"
+      zip: "sintetica002"
 
   _Errores:
     03 Sintetica Deprecada:
@@ -133,3 +151,4 @@ Sinteticas:
       glb_name: "sintetico-deprecado-a1.glb"
       img: "/images/sintetico_error.png"
       tipo: "Sintética"
+      zip: "sintetico-deprecado-a1"

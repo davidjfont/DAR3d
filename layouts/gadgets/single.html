@@ -11,41 +11,40 @@
   {{ $glbOriginal := printf "%s%s/%s" $base $cid .Params.glb }}
   {{ $glbClay := "" }}
   {{ if .Params.glbt }}
-    {{ $glbClay = printf "%s%s/%s" $base $cid .Params.glbt }}
+  {{ $glbClay = printf "%s%s/%s" $base $cid .Params.glbt }}
   {{ end }}
 
   <!-- PREVIEW -->
   <img id="preview" src="{{ .Params.image }}" alt="{{ .Title }}"
-      style="width:100%;border-radius:12px;margin-bottom:20px;cursor:pointer;"
-      onclick="mostrarViewer()">
+    style="width:100%;border-radius:12px;margin-bottom:20px;cursor:pointer;" onclick="mostrarViewer()">
 
   <!-- BOTÓN VOLVER -->
-  <button onclick="history.back()"
-          style="position:relative; left:20px; top:20px;
+  <button onclick="history.back()" style="position:relative; left:20px; top:20px;
                  background:none; border:none; font-size:22px;
                  cursor:pointer;">
     ← Volver
   </button>
 
   <!-- VISOR PRINCIPAL -->
-  <model-viewer id="visor"
-      src="{{ $glbOriginal }}"
-      camera-controls
-      auto-rotate
-      disable-pan
-      style="display:none;width:100%;height:500px;border-radius:12px;background:white;">
-    
-    <button onclick="history.back()"
-            style="position:absolute; left:20px; top:20px;
-                   background:none; border:none; font-size:22px;
+  <model-viewer id="visor" src="{{ $glbOriginal }}" camera-controls auto-rotate disable-pan
+    style="display:none;width:100%;height:500px;border-radius:12px;background:white;">
+
+    <button onclick="history.back()" style="position:absolute; left:20px; top:20px;
+                   background:none; border:none; font-size:22px; z-index:100;
                    cursor:pointer;">
       ← Volver
     </button>
+
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q/viewform?entry.1908425380={{ .Params.ZIP }}"
+      target="_blank"
+      style="position:absolute; right:12px; top:12px; background:rgba(0,0,0,0.7); color:white; padding:4px 8px; border-radius:4px; text-decoration:none; font-size:14px; z-index:1000;"
+      onclick="darEvent('click_request_3d', { gadget_name: '{{ .Title }}', location: 'viewer_overlay' })">
+      Solicitar 3D Gratuito ->
+    </a>
   </model-viewer>
 
   <!-- PANEL -->
-  <div id="panel"
-      style="display:none; margin-top:20px; padding:15px; border-radius:12px;
+  <div id="panel" style="display:none; margin-top:20px; padding:15px; border-radius:12px;
               background:#f3f3f3; border:1px solid #ddd; max-width:500px;">
 
     <h3 style="margin-top:0;">Opciones del visor</h3>
@@ -53,15 +52,14 @@
     <!-- TOGGLE GLB -->
     <label><strong>Color sólido:</strong></label><br>
     <button id="btnTexturas"
-            style="padding:6px 14px; cursor:pointer;border-radius: 3px;border-width: 1px;background-color: rgb(202, 202, 202);"
-            onclick="toggleOverride()">
+      style="padding:6px 14px; cursor:pointer;border-radius: 3px;border-width: 1px;background-color: rgb(202, 202, 202);"
+      onclick="toggleOverride()">
       Mostrar color sólido
     </button>
     <br><br>
 
     <label><strong>Color del modelo:</strong></label><br>
-    <input type="color" id="colorPicker" value="#828282"
-           onchange="cambiarColorOverride()">
+    <input type="color" id="colorPicker" value="#828282" onchange="cambiarColorOverride()">
     <br><br>
 
     <label><strong>Fondo:</strong></label><br>
@@ -81,78 +79,96 @@
     {{ .Content }}
   </div>
 
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q/viewform?entry.1908425380={{ .Params.ZIP }}" target="_blank"
-    style="display:inline-block;padding:12px 24px;border-radius:8px;background:black;
-            color:white;text-decoration:none;margin-top:20px;">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q/viewform?entry.1908425380={{ .Params.ZIP }}"
+    target="_blank" style="display:inline-block;padding:12px 24px;border-radius:8px;background:black;
+            color:white;text-decoration:none;margin-top:20px;"
+    onclick="darEvent('click_request_3d', { gadget_name: '{{ .Title }}', zip: '{{ .Params.ZIP }}' })">
     Solicitar 3D Gratuito ->
   </a>
 
 </article>
 
-<script type="module"
-        src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <script>
-const visor = document.getElementById("visor");
+  const visor = document.getElementById("visor");
 
-// GLB vía Hugo -> JS
-const glbOriginal = "{{ $glbOriginal }}";
-const glbClay = "{{ $glbClay }}";
+  // GLB vía Hugo -> JS
+  const glbOriginal = "{{ $glbOriginal }}";
+  const glbClay = "{{ $glbClay }}";
 
-let overrideActivo = false;
-let currentColor = "#828282";
+  let overrideActivo = false;
+  let currentColor = "#828282";
 
-/* Mostrar visor */
-function mostrarViewer() {
-  document.getElementById("preview").style.display = "none";
-  visor.style.display = "block";
-  document.getElementById("panel").style.display = "block";
-}
+  /* Mostrar visor */
+  function mostrarViewer() {
+    document.getElementById("preview").style.display = "none";
+    visor.style.display = "block";
+    document.getElementById("panel").style.display = "block";
 
-/* Aplicar color */
-function aplicarColor(colorHex) {
-  if (!visor.model) return;
-
-  const r = parseInt(colorHex.substr(1,2),16) / 255;
-  const g = parseInt(colorHex.substr(3,2),16) / 255;
-  const b = parseInt(colorHex.substr(5,2),16) / 255;
-
-  for (const mat of visor.model.materials) {
-    mat.pbrMetallicRoughness.setBaseColorFactor([r, g, b, 1]);
-    mat.pbrMetallicRoughness.metallicFactor = 0;
-    mat.pbrMetallicRoughness.roughnessFactor = 1;
+    darEvent('open_3d_viewer', {
+      model_type: 'gadget',
+      name: '{{ .Title }}'
+    });
   }
-}
 
-function cambiarColorOverride() {
-  currentColor = document.getElementById("colorPicker").value;
-  if (overrideActivo) aplicarColor(currentColor);
-}
+  // Track interaction once
+  let hasInteracted = false;
+  visor.addEventListener('camera-change', () => {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      darEvent('interact_3d_model', {
+        model_type: 'gadget',
+        name: '{{ .Title }}'
+      });
+    }
+  });
 
-/* Cambiar entre GLB original y clay */
-function toggleOverride() {
-  overrideActivo = !overrideActivo;
+  /* Aplicar color */
+  function aplicarColor(colorHex) {
+    if (!visor.model) return;
 
-  if (overrideActivo && glbClay.length > 5) {
-    visor.src = glbClay;
-    visor.addEventListener("load", () => aplicarColor(currentColor), { once:true });
-    document.getElementById("btnTexturas").textContent = "Mostrar textura original";
-  } else {
-    visor.src = glbOriginal;
-    document.getElementById("btnTexturas").textContent = "Mostrar color sólido";
+    const r = parseInt(colorHex.substr(1, 2), 16) / 255;
+    const g = parseInt(colorHex.substr(3, 2), 16) / 255;
+    const b = parseInt(colorHex.substr(5, 2), 16) / 255;
+
+    for (const mat of visor.model.materials) {
+      mat.pbrMetallicRoughness.setBaseColorFactor([r, g, b, 1]);
+      mat.pbrMetallicRoughness.metallicFactor = 0;
+      mat.pbrMetallicRoughness.roughnessFactor = 1;
+    }
   }
-}
 
-/* Fondo */
-function cambiarFondo() {
-  visor.style.background = document.getElementById("bgSelect").value;
-}
+  function cambiarColorOverride() {
+    currentColor = document.getElementById("colorPicker").value;
+    if (overrideActivo) aplicarColor(currentColor);
+    darEvent('customize_gadget', { action: 'change_color', color: currentColor, name: '{{ .Title }}' });
+  }
 
-/* Reset cámara */
-function resetCamara() {
-  visor.resetTurntableRotation();
-  visor.cameraOrbit = "0deg 75deg 2.5m";
-}
+  /* Cambiar entre GLB original y clay */
+  function toggleOverride() {
+    overrideActivo = !overrideActivo;
+
+    if (overrideActivo && glbClay.length > 5) {
+      visor.src = glbClay;
+      visor.addEventListener("load", () => aplicarColor(currentColor), { once: true });
+      document.getElementById("btnTexturas").textContent = "Mostrar textura original";
+    } else {
+      visor.src = glbOriginal;
+      document.getElementById("btnTexturas").textContent = "Mostrar color sólido";
+    }
+  }
+
+  /* Fondo */
+  function cambiarFondo() {
+    visor.style.background = document.getElementById("bgSelect").value;
+  }
+
+  /* Reset cámara */
+  function resetCamara() {
+    visor.resetTurntableRotation();
+    visor.cameraOrbit = "0deg 75deg 2.5m";
+  }
 </script>
 
 {{ end }}

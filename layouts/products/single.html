@@ -7,25 +7,23 @@
   <div class="product-single__layout">
 
     {{ with .Params.image }}
-      <div class="product-single__image-wrapper">
-        <img src="{{ . }}" alt="{{ $.Title }}" class="product-single__image">
-      </div>
+    <div class="product-single__image-wrapper">
+      <img src="{{ . }}" alt="{{ $.Title }}" class="product-single__image">
+    </div>
     {{ end }}
 
     <!-- GLB AUTOMÁTICO SEGÚN NOMBRE DEL ARCHIVO -->
     <model-viewer
-        src="https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/{{ .File.BaseFileName }}.glb"
-        camera-controls
-        auto-rotate
-        class="w-full h-[30rem] bg-black rounded-xl">
+      src="https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/{{ .File.BaseFileName }}.glb"
+      camera-controls auto-rotate class="w-full h-[30rem] bg-black rounded-xl">
     </model-viewer>
 
     <div class="product-single__content">
 
       {{ with .Params.price }}
-        <p class="product-single__price">
-          {{ printf "€%.2f" . }}
-        </p>
+      <p class="product-single__price">
+        {{ printf "€%.2f" . }}
+      </p>
       {{ end }}
 
       <div class="product-single__description">
@@ -33,9 +31,9 @@
       </div>
 
       {{ with .Params.stripe_url }}
-        <a href="{{ . }}" class="product-single__buy" target="_blank" rel="noopener">
-          Comprar ahora
-        </a>
+      <a href="{{ . }}" class="product-single__buy" target="_blank" rel="noopener">
+        Comprar ahora
+      </a>
       {{ end }}
 
     </div>
