@@ -1,5 +1,4 @@
-<section id="home"
-  class="relative min-h-screen w-full bg-cover bg-center bg-no-repeat"
+<section id="home" class="relative min-h-screen w-full bg-cover bg-center bg-no-repeat"
   style="background-image:url('/images/hero_bg.jpg');">
 
   <div class="relative max-w-7xl mx-auto grid md:grid-cols-2 gap-12 p-8 md:p-12 z-20">
@@ -21,12 +20,12 @@
 
       <div class="mt-10 flex flex-col sm:flex-row gap-4">
         <a href="#creatures"
-           class="wireframe-border text-center px-8 py-3 bg-fox-red text-grey rounded-lg shadow-lg hover:bg-fox-red/90">
+          class="wireframe-border text-center px-8 py-3 bg-fox-red text-grey rounded-lg shadow-lg hover:bg-fox-red/90">
           Explorar criaturas
         </a>
 
         <a href="/products/"
-           class="text-center px-8 py-3 bg-deep-black text-neon-green border border-neon-green/50 rounded-lg">
+          class="text-center px-8 py-3 bg-deep-black text-neon-green border border-neon-green/50 rounded-lg">
           Entrar en la tienda
         </a>
       </div>
@@ -37,15 +36,13 @@
                 rounded-xl overflow-hidden shadow-xl">
 
       <!-- IMAGEN PLACEHOLDER -->
-      <img id="hero-placeholder"
-           src="/images/hero.png"
-           class="absolute inset-0 h-full object-cover z-10
+      <img id="hero-placeholder" src="/images/hero.png" class="absolute inset-0 h-full object-cover z-10
                   transition-opacity duration-700">
 
-      <!-- VISOR 3D -->
-      <div id="hero-3d-container"
-           class="absolute inset-0 z-20 opacity-0
-                  transition-opacity duration-700 pointer-events-auto">
+      <!-- VISOR 3D (DOUBLE BUFFER) -->
+      <div id="hero-3d-wrapper" class="absolute inset-0 z-20 pointer-events-auto">
+        <div id="hero-viewer-1" class="absolute inset-0 opacity-0 transition-opacity duration-1000"></div>
+        <div id="hero-viewer-2" class="absolute inset-0 opacity-0 transition-opacity duration-1000"></div>
       </div>
 
     </div>
@@ -54,98 +51,94 @@
 
 </section>
 <script type="module">
-import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
+  import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
 
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
 
-  const MODELS = [
-    {
-      name: "Sewer Monster",
-      glb: "sewer_monster.glb"
-    },
-    {
-      name: "Alien Gris",
-      glb: "alien-d1.glb"
-    },
-    {
-      name: "Dark Synth",
-      glb: "dron-militar-a1.glb"
-    },
-    {
-      name: "David el Mutante",
-      glb: "david-mutante-a1.glb"
-    },
-    {
-      name: "Sintetica Disidente",
-      glb: "sintetica-pistola2.glb"
-    },
-    {
-      name: "Escalopendra Gigantae",
-      glb: "scolopendrae_gigantae.glb"
+    const MODELS = [
+      { name: "Sewer Monster", glb: "sewer_monster.glb" },
+      { name: "Alien Gris", glb: "alien-d1.glb" },
+      { name: "Dark Synth", glb: "dron-militar-a1.glb" },
+      { name: "David el Mutante", glb: "david-mutante-a1.glb" },
+      { name: "Sintetica Disidente", glb: "sintetica-pistola2.glb" },
+      { name: "Escalopendra Gigantae", glb: "scolopendrae_gigantae.glb" }
+    ];
+
+    const IPFS_BASE = "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/";
+
+    const v1 = document.getElementById("hero-viewer-1");
+    const v2 = document.getElementById("hero-viewer-2");
+    const placeholder = document.getElementById("hero-placeholder");
+
+    let activeViewer = 1; // 1 or 2
+    let index = 0;
+
+    function createViewerContent(container, model) {
+      container.innerHTML = "";
+      const mv = document.createElement("model-viewer");
+      mv.src = IPFS_BASE + model.glb;
+      mv.style.width = "100%";
+      mv.style.height = "100%";
+      mv.setAttribute("auto-rotate", "");
+      mv.setAttribute("camera-controls", "");
+      mv.setAttribute("interaction-prompt", "none");
+      mv.setAttribute("shadow-intensity", "1");
+      // Ensure smooth loading
+      mv.setAttribute("reveal", "auto");
+
+      container.appendChild(mv);
+      return mv;
     }
-  ];
 
-  const IPFS_BASE =
-    "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/";
+    function loadNextModel(i) {
+      const model = MODELS[i];
+      if (!model) return;
 
-  const container = document.getElementById("hero-3d-container");
-  const placeholder = document.getElementById("hero-placeholder");
+      // Determine target container (if active is 1, target is 2)
+      const targetContainer = activeViewer === 1 ? v2 : v1;
+      const currentContainer = activeViewer === 1 ? v1 : v2;
 
-  let index = 0;
-  let viewer = null;
+      darEvent("hero_preload_model", { model: model.name });
 
-  function loadModel(i) {
+      const mv = createViewerContent(targetContainer, model);
 
-    const model = MODELS[i];
+      mv.addEventListener("load", () => {
+        // 1. Fade IN target
+        targetContainer.classList.remove("opacity-0");
+        targetContainer.classList.add("opacity-100");
 
-    if (!model) return;
+        // 2. Fade OUT current
+        currentContainer.classList.remove("opacity-100");
+        currentContainer.classList.add("opacity-0");
 
-    darEvent("hero_load_model", {
-      model: model.name,
-      index: i
-    });
+        // 3. Fade OUT placeholder (only first time)
+        if (!placeholder.classList.contains("opacity-0")) {
+          placeholder.classList.add("opacity-0");
+        }
 
-    // destruir visor anterior
-    container.innerHTML = "";
+        // Cleanup old container after transition (1s) to save resources
+        setTimeout(() => {
+          currentContainer.innerHTML = "";
+        }, 1000);
 
-    const mv = document.createElement("model-viewer");
-    mv.src = IPFS_BASE + model.glb;
-    mv.style.width = "100%";
-    mv.style.height = "100%";
-    mv.setAttribute("auto-rotate", "");
-    mv.setAttribute("camera-controls", "");
-    mv.setAttribute("interaction-prompt", "none");
-    mv.setAttribute("shadow-intensity", "1");
+        // Swap active index
+        activeViewer = activeViewer === 1 ? 2 : 1;
 
-    container.appendChild(mv);
+        darEvent("hero_model_visible", { model: model.name });
+      }, { once: true });
 
-    mv.addEventListener("load", () => {
-
-      // fade imagen → 3D
-      placeholder.classList.add("opacity-0");
-      container.classList.remove("opacity-0");
-      container.classList.add("opacity-100");
-
-      darEvent("hero_model_visible", {
-        model: model.name
+      mv.addEventListener("camera-change", () => {
+        darEvent("hero_interact_model", { model: model.name });
       });
-    });
+    }
 
-    mv.addEventListener("camera-change", () => {
-      darEvent("hero_interact_model", {
-        model: model.name
-      });
-    });
-  }
+    // Start loop
+    setTimeout(() => loadNextModel(index), 3500);
 
-  // primer modelo tras pequeño delay (hero respira)
-  setTimeout(() => loadModel(index), 800);
+    setInterval(() => {
+      index = (index + 1) % MODELS.length;
+      loadNextModel(index);
+    }, 9000);
 
-  // carrusel automático
-  setInterval(() => {
-    index = (index + 1) % MODELS.length;
-    loadModel(index);
-  }, 9000);
-
-});
+  });
 </script>

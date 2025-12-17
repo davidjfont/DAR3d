@@ -13,10 +13,15 @@
     {{ end }}
 
     <!-- GLB AUTOMÁTICO SEGÚN NOMBRE DEL ARCHIVO -->
-    <model-viewer
-      src="https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/{{ .File.BaseFileName }}.glb"
-      camera-controls auto-rotate class="w-full h-[30rem] bg-black rounded-xl">
-    </model-viewer>
+    {{ partial "glb_viewer.html" (dict
+    "id" (printf "product-viewer-%s" .File.BaseFileName)
+    "src" (printf "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/%s.glb"
+    .File.BaseFileName)
+    "alt" .Title
+    "height" "30rem"
+    "request_zip" .Params.zip
+    "request_name" .Title
+    ) }}
 
     <div class="product-single__content">
 
