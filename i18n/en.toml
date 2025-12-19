@@ -1,0 +1,203 @@
+[criaturas]
+other = "Creatures"
+
+[arbol_criaturas]
+other = "CREATURE TREE"
+
+[cat_Inorganicas]
+other = "Inorganics"
+
+[cat_Organicos]
+other = "Organics"
+
+[cat_Sinteticas]
+other = "Synthetics"
+
+[search_placeholder]
+other = "Search creatures..."
+[search_no_results]
+other = "No results found"
+
+[criaturas_title]
+other = "Our Creatures"
+[creatures_button_tree]
+other = "Access the creature tree →"
+[creature_type_label]
+other = "TYPE"
+
+[tipo_organico]
+other = "Organic"
+[tipo_inorganico]
+other = "Inorganic"
+[tipo_sintetico]
+other = "Synthetic"
+
+[david_desc_short]
+other = "Mutant Human from the TEMPLE"
+[mr3042_desc_short]
+other = "Unit pending update"
+[alefar_desc_short]
+other = "System Error"
+
+[gadgets_title]
+other = "Devices"
+[gadgets_no_results]
+other = "No gadgets available in this dimension."
+
+[fanart]
+other = "Fanart"
+
+[nav_github]
+other = "Github"
+
+[wiki]
+other = "Wiki"
+
+[tienda]
+other = "Store"
+
+[evolucion]
+other = "Advancing in Evolution?"
+
+[explora_milenio]
+other = "Explore the Next Millennium"
+
+[apertura_archivo]
+other = "Archive Opening: Universe 4042"
+
+# Hero Section
+[hero_model_sewer]
+other = "Sewer Monster"
+[hero_model_alien]
+other = "Grey Alien"
+[hero_model_synth]
+other = "Dark Synth"
+[hero_model_david]
+other = "Mutant David"
+[hero_model_sintetica]
+other = "Dissident Synthetic"
+[hero_model_scolopendra]
+other = "Giant Scolopendra"
+
+[hero_subtitle_long]
+other = "3D Art, impossible creatures and cyberpunk fanart born between nature and neon."
+[hero_button_explore]
+other = "Explore creatures"
+[hero_button_store]
+other = "Enter the store"
+
+# About Section
+[about_title]
+other = "What is DAR3D?"
+[about_subtitle]
+other = "The Laboratory of Inexistent Beasts"
+[about_p1]
+other = "DAR3D is my laboratory for beasts, worlds and objects that don't exist... yet."
+[about_quote]
+other = "Here I mix 3D design, physical printing, AI and fan culture to create organic-technological creatures, fanart, and unique pieces."
+[about_p2]
+other = "I'm inspired by forests, city rats, curious cats..."
+
+# Shadow Streets Section
+[shadow_subtitle]
+other = "A Tribute to the Seventh World"
+[shadow_p1]
+other = "Here you will find urban shamans, reimagined archetypes and 3D fanart inspired by the Shadowrun universe."
+[shadow_legal]
+other = "Legal disclaimer: unofficial fanart."
+[shadow_back]
+other = "← back"
+[shadow_loading_artifact]
+other = "Loading 3D artifact…"
+[shadow_loading_model]
+other = "Loading %s…"
+
+# Wiki Banner
+[wiki_banner_button]
+other = "Enter the Wiki"
+
+# Contact Section
+[contact_title]
+other = "Let's build something strange and beautiful."
+[contact_subtitle]
+other = "Want an original creature or collaboration?"
+[contact_button]
+other = "Contact DAR3D"
+
+# Store Section
+[store_title]
+other = "DAR3D Collection"
+[store_subtitle]
+other = "3D models, creatures and digital art ready to download and print."
+[store_buy]
+other = "Buy now"
+
+# Creatures Data (Search)
+["01 Robot Militar"]
+other = "Military Robot 01"
+["02 Robot Ciudadano"]
+other = "Citizen Robot 02"
+["03 Robot Ciudadano Deprecado"]
+other = "Deprecated Citizen Robot 03"
+["01 Mascota Robotica"]
+other = "Robotic Pet 01"
+["02 DRON Terrestre Militar"]
+other = "Military Ground Drone 02"
+["03 Mascota Alienigena"]
+other = "Alien Pet 03"
+["04 DRON Alienigena Militar"]
+other = "Military Alien Drone 04"
+["01 Alien Gris"]
+other = "Grey Alien 01"
+["02 Alien Reptiliano"]
+other = "Reptilian Alien 02"
+["03 Alien Nebulosa 1"]
+other = "Nebula Alien 03"
+["04 Alien Oscura"]
+other = "Dark Alien 04"
+["01 Alpha"]
+other = "Alpha Human 01"
+["02 Beta"]
+other = "Beta Human 02"
+["04 Mutante Adulta varon"]
+other = "Adult Male Mutant 04"
+["03 Mutante Adulta hembra"]
+other = "Adult Female Mutant 03"
+["01 Mutante Ninfa hembra"]
+other = "Female Nymph Mutant 01"
+["02 Mutante Ninfa varon"]
+other = "Male Nymph Mutant 02"
+["01 sintetica ciudadana"]
+other = "Citizen Synthetic 01"
+["02 Sintetica disidente"]
+other = "Dissident Synthetic 02"
+["03 Sintetica Deprecada"]
+other = "Deprecated Synthetic 03"
+
+["Unidad militar autónoma."]
+other = "Autonomous military unit."
+["Unidad robótica mascota."]
+other = "Robotic pet unit."
+["Unidad robótica militar."]
+other = "Military robotic unit."
+["Alienígena de tipo gris clásico."]
+other = "Classic grey-type alien."
+["Reptiliano con estructura híbrida."]
+other = "Reptilian with hybrid structure."
+["Subespecie humana variante Alpha."]
+other = "Alpha variant human subspecies."
+["Subespecie humana variante Beta."]
+other = "Beta variant human subspecies."
+["Mutante completamente desarrollada."]
+other = "Fully developed mutant."
+["Mutante joven de tipo ninfa."]
+other = "Young nymph-type mutant."
+["Adeptas sintéticas de rango básico."]
+other = "Basic-rank synthetic adepts."
+
+["Orgánico"]
+other = "Organic"
+["Inorgánico"]
+other = "Inorganic"
+["Sintética"]
+other = "Synthetic"

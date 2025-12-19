@@ -1,107 +1,113 @@
 <style>
-/* -------------------------------------------
+    /* -------------------------------------------
    CSS para la Galería (Asegúrate de incluir esto en tu <style> principal o archivo CSS)
 ------------------------------------------- */
-#gadget-cloud {
-    /* Define la cuadrícula con un tamaño mínimo para responsividad */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
+    #gadget-cloud {
+        /* Define la cuadrícula con un tamaño mínimo para responsividad */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
 
-.gadget-card {
-    /* Fondo de tarjeta oscura y borde sutil */
-    background-color: var(--tw-colors-ui-dark-gray); 
-    border: 1px solid var(--tw-colors-fox-red) !important;
-    border-radius: 1rem; /* Borde más pronunciado */
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
+    .gadget-card {
+        /* Fondo de tarjeta oscura y borde sutil */
+        background-color: var(--tw-colors-ui-dark-gray);
+        border: 1px solid var(--tw-colors-fox-red) !important;
+        border-radius: 1rem;
+        /* Borde más pronunciado */
+        overflow: hidden;
+        transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
 
-/* EFECTO GLOW FUTURISTA (Neon Green) */
-.gadget-card:hover {
-    transform: scale(1.05) translateY(-8px); 
-    box-shadow: 0 0 35px rgba(92, 255, 191, 0.6), 0 8px 20px rgba(0, 0, 0, 0.5); /* Sombra + Resplandor */
-    border-color: var(--tw-colors-neon-green) !important;
-}
+    /* EFECTO GLOW FUTURISTA (Neon Green) */
+    .gadget-card:hover {
+        transform: scale(1.05) translateY(-8px);
+        box-shadow: 0 0 35px rgba(92, 255, 191, 0.6), 0 8px 20px rgba(0, 0, 0, 0.5);
+        /* Sombra + Resplandor */
+        border-color: var(--tw-colors-neon-green) !important;
+    }
 
-.gadget-card:active {
-    transform: scale(0.98); /* Feedback táctil */
-}
+    .gadget-card:active {
+        transform: scale(0.98);
+        /* Feedback táctil */
+    }
 
-/* IMAGEN DEL GADGET */
-.gadget-card img {
-    /* La imagen debe ocupar la mayor parte, con un fondo limpio */
-    width: 100%;
-    max-height: 250px; 
-    object-fit: contain;
-    padding: 24px;
-    background-color: var(--tw-colors-bone-white); /* Fondo blanco para contraste con la imagen */
-    border-bottom: 1px solid var(--tw-colors-ui-dark-gray);
-    transition: transform 0.4s ease;
-}
+    /* IMAGEN DEL GADGET */
+    .gadget-card img {
+        /* La imagen debe ocupar la mayor parte, con un fondo limpio */
+        width: 100%;
+        max-height: 250px;
+        object-fit: contain;
+        padding: 24px;
+        background-color: var(--tw-colors-bone-white);
+        /* Fondo blanco para contraste con la imagen */
+        border-bottom: 1px solid var(--tw-colors-ui-dark-gray);
+        transition: transform 0.4s ease;
+    }
 
-.gadget-card:hover img {
-    transform: scale(1.03); /* Zoom sutil en la imagen al hacer hover */
-}
+    .gadget-card:hover img {
+        transform: scale(1.03);
+        /* Zoom sutil en la imagen al hacer hover */
+    }
 
-/* TÍTULO Y DESCRIPCIÓN */
-.gadget-info {
-    padding: 1rem;
-    color: var(--tw-colors-bone-white);
-    text-align: left;
-    flex-grow: 1; /* Asegura que el contenido se extienda */
-}
+    /* TÍTULO Y DESCRIPCIÓN */
+    .gadget-info {
+        padding: 1rem;
+        color: var(--tw-colors-bone-white);
+        text-align: left;
+        flex-grow: 1;
+        /* Asegura que el contenido se extienda */
+    }
 
-.gadget-card h2 {
-    font-size: 1.5rem;
-    font-family: var(--tw-font-family-title);
-    color: var(--tw-colors-fox-red);
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.05em;
-}
+    .gadget-card h2 {
+        font-size: 1.5rem;
+        font-family: var(--tw-font-family-title);
+        color: var(--tw-colors-fox-red);
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.05em;
+    }
 
-.gadget-card p {
-    font-size: 0.9rem;
-    color: #b0b0b0; /* Gris más claro */
-    line-height: 1.4;
-    opacity: 0.8;
-}
+    .gadget-card p {
+        font-size: 0.9rem;
+        color: #b0b0b0;
+        /* Gris más claro */
+        line-height: 1.4;
+        opacity: 0.8;
+    }
 </style>
 
-    <h1 id="gadgets" class="text-5xl md:text-6xl font-title text-center mb-16 tracking-wider text-neon-green/90">
-        // DAR3D <span class="text-fox-red">Gadgets</span>
-    </h1>
+<h1 id="gadgets" class="text-5xl md:text-6xl font-title text-center mb-16 tracking-wider text-neon-green/90">
+    // DAR3D <span class="text-fox-red">{{ T "gadgets_title" }}</span>
+</h1>
 
-    <div id="gadget-cloud" class="max-w-7xl mx-auto px-4 md:px-8 grid gap-10">
+<div id="gadget-cloud" class="max-w-7xl mx-auto px-4 md:px-8 grid gap-10">
 
-        {{ $gadgets := .Site.GetPage "section" "gadgets" }}
+    {{ $gadgets := .Site.GetPage "section" "gadgets" }}
 
-        {{ if $gadgets }}
-            {{ range $gadgets.Pages }}
-                
-                <a href="{{ .RelPermalink }}" class="gadget-card group relative">
-                    
-                    <div class="w-full">
-                        <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="rounded-t-lg">
-                    </div>
+    {{ if $gadgets }}
+    {{ range $gadgets.Pages }}
 
-                    <div class="gadget-info">
-                        <h2>{{ .Title }}</h2>
+    <a href="{{ .RelPermalink }}" class="gadget-card group relative">
 
-                        {{ if .Params.desc }}
-                        <p>
-                            {{ .Params.desc }}
-                        </p>
-                        {{ end }}
-                    </div>
-                </a>
+        <div class="w-full">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="rounded-t-lg">
+        </div>
+
+        <div class="gadget-info">
+            <h2>{{ .Title }}</h2>
+
+            {{ if .Params.desc }}
+            <p>
+                {{ .Params.desc }}
+            </p>
             {{ end }}
-        {{ else }}
-            <p class="text-center text-gray-500 col-span-full">No hay gadgets disponibles en esta dimensión.</p>
-        {{ end }}
-    </div>
+        </div>
+    </a>
+    {{ end }}
+    {{ else }}
+    <p class="text-center text-gray-500 col-span-full">{{ T "gadgets_no_results" }}</p>
+    {{ end }}
 </div>
-    
+</div>

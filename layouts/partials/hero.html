@@ -7,26 +7,27 @@
     <div class="bg-white/65 backdrop-blur-sm p-8 sm:p-12 rounded-xl shadow-2xl relative z-40">
 
       <p class="font-title text-sm tracking-widest text-fox-red mb-3">
-        DAR3D – Imported From Other Realities
+        DAR3D – {{ T "hero_subtitle" }}
       </p>
 
       <h1 class="text-5xl sm:text-7xl font-title font-bold leading-tight text-deep-black">
-        Creatures<br>From Another<br>Timeline
+        {{ if eq .Language.Lang "es" }}Criaturas<br>de Otra<br>Línea Temporal{{ else }}Creatures<br>From
+        Another<br>Timeline{{ end }}
       </h1>
 
       <p class="mt-6 text-lg text-ui-dark-gray">
-        Arte 3D, criaturas imposibles y fanart cyberpunk nacido entre la naturaleza y el neón.
+        {{ T "hero_subtitle_long" | default (T "hero_subtitle") }}
       </p>
 
       <div class="mt-10 flex flex-col sm:flex-row gap-4">
-        <a href="#creatures"
+        <a href="{{ " /#creatures" | relLangURL }}"
           class="wireframe-border text-center px-8 py-3 bg-fox-red text-grey rounded-lg shadow-lg hover:bg-fox-red/90">
-          Explorar criaturas
+          {{ T "hero_button_explore" }}
         </a>
 
-        <a href="/products/"
+        <a href="{{ " /products/" | relLangURL }}"
           class="text-center px-8 py-3 bg-deep-black text-neon-green border border-neon-green/50 rounded-lg">
-          Entrar en la tienda
+          {{ T "hero_button_store" }}
         </a>
       </div>
     </div>
@@ -56,12 +57,12 @@
   document.addEventListener("DOMContentLoaded", () => {
 
     const MODELS = [
-      { name: "Sewer Monster", glb: "sewer_monster.glb" },
-      { name: "Alien Gris", glb: "alien-d1.glb" },
-      { name: "Dark Synth", glb: "dron-militar-a1.glb" },
-      { name: "David el Mutante", glb: "david-mutante-a1.glb" },
-      { name: "Sintetica Disidente", glb: "sintetica-pistola2.glb" },
-      { name: "Escalopendra Gigantae", glb: "scolopendrae_gigantae.glb" }
+      { name: "{{ T "hero_model_sewer" | default "Sewer Monster" }}", glb: "sewer_monster.glb" },
+      { name: "{{ T "hero_model_alien" | default "Grey Alien" }}", glb: "alien-d1.glb" },
+      { name: "{{ T "hero_model_synth" | default "Dark Synth" }}", glb: "dron-militar-a1.glb" },
+      { name: "{{ T "hero_model_david" | default "Mutant David" }}", glb: "david-mutante-a1.glb" },
+      { name: "{{ T "hero_model_sintetica" | default "Dissident Synthetic" }}", glb: "sintetica-pistola2.glb" },
+      { name: "{{ T "hero_model_scolopendra" | default "Giant Scolopendra" }}" , glb: "scolopendrae_gigantae.glb" }
     ];
 
     const IPFS_BASE = "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/";
@@ -127,8 +128,12 @@
         darEvent("hero_model_visible", { model: model.name });
       }, { once: true });
 
+      let interactionFired = false;
       mv.addEventListener("camera-change", () => {
-        darEvent("hero_interact_model", { model: model.name });
+        if (!interactionFired) {
+          interactionFired = true;
+          darEvent("interact_3d_model", { model: model.name, source: "hero" });
+        }
       });
     }
 

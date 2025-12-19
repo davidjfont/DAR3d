@@ -1,10 +1,8 @@
-<section id="wiki-banner"
-         class="relative w-full h-[380px] md:h-[480px] overflow-hidden my-20 rounded-2xl shadow-2xl">
+<section id="wiki-banner" class="relative w-full h-[380px] md:h-[480px] overflow-hidden my-20 rounded-2xl shadow-2xl">
 
     <!-- FONDO PARALLAX DINÁMICO -->
-    <div id="wiki-parallax"
-         class="absolute inset-0 w-full bg-cover bg-center will-change-transform"
-         style="background-image:url('/images/wiki/tierra7.png');">
+    <div id="wiki-parallax" class="absolute inset-0 w-full bg-cover bg-center will-change-transform"
+        style="background-image:url('/images/wiki/tierra7.png');">
     </div>
 
     <!-- OSCURECIDO -->
@@ -21,66 +19,66 @@
         </h2>
 
         <a href="/lore/"
-           class="px-10 py-3 bg-neon-green text-white font-semibold rounded-xl shadow-lg hover:bg-white transition">
-            Entrar en la Wiki
+            class="px-10 py-3 bg-neon-green text-white font-semibold rounded-xl shadow-lg hover:bg-white hover:text-black transition">
+            {{ T "wiki_banner_button" }}
         </a>
     </div>
 
 </section>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const section = document.getElementById("wiki-banner");
-    const bg = document.getElementById("wiki-parallax");
+    document.addEventListener("DOMContentLoaded", () => {
+        const section = document.getElementById("wiki-banner");
+        const bg = document.getElementById("wiki-parallax");
 
-    if (!section || !bg) return;
+        if (!section || !bg) return;
 
-    let active = false;
+        let active = false;
 
-    // Observer: activar el efecto un poco antes de que aparezca
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            active = entry.isIntersecting;
+        // Observer: activar el efecto un poco antes de que aparezca
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                active = entry.isIntersecting;
+            });
+        }, {
+            threshold: 0,
+            rootMargin: "300px 0px -100px 0px"
         });
-    }, { 
-        threshold: 0,
-        rootMargin: "300px 0px -100px 0px"
+
+        observer.observe(section);
+
+        function updateParallax() {
+            if (!active) return;
+
+            const rect = section.getBoundingClientRect();
+            const windowH = window.innerHeight;
+
+            // Cuando la sección todavía está completamente por debajo del viewport
+            if (rect.top > windowH) return;
+
+            // Cuando la sección ya ha salido completamente por arriba
+            if (rect.bottom < 0) return;
+
+            // Calculamos cuánto de la sección está entrando en el viewport
+            const distanceFromBottom = windowH - rect.top;
+            const totalMovementRange = windowH + rect.height;
+
+            // Progreso normalizado: 0 (entra desde abajo) → 1 (llega arriba)
+            const progress = Math.min(Math.max(distanceFromBottom / totalMovementRange, 0), 1);
+
+            // MOVIMIENTO PROFESIONAL: suave, limitado y elegante
+            const movement = -rect.height * 1.5;  // 25% de la altura real del banner
+            const translateY = progress * movement;
+
+            // La imagen SIEMPRE crece lo necesario para que nunca se corte
+            const requiredHeight = rect.height - translateY;
+            bg.style.height = requiredHeight + "px";
+
+            // Aplicar desplazamiento vertical
+            bg.style.transform = `translateY(${translateY}px)`;
+        }
+
+        window.addEventListener("scroll", updateParallax, { passive: true });
+        window.addEventListener("resize", updateParallax);
     });
-
-    observer.observe(section);
-
-    function updateParallax() {
-        if (!active) return;
-
-        const rect = section.getBoundingClientRect();
-        const windowH = window.innerHeight;
-
-        // Cuando la sección todavía está completamente por debajo del viewport
-        if (rect.top > windowH) return;
-
-        // Cuando la sección ya ha salido completamente por arriba
-        if (rect.bottom < 0) return;
-
-        // Calculamos cuánto de la sección está entrando en el viewport
-        const distanceFromBottom = windowH - rect.top;
-        const totalMovementRange = windowH + rect.height;
-
-        // Progreso normalizado: 0 (entra desde abajo) → 1 (llega arriba)
-        const progress = Math.min(Math.max(distanceFromBottom / totalMovementRange, 0), 1);
-
-        // MOVIMIENTO PROFESIONAL: suave, limitado y elegante
-        const movement = -rect.height * 1.5;  // 25% de la altura real del banner
-        const translateY = progress * movement;
-
-        // La imagen SIEMPRE crece lo necesario para que nunca se corte
-        const requiredHeight = rect.height - translateY;
-        bg.style.height = requiredHeight + "px";
-
-        // Aplicar desplazamiento vertical
-        bg.style.transform = `translateY(${translateY}px)`;
-    }
-
-    window.addEventListener("scroll", updateParallax, { passive: true });
-    window.addEventListener("resize", updateParallax);
-});
 </script>

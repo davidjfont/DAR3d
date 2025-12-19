@@ -4,17 +4,16 @@
   <div class="grid md:grid-cols-3 gap-8 mb-12">
 
     <h2 class="text-5xl font-title font-bold text-bone-white">
-      Nuestras Criaturas
+      {{ T "criaturas_title" }}
     </h2>
 
     <div class="md:col-span-2 text-center md:text-right mt-8 md:mt-0">
-      <a href="#criaturaTree"
-         class="inline-block px-6 py-3 text-lg font-semibold rounded-lg
+      <a href="#criaturaTree" class="inline-block px-6 py-3 text-lg font-semibold rounded-lg
                 bg-fox-red text-bone-white
                 hover:bg-neon-green hover:text-deep-black
                 transition-colors duration-300 shadow-lg"
-         onclick="darEvent('go_to_creature_tree', { source: 'home_creatures_section' })">
-        Acceder al árbol de criaturas →
+        onclick="darEvent('go_to_creature_tree', { source: 'home_creatures_section' })">
+        {{ T "creatures_button_tree" }}
       </a>
     </div>
 
@@ -25,24 +24,26 @@
 
     {{/* Lista de criaturas */}}
     {{ $criaturas := slice
-      (dict "nombre" "DE DA" "tipo" "Orgánico" "descripcion" "Humano Mutante del TEMPLO" "img" "de-da.png" "glb" "david%20mutante.glb" "color" "text-fox-red")
-      (dict "nombre" "MR-3042" "tipo" "Inorgánico" "descripcion" "Unidad pendiente de actualización" "img" "mr-3042-v3.png" "glb" "mr-3042_v3.glb" "color" "text-neon-green")
-      (dict "nombre" "ALEFAR" "tipo" "Sintético" "descripcion" "Error del sistema" "img" "sintetica.jpg" "glb" "sintetica-pistola2.glb" "color" "text-neon-green")
+    (dict "nombre" "DE DA" "tipo" (T "tipo_organico") "descripcion" (T "david_desc_short") "img" "de-da.png" "glb"
+    "david%20mutante.glb" "color" "text-fox-red")
+    (dict "nombre" "MR-3042" "tipo" (T "tipo_inorganico") "descripcion" (T "mr3042_desc_short") "img"
+    "mr-3042-v3.png" "glb" "mr-3042_v3.glb" "color" "text-neon-green")
+    (dict "nombre" "ALEFAR" "tipo" (T "tipo_sintetico") "descripcion" (T "alefar_desc_short") "img" "sintetica.jpg"
+    "glb"
+    "sintetica-pistola2.glb" "color" "text-neon-green")
     }}
 
     {{ range $index, $c := $criaturas }}
     <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20 criatura-container"
-         data-src="https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/{{ $c.glb }}"
-         data-name="{{ $c.nombre }}"
-         data-type="{{ $c.tipo }}">
+      data-src="https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/{{ $c.glb }}"
+      data-name="{{ $c.nombre }}" data-type="{{ $c.tipo }}" data-t-volver="{{ T " shadow_back" }}"
+      data-t-loading="{{ T " shadow_loading_artifact" }}">
 
       <div class="relative w-full h-[480px] md:h-[700px]
                   rounded-xl overflow-hidden shadow-xl">
 
         <!-- IMAGEN PREVIA -->
-        <img src="/images/{{ $c.img }}"
-             alt="{{ $c.nombre }}"
-             class="criatura-ficha w-full h-full object-cover
+        <img src="/images/{{ $c.img }}" alt="{{ $c.nombre }}" class="criatura-ficha w-full h-full object-cover
                     rounded-lg border border-fox-red/50
                     shadow-xl cursor-pointer">
 
@@ -50,7 +51,7 @@
         <button class="volver-btn hidden absolute top-3 right-3
                        bg-black/60 text-white text-sm
                        px-2 py-1 rounded z-20">
-          ← volver
+          {{ T "shadow_back" }}
         </button>
 
         <!-- VISOR 3D -->
@@ -62,7 +63,7 @@
         {{ $c.nombre }}
       </h3>
       <p class="text-xs text-neon-green mb-3">
-        TIPO: {{ $c.tipo }}
+        {{ T "creature_type_label" }}: {{ $c.tipo }}
       </p>
       <p class="opacity-80">
         {{ $c.descripcion }}
@@ -89,6 +90,7 @@
         const glbSrc = container.dataset.src;
         const name = container.dataset.name;
         const type = container.dataset.type;
+        const tLoading = container.dataset.tLoading || "Loading...";
 
         let interacted = false;
 
@@ -124,8 +126,9 @@
             loader.setAttribute('slot', 'poster');
             loader.className = 'dar3d-loader';
             loader.innerHTML = `
-              <img src="/svg/dar3d-loader.svg" alt="Cargando DAR3D">
-              <span>Cargando ${name}…</span>
+              <img src="/svg/dar3d-loader.svg" alt="DAR3D Loading">
+              <span>${tLoading}</span>
+              <span>${name}</span>
             `;
 
             modelViewer.appendChild(loader);
@@ -141,7 +144,8 @@
                 interacted = true;
                 darEvent('interact_3d_model', {
                   model: glbSrc,
-                  creature_name: name
+                  creature_name: name,
+                  source: 'home_creatures'
                 });
               }
             });

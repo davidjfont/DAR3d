@@ -23,7 +23,7 @@
     {{ with .Params.stripe_url }}
     <a href="{{ . }}" class="product-card__buy" target="_blank" rel="noopener"
       onclick="darEvent('begin_checkout', { product_name: '{{ $.Title }}', url: '{{ . }}' })">
-      Comprar ahora
+      {{ T "store_buy" }}
     </a>
     {{ end }}
   </div>

@@ -1,5 +1,4 @@
-<section id="fanart"
-  class="pt-16 md:pt-24 mt-16 md:mt-24 border-t border-neon-green/30 max-w-7xl mx-auto px-4">
+<section id="fanart" class="pt-16 md:pt-24 mt-16 md:mt-24 border-t border-neon-green/30 max-w-7xl mx-auto px-4">
 
   <!-- INTRO -->
   <div class="grid md:grid-cols-5 gap-8 items-center mb-16">
@@ -10,44 +9,38 @@
         Shadow-Streets
       </h2>
       <h3 class="text-3xl font-title text-fox-red mb-6">
-        Un Homenaje al Séptimo Mundo
+        {{ T "shadow_subtitle" }}
       </h3>
       <p class="text-lg leading-relaxed mb-6">
-        Aquí encontrarás chamanes urbanos, arquetipos reimaginados y fanart 3D
-        inspirados en el universo Shadowrun.
+        {{ T "shadow_p1" }}
       </p>
     </div>
 
     <div class="md:col-span-2">
-      <img class="rounded-xl shadow-2xl border-4 border-fox-red/50"
-           src="/images/dancer.png">
+      <img class="rounded-xl shadow-2xl border-4 border-fox-red/50" src="/images/dancer.png">
     </div>
   </div>
 
   <!-- GRID FANART -->
-  <div id="fanart-grid"
-       class="grid grid-cols-2 md:grid-cols-4 gap-8">
+  <div id="fanart-grid" class="grid grid-cols-2 md:grid-cols-4 gap-8">
 
     {{/* FANART CON PNG Y GLB DIFERENTES */}}
     {{ $fanarts := slice
-      (dict "name" "Troll" "png" "troll.png" "glb" "troll.glb")
-      (dict "name" "Elfo Guerrero" "png" "elfo-tecnomante.png" "glb" "elfo-guerrero-a1.glb")
-      (dict "name" "Orca Tecnomante" "png" "orca-tecnomante.png" "glb" "orca-tecnomante-a1.glb")
-      (dict "name" "Indio Shaman" "png" "shaman.png" "glb" "shaman-varon.glb")
-      (dict "name" "Police" "png" "police.png" "glb" "police.glb")
-      (dict "name" "Punky Ares Predator" "png" "punky-ares2.png" "glb" "punky-ares2.glb")
-      (dict "name" "Dancer" "png" "dancer.png" "glb" "dancer.glb")
-      (dict "name" "Dunkelzahn" "png" "dunkelzahn.png" "glb" "dunkelzahn.glb")
-      
+    (dict "name" "Troll" "png" "troll.png" "glb" "troll.glb")
+    (dict "name" "T-Warrior" "png" "elfo-tecnomante.png" "glb" "elfo-guerrero-a1.glb")
+    (dict "name" "O-Technomancer" "png" "orca-tecnomante.png" "glb" "orca-tecnomante-a1.glb")
+    (dict "name" "Shaman" "png" "shaman.png" "glb" "shaman-varon.glb")
+    (dict "name" "Police" "png" "police.png" "glb" "police.glb")
+    (dict "name" "Ares Punky" "png" "punky-ares2.png" "glb" "punky-ares2.glb")
+    (dict "name" "Dancer" "png" "dancer.png" "glb" "dancer.glb")
+    (dict "name" "Dunkelzahn" "png" "dunkelzahn.png" "glb" "dunkelzahn.glb")
+
     }}
 
     {{ range $fanarts }}
-    <div class="fanart-item cursor-pointer"
-         data-name="{{ .name }}"
-         data-glb="{{ .glb }}">
+    <div class="fanart-item cursor-pointer" data-name="{{ .name }}" data-glb="{{ .glb }}">
 
-      <img src="/images/fanart/{{ .png }}"
-           class="rounded-xl shadow-xl border border-fox-red/30
+      <img src="/images/fanart/{{ .png }}" class="rounded-xl shadow-xl border border-fox-red/30
                   hover:scale-[1.03] transition-transform duration-300">
     </div>
     {{ end }}
@@ -55,25 +48,23 @@
   </div>
 
   <p class="mt-8 text-xs opacity-50 text-center">
-    Descargo legal: fanart no oficial.
+    {{ T "shadow_legal" }}
   </p>
 
 </section>
-<div id="fanart-overlay"
-     class="fixed inset-0 hidden bg-black/90 backdrop-blur-md
-            flex items-center justify-center z-[2000]">
+<div id="fanart-overlay" class="fixed inset-0 hidden bg-black/90 backdrop-blur-md
+            flex items-center justify-center z-[2000]" data-t-back="{{ T " shadow_back" }}"
+  data-t-loading-artifact="{{ T " shadow_loading_artifact" }}" data-t-loading-model="{{ T " shadow_loading_model" }}">
 
-  <div id="fanart-overlay-inner"
-       class="relative w-[92vw] h-[92vh]
+  <div id="fanart-overlay-inner" class="relative w-[92vw] h-[92vh]
               bg-black rounded-xl overflow-hidden
-              scale-90 opacity-0 transition-all duration-300">
+               scale-90 opacity-0 transition-all duration-300">
 
     <!-- BOTÓN VOLVER -->
-    <button id="fanart-close"
-            class="absolute top-4 right-4 z-[3000]
+    <button id="fanart-close" class="absolute top-4 right-4 z-[3000]
                    bg-black/70 text-white px-3 py-1 rounded
                    hover:bg-white hover:text-black">
-      ← volver
+      {{ T "shadow_back" }}
     </button>
 
     <!-- VISOR -->
@@ -81,107 +72,114 @@
   </div>
 </div>
 <script type="module">
-import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
+  import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js';
 
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
 
-  const IPFS_BASE =
-    "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/";
+    const IPFS_BASE =
+      "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/";
 
-  const overlay = document.getElementById("fanart-overlay");
-  const inner = document.getElementById("fanart-overlay-inner");
-  const viewerBox = document.getElementById("fanart-overlay-viewer");
-  const closeBtn = document.getElementById("fanart-close");
+    const overlay = document.getElementById("fanart-overlay");
+    const inner = document.getElementById("fanart-overlay-inner");
+    const viewerBox = document.getElementById("fanart-overlay-viewer");
+    const closeBtn = document.getElementById("fanart-close");
 
-  let interacted = false;
-  let currentModel = null;
+    const tLoadingArt = overlay.dataset.tLoadingArtifact;
+    const tLoadingModel = overlay.dataset.tLoadingModel;
 
-  function openOverlay(glb, name) {
+    let interacted = false;
+    let currentModel = null;
 
-    darEvent("fanart_open_lightbox", {
-      model: name
-    });
+    function openOverlay(glb, name) {
 
-    overlay.classList.remove("hidden");
+      darEvent("fanart_open_lightbox", {
+        model: name
+      });
 
-    requestAnimationFrame(() => {
-      inner.classList.remove("scale-90", "opacity-0");
-      inner.classList.add("scale-100", "opacity-100");
-    });
+      overlay.classList.remove("hidden");
 
-    const mv = document.createElement("model-viewer");
-    mv.src = IPFS_BASE + glb;
-    mv.style.width = "100%";
-    mv.style.height = "100%";
-    mv.setAttribute("auto-rotate", "");
-    mv.setAttribute("camera-controls", "");
-    mv.setAttribute("interaction-prompt", "none");
-    mv.setAttribute("shadow-intensity", "1");
+      requestAnimationFrame(() => {
+        inner.classList.remove("scale-90", "opacity-0");
+        inner.classList.add("scale-100", "opacity-100");
+      });
 
-    if (window.innerWidth <= 768) {
-      mv.setAttribute("disable-zoom", "");
-    }
+      const mv = document.createElement("model-viewer");
+      mv.src = IPFS_BASE + glb;
+      mv.style.width = "100%";
+      mv.style.height = "100%";
+      mv.setAttribute("auto-rotate", "");
+      mv.setAttribute("camera-controls", "");
+      mv.setAttribute("interaction-prompt", "none");
+      mv.setAttribute("shadow-intensity", "1");
 
-    /* 🧬 CARGADOR DAR3D */
-    const loader = document.createElement("div");
-    loader.setAttribute("slot", "poster");
-    loader.className = "dar3d-loader";
-    loader.innerHTML = `
-      <img src="/svg/dar3d-loader.svg" alt="Cargando DAR3D">
-      <span>Cargando artefacto 3D…</span>
-      <span>Cargando ${name}…</span>
+      if (window.innerWidth <= 768) {
+        mv.setAttribute("disable-zoom", "");
+      }
+
+      /* 🧬 CARGADOR DAR3D */
+      const loader = document.createElement("div");
+      loader.setAttribute("slot", "poster");
+      loader.className = "dar3d-loader";
+
+      const personalizedLoading = tLoadingModel.replace("%s", name);
+
+      loader.innerHTML = `
+      <img src="/svg/dar3d-loader.svg" alt="DAR3D Loading">
+      <span>${tLoadingArt}</span>
+      <span>${personalizedLoading}</span>
     `;
 
-    mv.appendChild(loader);
-    viewerBox.appendChild(mv);
+      mv.appendChild(loader);
+      viewerBox.appendChild(mv);
 
 
-    darEvent("fanart_open_3d_viewer", {
-      model: name
+      darEvent("fanart_open_3d_viewer", {
+        model: name
+      });
+
+      mv.addEventListener("camera-change", () => {
+        if (!interacted) {
+          interacted = true;
+          darEvent("interact_3d_model", {
+            model: name,
+            source: "shadow_streets"
+          });
+        }
+      });
+
+      currentModel = name;
+    }
+
+    function closeOverlay() {
+
+      darEvent("fanart_close_lightbox", {
+        model: currentModel
+      });
+
+      inner.classList.add("scale-90", "opacity-0");
+
+      setTimeout(() => {
+        overlay.classList.add("hidden");
+        viewerBox.innerHTML = "";
+        interacted = false;
+        currentModel = null;
+      }, 300);
+    }
+
+    // GRID CLICK
+    document.querySelectorAll(".fanart-item").forEach(item => {
+      item.addEventListener("click", () => {
+        openOverlay(item.dataset.glb, item.dataset.name);
+      });
     });
 
-    mv.addEventListener("camera-change", () => {
-      if (!interacted) {
-        interacted = true;
-        darEvent("fanart_interact_3d", {
-          model: name
-        });
-      }
+    // VOLVER
+    closeBtn.addEventListener("click", closeOverlay);
+
+    // CLIC FUERA
+    overlay.addEventListener("click", e => {
+      if (e.target === overlay) closeOverlay();
     });
 
-    currentModel = name;
-  }
-
-  function closeOverlay() {
-
-    darEvent("fanart_close_lightbox", {
-      model: currentModel
-    });
-
-    inner.classList.add("scale-90", "opacity-0");
-
-    setTimeout(() => {
-      overlay.classList.add("hidden");
-      viewerBox.innerHTML = "";
-      interacted = false;
-      currentModel = null;
-    }, 300);
-  }
-
-  // GRID CLICK
-  document.querySelectorAll(".fanart-item").forEach(item => {
-    item.addEventListener("click", () => {
-      openOverlay(item.dataset.glb, item.dataset.name);
-    });
   });
-
-  // VOLVER
-  closeBtn.addEventListener("click", closeOverlay);
-
-  // CLIC FUERA
-  overlay.addEventListener("click", e => {
-    if (e.target === overlay) closeOverlay();
-  });
-
-});
 </script>

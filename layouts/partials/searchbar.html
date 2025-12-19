@@ -1,65 +1,64 @@
 <div class="w-full flex justify-center my-10">
     <div class="relative w-full max-w-xl">
 
-        <input id="search-input"
-               type="text"
-               placeholder="🔍 Buscar criaturas, razas, robots..."
-               class="w-full px-5 py-3 rounded-xl border border-cyan-400/70
+        <input id="search-input" type="text" placeholder="🔍 {{ T " search_placeholder" }}" class="w-full px-5 py-3 rounded-xl border border-cyan-400/70
                       focus:outline-none focus:ring-2 focus:ring-cyan-300
                       bg-white shadow-md text-gray-700" />
 
         <div id="search-results"
-             class="absolute w-full bg-white border border-gray-200 rounded-xl mt-2 shadow-xl hidden">
+            class="absolute w-full bg-white border border-gray-200 rounded-xl mt-2 shadow-xl hidden"
+            data-no-results="{{ T " search_no_results" }}">
         </div>
 
     </div>
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => {
 
-    const input = document.getElementById("search-input");
-    const resultsBox = document.getElementById("search-results");
+        const input = document.getElementById("search-input");
+        const resultsBox = document.getElementById("search-results");
 
-    input.addEventListener("input", () => {
-        const query = input.value.toLowerCase().trim();
+        input.addEventListener("input", () => {
+            const query = input.value.toLowerCase().trim();
 
-        if (!query) {
-            resultsBox.classList.add("hidden");
-            resultsBox.innerHTML = "";
-            return;
-        }
+            if (!query) {
+                resultsBox.classList.add("hidden");
+                resultsBox.innerHTML = "";
+                return;
+            }
 
-        const matches = [];
+            const matches = [];
 
-        // Buscar en TODAS las criaturas del JSON
-        for (const cat in window.CRIATURAS_3042) {
-            for (const sub in window.CRIATURAS_3042[cat]) {
-                for (const item of window.CRIATURAS_3042[cat][sub]) {
-                    if (
-                        item.nombre.toLowerCase().includes(query) ||
-                        item.desc.toLowerCase().includes(query) ||
-                        item.tipo.toLowerCase().includes(query)
-                    ) {
-                        matches.push(item);
+            // Buscar en TODAS las criaturas del JSON
+            for (const cat in window.CRIATURAS_3042) {
+                for (const sub in window.CRIATURAS_3042[cat]) {
+                    for (const item of window.CRIATURAS_3042[cat][sub]) {
+                        if (
+                            item.nombre.toLowerCase().includes(query) ||
+                            item.desc.toLowerCase().includes(query) ||
+                            item.tipo.toLowerCase().includes(query)
+                        ) {
+                            matches.push(item);
+                        }
                     }
                 }
             }
-        }
 
-        renderResults(matches);
-    });
+            renderResults(matches);
+        });
 
 
-    function renderResults(list) {
-        if (!list.length) {
-            resultsBox.classList.remove("hidden");
-            resultsBox.innerHTML = "<div class='p-3 text-gray-500'>Sin resultados</div>";
-            return;
-        }
+        function renderResults(list) {
+            if (!list.length) {
+                resultsBox.classList.remove("hidden");
+                const noResultsText = resultsBox.getAttribute("data-no-results") || "Sin resultados";
+                resultsBox.innerHTML = `<div class='p-3 text-gray-500'>${noResultsText}</div>`;
+                return;
+            }
 
-        const html = list.map(item => `
-            <a href="/criaturas/${item.slug}/" class="flex items-center ...">
+            const html = list.map(item => `
+            <a href="${window.LANG_PREFIX}criaturas/${item.slug}/" class="flex items-center ...">
 
                 <img src="${item.img}" class="w-12 h-12 rounded-md mr-3" />
                 <div>
@@ -69,8 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </a>
         `).join("");
 
-        resultsBox.innerHTML = html;
-        resultsBox.classList.remove("hidden");
-    }
-});
+            resultsBox.innerHTML = html;
+            resultsBox.classList.remove("hidden");
+        }
+    });
 </script>

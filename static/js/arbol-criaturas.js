@@ -226,7 +226,8 @@ function activarInteracciones() {
           interacted = true;
           darEvent("interact_3d_model", {
             model: glb,
-            creature_name: name
+            creature_name: name,
+            source: "creature_tree"
           });
         }
       });

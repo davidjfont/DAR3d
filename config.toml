@@ -1,6 +1,18 @@
+# DAR3D - Hugo Config
 baseURL = "/"
 languageCode = "es-es"
 title = "DAR3D - Mundos Abiertos a Posibilidades"
+defaultContentLanguage = "es"
+
+[languages]
+  [languages.es]
+    languageName = "Español"
+    contentDir = "content"
+    weight = 1
+  [languages.en]
+    languageName = "English"
+    contentDir = "content" # We use the same dir but suffix files with .en.md
+    weight = 2
 
 [[menu.main]]
   name = "Criaturas"
@@ -10,13 +22,6 @@ title = "DAR3D - Mundos Abiertos a Posibilidades"
 # ignoreFiles = []
 staticDir = ["static"]
 
-
 [params]
 glb_cid = "bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa"   # CID global per a tots els models
 ipfsBase = "https://w3s.link/ipfs/"
-
-
-
-
-
-

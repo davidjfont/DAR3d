@@ -56,7 +56,8 @@
                     const currentSrc = mv.src || '{{ $src }}';
                     darEvent('interact_3d_model', {
                         model_src: currentSrc,
-                        model_id: '{{ $id }}'
+                        model_id: '{{ $id }}',
+                        source: 'generic_partial'
                     });
                 }
             });

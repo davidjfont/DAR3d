@@ -1,0 +1,134 @@
+[criaturas]
+other = "Criaturas"
+
+[arbol_criaturas]
+other = "ÁRBOL DE CRIATURAS"
+
+[cat_Inorganicas]
+other = "Inorganicas"
+
+[cat_Organicos]
+other = "Organicos"
+
+[cat_Sinteticas]
+other = "Sinteticas"
+
+[search_placeholder]
+other = "Buscar criaturas..."
+[search_no_results]
+other = "No se encontraron resultados"
+
+[criaturas_title]
+other = "Nuestras Criaturas"
+[creatures_button_tree]
+other = "Acceder al árbol de criaturas →"
+[creature_type_label]
+other = "TIPO"
+
+[tipo_organico]
+other = "Orgánico"
+[tipo_inorganico]
+other = "Inorgánico"
+[tipo_sintetico]
+other = "Sintético"
+
+[david_desc_short]
+other = "Humano Mutante del TEMPLO"
+[mr3042_desc_short]
+other = "Unidad pendiente de actualización"
+[alefar_desc_short]
+other = "Error del sistema"
+
+[gadgets_no_results]
+other = "No hay gadgets disponibles en esta dimensión."
+
+[nav_github]
+other = "Github"
+
+[gadgets_title]
+other = "Gadgets"
+
+[fanart]
+other = "Fanart"
+
+[wiki]
+other = "Wiki"
+
+[tienda]
+other = "Tienda"
+
+[evolucion]
+other = "¿Avanzamos en la evolución?"
+
+[explora_milenio]
+other = "Explora el Siguiente Milenio"
+
+[apertura_archivo]
+other = "Apertura del Archivo: Universo 4042"
+
+# Hero Section
+[hero_model_sewer]
+other = "Monstruo de las Cloacas"
+[hero_model_alien]
+other = "Alien Gris"
+[hero_model_synth]
+other = "Synth Oscuro"
+[hero_model_david]
+other = "David el Mutante"
+[hero_model_sintetica]
+other = "Sintética Disidente"
+[hero_model_scolopendra]
+other = "Escalopendra Gigantae"
+
+[hero_subtitle_long]
+other = "Arte 3D, criaturas imposibles y fanart cyberpunk nacido entre la naturaleza y el neón."
+[hero_button_explore]
+other = "Explorar criaturas"
+[hero_button_store]
+other = "Entrar en la tienda"
+
+# About Section
+[about_title]
+other = "¿Qué es DAR3D?"
+[about_subtitle]
+other = "El Laboratorio de Bestias Inexistentes"
+[about_p1]
+other = "DAR3D es mi laboratorio de bestias, mundos y objetos que no existen… todavía."
+[about_quote]
+other = "Aquí mezclo diseño 3D, impresión física, IA y cultura fan para crear criaturas orgánico-tecnológicas, fanart, y piezas únicas."
+[about_p2]
+other = "Me inspiran los bosques, las ratas de ciudad, los gatos curiosos…"
+
+# Shadow Streets Section
+[shadow_subtitle]
+other = "Un Homenaje al Séptimo Mundo"
+[shadow_p1]
+other = "Aquí encontrarás chamanes urbanos, arquetipos reimaginados y fanart 3D inspirados en el universo Shadowrun."
+[shadow_legal]
+other = "Descargo legal: fanart no oficial."
+[shadow_back]
+other = "← volver"
+[shadow_loading_artifact]
+other = "Cargando artefacto 3D…"
+[shadow_loading_model]
+other = "Cargando %s…"
+
+# Wiki Banner
+[wiki_banner_button]
+other = "Entrar en la Wiki"
+
+# Contact Section
+[contact_title]
+other = "Construyamos algo raro y hermoso."
+[contact_subtitle]
+other = "¿Quieres una criatura original o colaboración?"
+[contact_button]
+other = "Contactar a DAR3D"
+
+# Store Section
+[store_title]
+other = "Colección DAR3D"
+[store_subtitle]
+other = "Modelos 3D, criaturas y arte digital listos para descargar e imprimir."
+[store_buy]
+other = "Comprar ahora"

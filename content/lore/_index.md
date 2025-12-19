@@ -83,6 +83,15 @@ Explora. Investiga. Ensambla la verdad perdida.
 
 ---
 
+---
+
+# 🏺 ¿Avanzamos en la evolución?
+*“Explora el Siguiente Milenio”*
+
+- **[Apertura del Archivo: Universo 4042](/lore/4042/)**
+
+---
+
 # 📦 ¿Qué es esta Wiki?
 Este archivo fue encontrado en múltiples nodos deprecated, piezas de memoria IA y diarios reconstruidos por mutantes hackeadores.
 
