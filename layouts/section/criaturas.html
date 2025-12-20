@@ -9,9 +9,8 @@
 </section>
 
 <div class="flex justify-center mb-12">
-  <a href="/">
-    <img src="/images/dar3D-logo.jpg"
-         class="w-64 rounded-xl border border-fox-red" />
+  <a href="{{ "/" | relLangURL }}">
+    <img src="/images/dar3D-logo.jpg" class="w-64 rounded-xl border border-fox-red" />
   </a>
 </div>
 
@@ -20,24 +19,23 @@
   window.CRIATURAS = {{ .Site.Data.criaturas | jsonify | safeJS }};
 </script>
 <script>
-const IPFS_BASE = "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/";
+  const IPFS_BASE = "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/";
 
-for (const cat in window.CRIATURAS) {
+  for (const cat in window.CRIATURAS) {
     for (const sub in window.CRIATURAS[cat]) {
-        for (const name in window.CRIATURAS[cat][sub]) {
+      for (const name in window.CRIATURAS[cat][sub]) {
 
-            const item = window.CRIATURAS[cat][sub][name];
+        const item = window.CRIATURAS[cat][sub][name];
 
-            if (item.glb_name) {
-                item.glb = IPFS_BASE + item.glb_name;   // 🔥 AFEGIM GLB FINAL
-            }
+        if (item.glb_name) {
+          item.glb = IPFS_BASE + item.glb_name;   // 🔥 AFEGIM GLB FINAL
         }
+      }
     }
-}
+  }
 </script>
 <!-- 2) Cargar model-viewer -->
-<script type="module"
-        src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">
 </script>
 
 <!-- 3) Cargar la lógica del árbol -->

@@ -7,7 +7,7 @@
 </section>
 
 <div class="flex justify-center mb-12">
-    <a href="{{ " /" | relLangURL }}">
+    <a href="{{ "/" | relLangURL }}">
         <img src="/images/dar3D-logo.jpg" class="w-64 rounded-xl border border-fox-red" />
     </a>
 </div>
@@ -22,7 +22,19 @@
 {{- $im := dict -}}
 {{- range $k, $i := $is -}}
 {{- $itemName := T $k | default $k -}}
-{{- $im = merge $im (dict $itemName (dict "nombre" $itemName "slug" ($k | urlize) "desc" (T $i.desc | default $i.desc)
+{{- $itemSlug := $k | urlize -}}
+{{- $pagePath := printf "/criaturas/%s" $itemSlug -}}
+{{- $page := site.GetPage $pagePath -}}
+{{- $actualUrl := "" -}}
+{{- if $page -}}
+{{- $actualUrl = $page.RelPermalink -}}
+{{- else -}}
+{{- /* Fallback por si no existe la página yet: intentamos construirla standar */ -}}
+{{- $actualUrl = printf "/criaturas/%s/" $itemSlug -}}
+{{- end -}}
+
+{{- $im = merge $im (dict $itemName (dict "nombre" $itemName "slug" $itemSlug "wiki_url" $actualUrl "desc" (T $i.desc |
+default $i.desc)
 "img" $i.img "glb_name" $i.glb_name "glb" (printf "%s%s/%s" $.Site.Params.ipfsBase $.Site.Params.glb_cid $i.glb_name)
 "glb_url" (printf "%s%s/%s" $.Site.Params.ipfsBase $.Site.Params.glb_cid $i.glb_name) "tipo" (T $i.tipo | default
 $i.tipo))) -}}
@@ -40,4 +52,4 @@ $i.tipo))) -}}
 </script>
 
 <!-- 3) Cargar la lógica del árbol -->
-<script src="/js/arbol-criaturas.js" defer></script>
+<script src="/js/arbol-criaturas-v2.js" defer></script>

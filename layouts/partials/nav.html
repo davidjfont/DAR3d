@@ -4,7 +4,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         <div class="flex items-center space-x-3">
             <div class="w-[60px] h-[60px] flex items-center justify-center pointer-events-none">
-                {{ partial "glb_viewer_logo.html" (dict "src" "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/fox.glb" "height" "48px") }}
+                {{ partial "glb_viewer_logo.html" (dict "src"
+                "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/fox.glb" "height"
+                "48px") }}
             </div>
             <a href="{{ "/" | relLangURL }}"
                 class="text-3xl font-title text-bone-white tracking-widest hover:text-fox-red transition duration-300">
@@ -21,7 +23,7 @@
 
             <a href="{{ "/products/" | relLangURL }}"
                 class="px-4 py-1.5 text-ui-dark-gray bg-fox-red font-bold rounded-lg hover:bg-bone-white transition duration-200 shadow-md">
-                {{ T "tienda" }} 
+                {{ T "tienda" }}
             </a>
 
             <!--  IDIOMAS -->
@@ -43,15 +45,17 @@
                 {{- $d := .Site.Data.criaturas -}}
                 {{- $r := dict -}}
                 {{- range $c, $s := $d -}}
-                    {{- $sm := dict -}}
-                    {{- range $sk, $is := $s -}}
-                        {{- $il := slice -}}
-                        {{- range $k, $i := $is -}}
-                            {{- $il = $il | append (dict "nombre" (T $k | default $k) "slug" ($k | urlize) "desc" (T $i.desc | default $i.desc) "img" $i.img "glb_name" $i.glb_name "glb_url" (printf "%s%s/%s" $.Site.Params.ipfsBase $.Site.Params.glb_cid $i.glb_name) "tipo" (T $i.tipo | default $i.tipo)) -}}
-                        {{- end -}}
-                        {{- $sm = merge $sm (dict $sk $il) -}}
-                    {{- end -}}
-                    {{- $r = merge $r (dict $c $sm) -}}
+                {{- $sm := dict -}}
+                {{- range $sk, $is := $s -}}
+                {{- $il := slice -}}
+                {{- range $k, $i := $is -}}
+                {{- $il = $il | append (dict "nombre" (T $k | default $k) "slug" ($k | urlize) "desc" (T $i.desc |
+                default $i.desc) "img" $i.img "glb_name" $i.glb_name "glb_url" (printf "%s%s/%s" $.Site.Params.ipfsBase
+                $.Site.Params.glb_cid $i.glb_name) "tipo" (T $i.tipo | default $i.tipo)) -}}
+                {{- end -}}
+                {{- $sm = merge $sm (dict $sk $il) -}}
+                {{- end -}}
+                {{- $r = merge $r (dict $c $sm) -}}
                 {{- end -}}
                 <script>
                     window.CRIATURAS_3042 = {{ $r | jsonify | safeJS }};
@@ -74,7 +78,8 @@
         <a href="{{ "/#gadgets" | relLangURL }}" class="block px-4 py-2 hover:bg-fox-red/20">{{ T "gadgets" }}</a>
         <a href="{{ "/#fanart" | relLangURL }}" class="block px-4 py-2 hover:bg-fox-red/20">{{ T "fanart" }}</a>
         <a href="{{ "/lore/" | relLangURL }}" class="block px-4 py-2 hover:bg-fox-red/20">{{ T "wiki" }}</a>
-        <a href="{{ "/products/" | relLangURL }}" class="block px-4 py-2 bg-fox-red font-bold mt-2">{{ T "tienda" }}</a>
+        <a href="{{ "/products/" | relLangURL }}" class="block px-4 py-2 bg-fox-red font-bold mt-2">{{ T "tienda"
+            }}</a>
 
         <!--  CAMBIADOR DE IDIOMA MÓVIL -->
         <div class="flex justify-center space-x-8 py-4 border-t border-white/10 mt-2">

@@ -29,6 +29,9 @@
         const link = e.target.closest("a[href^='/lore/'], a[href^='/en/lore/']");
         if (!link) return;
 
+        // Exclude links in navigation bar (they should navigate normally)
+        if (link.closest("nav") || link.closest("#mobile-menu") || link.closest("header")) return;
+
         e.preventDefault();
 
         const url = link.href;

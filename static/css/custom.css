@@ -49,9 +49,11 @@
   opacity: 0.85;
   margin-bottom: 1rem;
 }
+
 a.block.mt-6.bg-fox-red.text-white.px-6.py-3.rounded.text-center.text-lg.font-bold {
-    color: black;
+  color: black;
 }
+
 .product-card__buy,
 .product-single__buy {
   display: inline-block;
@@ -102,6 +104,7 @@ a.block.mt-6.bg-fox-red.text-white.px-6.py-3.rounded.text-center.text-lg.font-bo
     grid-template-columns: 1fr;
   }
 }
+
 /* --- WIKI STYLE FIXES --- */
 
 /* Contenido base */
@@ -135,14 +138,16 @@ a.block.mt-6.bg-fox-red.text-white.px-6.py-3.rounded.text-center.text-lg.font-bo
 
 /* Enlaces de la wiki */
 .wikibody a {
-  color: #08868f;            /* Neon verde */
+  color: #08868f;
+  /* Neon verde */
   font-weight: 600;
   text-decoration: none;
   border-bottom: 1px dashed #5CFFBF50;
 }
 
 .wikibody a:hover {
-  color: #E5442A;            /* Fox red */
+  color: #E5442A;
+  /* Fox red */
   border-bottom: 1px dashed #E5442A;
 }
 
@@ -170,55 +175,98 @@ a.block.mt-6.bg-fox-red.text-white.px-6.py-3.rounded.text-center.text-lg.font-bo
 
 /* Animación suave */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
 .gallery-container {
-    background-color: var(--tw-colors-bone-white);
-    color: #333;
-    padding: 4rem 1rem;
+  background-color: var(--tw-colors-bone-white);
+  color: #333;
+  padding: 4rem 1rem;
 }
 
 #gadget-cloud {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
 }
 
 .gadget-card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .gadget-card:hover {
-    transform: scale(1.05) translateY(-5px);
-    box-shadow: 0 0 25px rgba(92, 255, 191, 0.5), 0 8px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 0 25px rgba(92, 255, 191, 0.5), 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .gadget-card img {
-    width: 100%;
-    height: auto;
-    max-height: 160px;
-    object-fit: contain;
-    padding: 20px 0;
+  width: 100%;
+  height: auto;
+  max-height: 160px;
+  object-fit: contain;
+  padding: 20px 0;
 }
 
 .gadget-card h2 {
-    font-size: 1.1em;
-    padding: 12px;
-    margin: 0;
-    color: #000;
-    background-color: #eee;
-    border-top: 1px solid #ddd;
-    font-family: var(--tw-font-family-title);
-    letter-spacing: 0.05em;
+  font-size: 1.1em;
+  padding: 12px;
+  margin: 0;
+  color: #000;
+  background-color: #eee;
+  border-top: 1px solid #ddd;
+  font-family: var(--tw-font-family-title);
+  letter-spacing: 0.05em;
 }
 
+/* === Botón Wiki === */
+.wiki-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid #00ffcc;
+  /* Neon Green */
+  color: #00ffcc;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+
+  /* Posicionamiento y Z-Index Crítico */
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  z-index: 1000 !important;
+}
+
+.wiki-btn:hover {
+  background-color: rgba(0, 255, 204, 0.15);
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+  text-shadow: 0 0 8px rgba(0, 255, 204, 0.6);
+  transform: translateY(-2px);
+  color: #fff;
+}

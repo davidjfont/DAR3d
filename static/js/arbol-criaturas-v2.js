@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <button class="btn-rama border border-fox-red/40 p-3 rounded-xl hover:bg-fox-red/10 transition"
               data-target="#${id}" data-category="${categoria}">
         <img src="/images/${categoria.toLowerCase()}.png"
-             class="mx-auto mb-2 w-32 h-32 object-contain">
+             class="mx-auto mb-2 w-320 h-320  object-contain">
         <p class="text-xl">${categoria}</p>
       </button>
     `);
@@ -73,6 +73,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------------------------------------------------
   // NIVEL 2 y 3
   // ---------------------------------------------------
+  // Helper slugify
+  const slugify = text => text.toString().toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+
+  // ---------------------------------------------------
+  // NIVEL 2 y 3
+  // ---------------------------------------------------
   Object.entries(DATA).forEach(([categoria, subcats], i) => {
 
     const nivel2 = document.querySelector(`#cat_${i} .nivel2`);
@@ -100,10 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
       `);
 
       // NIVEL 3
-      const cards = Object.entries(criaturas).map(([name, data]) => `
+      const cards = Object.entries(criaturas).map(([name, data]) => {
+        const slug = slugify(name);
+        return `
         <div class="criatura-node"
              data-src="${data.glb || ""}"
              data-name="${name}"
+             data-wiki-url="${data.wiki_url}" 
              data-type="${data.tipo}"
              data-category="${categoria}"
              data-subcategory="${subcategoria}"
@@ -116,15 +131,25 @@ document.addEventListener("DOMContentLoaded", () => {
               <img src="${data.img}"
                    class="criatura-ficha w-full h-full object-contain bg-black rounded">
 
-              <button class="volver-btn hidden absolute top-3 right-3 bg-black/70 text-white px-2 py-1 rounded z-[1000]">
+              <div class="criatura-3d hidden absolute inset-0"></div>
+
+              <button class="volver-btn absolute top-3 right-3 bg-black/70 text-white px-2 py-1 rounded"
+                      style="display: none; z-index: 2000;">
                 ← volver
               </button>
+            
 
-              <div class="criatura-3d hidden absolute inset-0"></div>
+              <a href="${data.wiki_url}" target="_blank"
+                 onclick="darEvent('click_wiki_from_viewer', { creature_name: '${name}', source: 'creature_tree' })"
+                 class="wiki-btn absolute bottom-3 right-3 bg-black/70 text-white px-2 py-1 rounded hover:bg-fox-red transition text-xs font-bold tracking-wider"
+                 style="display: none; z-index: 2000; width: auto;">
+                ★ WIKI
+              </a>
             </div>
           </div>
         </div>
-      `).join("");
+      `;
+      }).join("");
 
       nivel3Container.insertAdjacentHTML("beforeend", `
         <div id="${subId}" class="subrama-n3 hidden mt-6 pt-6 border-t border-fox-red/30">
@@ -152,9 +177,11 @@ function activarInteracciones() {
     const img = node.querySelector(".criatura-ficha");
     const viewer = node.querySelector(".criatura-3d");
     const volver = node.querySelector(".volver-btn");
+    const wiki = node.querySelector(".wiki-btn"); // Nuevo
 
     const glb = node.dataset.src;
     const name = node.dataset.name;
+    const wikiUrl = node.dataset.wikiUrl; // Lectura URL correcta
     const type = node.dataset.type;
     const category = node.dataset.category;
     const subcategory = node.dataset.subcategory;
@@ -174,7 +201,25 @@ function activarInteracciones() {
 
       viewer.classList.remove("hidden");
       viewer.style.minHeight = "32rem";
-      volver.classList.remove("hidden");
+
+      // DEBUG LOGS
+      console.log("Activando visor para:", name);
+
+      volver.style.display = "block";
+
+      // Restaurar lógica para botón estático (ya presente en el HTML del usuario)
+      if (wiki) {
+        wiki.style.display = "flex"; // Usar flex para centrado
+        console.log("Wiki button mostrado (static)");
+      } else {
+        console.warn("Wiki button static selector returned null");
+      }
+
+      // Eliminar lógica dinámica anterior para evitar duplicados
+      const existingWikiDyn = viewer.parentElement.querySelector('.wiki-dynamic-btn');
+      if (existingWikiDyn) existingWikiDyn.remove();
+
+      // (No creamos botón dinámico, usamos el estático del HTML)
 
       const mv = document.createElement("model-viewer");
       mv.setAttribute("src", glb);
@@ -242,7 +287,15 @@ function activarInteracciones() {
 
       viewer.innerHTML = "";
       viewer.classList.add("hidden");
-      volver.classList.add("hidden");
+      volver.style.display = "none";
+
+      // Ocultar botón estático
+      if (wiki) wiki.style.display = "none";
+
+      // (Limpieza legacy dinámica por si acaso)
+      const dynWiki = node.querySelector('.wiki-dynamic-btn');
+      if (dynWiki) dynWiki.remove();
+
       img.classList.remove("hidden");
       interacted = false;
 

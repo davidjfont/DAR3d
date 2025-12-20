@@ -1,82 +1,125 @@
 {{ define "main" }}
-  {{ $slug := .Params.slug }}
-  {{ $data := site.Data.criaturas }}
+{{ $slug := .Params.slug }}
+{{ $data := site.Data.criaturas }}
 
-  {{/* Buscar en TODAS las categorías y subcategorías */}}
-  {{ $found := dict }}
+{{/* Buscar en TODAS las categorías y subcategorías */}}
+{{ $found := dict }}
 
-  {{ range $cat, $subs := $data }}
-    {{ range $sub, $items := $subs }}
-      {{ range $name, $item := $items }}
-        {{ if eq (urlize $name) $slug }}
-          {{ $found = merge $item (dict "nombre" $name "categoria" $cat "subcategoria" $sub) }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
+{{ range $cat, $subs := $data }}
+{{ range $sub, $items := $subs }}
+{{ range $name, $item := $items }}
+{{ if eq (urlize $name) $slug }}
+{{ $found = merge $item (dict "nombre" $name "categoria" $cat "subcategoria" $sub) }}
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
 
-  {{/* BASE IPFS – cambia esto si usas otro CID o gateway */}}
-  {{ $ipfsBase := "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/" }}
+{{/* BASE IPFS – cambia esto si usas otro CID o gateway */}}
+{{ $ipfsBase := "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/" }}
 
-  {{/* Nombre del GLB desde el YAML (glb_name) */}}
-  {{ $glbName := index $found "glb_name" }}
+{{/* Nombre del GLB desde el YAML (glb_name) */}}
+{{ $glbName := index $found "glb_name" }}
 
-  {{/* Construimos la URL completa al GLB en IPFS */}}
-  {{ $glbURL := "" }}
-  {{ if $glbName }}
-    {{ $glbURL = printf "%s%s" $ipfsBase $glbName }}
-  {{ end }}
+{{/* Construimos la URL completa al GLB en IPFS */}}
+{{ $glbURL := "" }}
+{{ if $glbName }}
+{{ $glbURL = printf "%s%s" $ipfsBase $glbName }}
+{{ end }}
 
-  <section class="max-w-6xl mx-auto p-8">
+<section class="max-w-6xl mx-auto p-8">
 
-    <!-- TÍTULO -->
-    <h1 class="text-4xl font-title font-bold mb-2 text-deep-black">
-      {{ $found.nombre }}
-    </h1>
-    <p class="text-ui-dark-gray mb-10 text-lg">
-      {{ $found.desc }}
+  <!-- TÍTULO -->
+  <h1 class="text-4xl font-title font-bold mb-2 text-deep-black">
+    {{ $found.nombre }}
+  </h1>
+  <p class="text-ui-dark-gray mb-4 text-lg">
+    {{ $found.desc }}
+  </p>
+
+  {{ if .Params.description }}
+  <div class="mb-10 max-w-3xl">
+    <p class="text-gray-800 text-xl leading-relaxed font-light italic border-l-4 border-gray-200 pl-6">
+      {{ .Params.description }}
     </p>
+  </div>
+  {{ end }}
 
-    <!-- IMAGEN + 3D EN TARJETAS -->
-    <div class="grid md:grid-cols-2 gap-10">
+  <!-- IMAGEN + 3D EN TARJETAS -->
+  <div class="grid md:grid-cols-2 gap-10">
 
-      <!-- PNG -->
-      <div class="bg-white rounded-2xl shadow-xl p-4">
-        <img src="{{ $found.img }}" alt="{{ $found.nombre }}"
-             class="w-full rounded-xl object-cover">
-      </div>
-
-      <!-- GLB VIEWER -->
-      <div class="bg-white rounded-2xl shadow-xl p-4">
-        <model-viewer
-          src="{{ $glbURL }}"
-          alt="Modelo 3D de {{ $found.nombre }}"
-          camera-controls
-          auto-rotate
-          auto-rotate-delay="0"
-          shadow-intensity="1"
-          exposure="1"
-          interaction-prompt="none"
-          ar
-          class="w-full h-[500px] rounded-xl bg-black">
-        </model-viewer>
-      </div>
-
+    <!-- PNG -->
+    <div class="bg-white rounded-2xl shadow-xl p-4">
+      <img src="{{ $found.img }}" alt="{{ $found.nombre }}" class="w-full rounded-xl object-cover">
     </div>
 
-    <!-- INFO -->
-    <div class="mt-12 text-gray-700 text-lg leading-relaxed">
-      <p><strong>Categoría:</strong> {{ $found.categoria }}</p>
-      <p><strong>Subcategoría:</strong> {{ $found.subcategoria }}</p>
-      <p><strong>Tipo:</strong> {{ $found.tipo }}</p>
+    <!-- GLB VIEWER -->
+    <div class="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
+      <model-viewer src="{{ $glbURL }}" alt="Modelo 3D de {{ $found.nombre }}" camera-controls auto-rotate
+        auto-rotate-delay="0" shadow-intensity="1" exposure="1" interaction-prompt="none" ar
+        class="w-full h-[500px] rounded-xl bg-gray-900 ">
+
+        <!-- 🧬 LOADER DAR3D -->
+        <div slot="poster" class="dar3d-loader">
+          <img src="/svg/dar3d-loader.svg" alt="Cargando DAR3D">
+          <span>Inicializando artefacto 3D…</span>
+          <span>Cargando...</span>
+        </div>
+
+      </model-viewer>
+
+      {{ $zip := index $found "zip" | default (index $found "ZIP") }}
+      {{ if $zip }}
+      <div class="mt-6">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q/viewform?entry.1908425380={{ $zip }}"
+          target="_blank"
+          class="group relative flex items-center justify-center gap-3 px-8 py-5 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-1 w-full overflow-hidden"
+          onclick="darEvent('click_request_3d', { model_name: '{{ $found.nombre }}', location: 'single_creature_page', zip: '{{ $zip }}' })">
+
+          <!-- Efecto de brillo al pasar el ratón -->
+          <div
+            class="absolute inset-0 w-1/2 h-full bg-white/10 skew-x-[-25deg] -translate-x-full group-hover:translate-x-[250%] transition-transform duration-1000">
+          </div>
+
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 16v1a3 3 0 003 3h10a3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+
+          <span class="text-xl font-bold tracking-tight">
+            {{ if eq .Language.Lang "es" }}
+            Solicitar 3D Gratis
+            {{ else }}
+            Request Free 3D
+            {{ end }}
+          </span>
+        </a>
+        <p class="text-center text-gray-400 text-xs mt-3 uppercase tracking-widest font-semibold opacity-60">
+          {{ if eq .Language.Lang "es" }}
+          Formato .OBJ compatible con Impresión 3D y Entornos Digitales
+          {{ else }}
+          .OBJ format compatible with 3D Printing & Digital Environments
+          {{ end }}
+        </p>
+      </div>
+      {{ end }}
     </div>
 
-    {{/* DEBUG opcional: quita esto cuando veas que funciona */}}
-    <!--
+  </div>
+
+  <!-- INFO -->
+  <div class="mt-12 text-gray-700 text-lg leading-relaxed">
+    <p><strong>Categoría:</strong> {{ $found.categoria }}</p>
+    <p><strong>Subcategoría:</strong> {{ $found.subcategoria }}</p>
+    <p><strong>Tipo:</strong> {{ $found.tipo }}</p>
+  </div>
+
+  {{/* DEBUG opcional: quita esto cuando veas que funciona */}}
+  <!--
     <p style="margin-top:2rem;color:red;">
       DEBUG GLB URL: {{ $glbURL }}
     </p>
     -->
 
-  </section>
+</section>
 {{ end }}

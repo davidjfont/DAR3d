@@ -47,6 +47,9 @@
                     rounded-lg border border-fox-red/50
                     shadow-xl cursor-pointer">
 
+        <!-- VISOR 3D -->
+        <div class="criatura-3d hidden w-full h-full"></div>
+
         <!-- BOTÓN VOLVER -->
         <button class="volver-btn hidden absolute top-3 right-3
                        bg-black/60 text-white text-sm
@@ -54,8 +57,13 @@
           {{ T "shadow_back" }}
         </button>
 
-        <!-- VISOR 3D -->
-        <div class="criatura-3d hidden w-full h-full"></div>
+        <!-- BOTÓN WIKI -->
+        <a href="#" target="_blank" class="wiki-btn hidden absolute bottom-3 right-3
+                       bg-black/60 text-white text-sm
+                       px-2 py-1 rounded z-[1000] hover:bg-fox-red transition"
+          onclick="darEvent('click_wiki_from_viewer', { source: 'home_grid' })">
+          ★ WIKI
+        </a>
 
       </div>
 
@@ -85,10 +93,19 @@
         const img = container.querySelector('.criatura-ficha');
         const viewerWrapper = container.querySelector('.criatura-3d');
         const volverBtn = container.querySelector('.volver-btn');
+        const wikiBtn = container.querySelector('.wiki-btn'); // Nueva selección
         const h3 = container.querySelector('h3');
 
         const glbSrc = container.dataset.src;
         const name = container.dataset.name;
+
+        // Actualizar Link Wiki
+        if (wikiBtn) {
+          wikiBtn.href = `/criaturas/${slugify(name)}/`;
+          // Actualizar evento GA con nombre real (opcional, o dejar el genérico del HTML)
+          wikiBtn.onclick = () => darEvent('click_wiki_from_viewer', { creature_name: name, source: 'home_grid' });
+        }
+
         const type = container.dataset.type;
         const tLoading = container.dataset.tLoading || "Loading...";
 
@@ -105,6 +122,7 @@
           img.classList.add('hidden');
           viewerWrapper.classList.remove('hidden');
           volverBtn.classList.remove('hidden');
+          if (wikiBtn) wikiBtn.classList.remove('hidden'); // Mostrar wiki
 
           if (!viewerWrapper.querySelector('model-viewer')) {
 
@@ -162,6 +180,7 @@
           viewerWrapper.innerHTML = '';
           viewerWrapper.classList.add('hidden');
           volverBtn.classList.add('hidden');
+          if (wikiBtn) wikiBtn.classList.add('hidden');
           img.classList.remove('hidden');
           interacted = false;
         }
@@ -172,7 +191,19 @@
 
       });
 
+      // Helper slugify para generar enlaces wiki
+      function slugify(text) {
+        return text.toString().toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .replace(/\s+/g, '-')
+          .replace(/[^\w\-]+/g, '')
+          .replace(/\-\-+/g, '-')
+          .replace(/^-+/, '')
+          .replace(/-+$/, '');
+      }
+
     });
   </script>
+
 
 </section>

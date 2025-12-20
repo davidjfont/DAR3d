@@ -87,16 +87,28 @@ other = "Explore creatures"
 other = "Enter the store"
 
 # About Section
+
+[about_intro]
+other = "Year 3042. Nature did not disappear: it transformed."
+
 [about_title]
 other = "What is DAR3D?"
+
 [about_subtitle]
-other = "The Laboratory of Inexistent Beasts"
+other = "Living Archive of the 3042 Universe"
+
 [about_p1]
-other = "DAR3D is my laboratory for beasts, worlds and objects that don't exist... yet."
+other = "DAR3D is a laboratory of creation and exploration located at the edges of the 3042 universe, where the organic and the technological are no longer opposites."
+
 [about_quote]
-other = "Here I mix 3D design, physical printing, AI and fan culture to create organic-technological creatures, fanart, and unique pieces."
+other = "Here I design and materialize beasts, artifacts, and speculative worlds through 3D design, physical printing, and artificial intelligence: forms of life that feel discovered rather than invented."
+
 [about_p2]
-other = "I'm inspired by forests, city rats, curious cats..."
+other = "DAR3D pieces function as fragments of an incomplete archive—mutated creatures, biomechanical relics, and fanart reinterpreted as fossils of the future."
+
+[about_p3]
+other = "Each entity is both a visual and narrative experiment, conceived to exist in digital and physical spaces, as if recovered from an alternate timeline."
+
 
 # Shadow Streets Section
 [shadow_subtitle]
