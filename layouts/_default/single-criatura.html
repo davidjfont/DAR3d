@@ -32,13 +32,13 @@
     max-width: 1100px;
     margin: 0 auto;
     padding: 3rem 1.5rem;
-    color: var(--tw-colors-bone-white);
+    color: var(--color-bone-white);
   }
 
   .creature-title {
-    font-family: var(--tw-font-family-title);
+    font-family: var(--font-title);
     font-size: 3.5rem;
-    color: var(--tw-colors-bone-white);
+    color: var(--color-bone-white);
     margin-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -48,8 +48,8 @@
     display: inline-block;
     padding: 0.3rem 1rem;
     background: rgba(229, 68, 42, 0.2);
-    border: 1px solid var(--tw-colors-fox-red);
-    color: var(--tw-colors-fox-red);
+    border: 1px solid rgb(var(--color-fox-red));
+    color: rgb(var(--color-fox-red));
     border-radius: 4px;
     font-size: 0.75rem;
     font-weight: bold;
@@ -61,10 +61,10 @@
   .creature-description-header {
     font-size: 1.25rem;
     line-height: 1.6;
-    color: rgba(245, 243, 238, 0.8);
+    color: var(--color-prose-text);
     margin-bottom: 3rem;
     max-width: 800px;
-    border-left: 3px solid var(--tw-colors-neon-green);
+    border-left: 3px solid rgb(var(--color-neon-green));
     padding-left: 1.5rem;
   }
 
@@ -81,7 +81,7 @@
   }
 
   .visual-card {
-    background: rgba(32, 35, 38, 0.4);
+    background: color-mix(in srgb, rgb(var(--color-ui-dark-gray)) 40%, transparent);
     border: 1px solid rgba(229, 68, 42, 0.2);
     border-radius: 24px;
     overflow: hidden;
@@ -111,10 +111,10 @@
     justify-content: center;
     gap: 1rem;
     padding: 1.25rem;
-    background: var(--tw-colors-fox-red);
+    background: rgb(var(--color-fox-red));
     color: white;
     text-decoration: none;
-    font-family: var(--tw-font-family-title);
+    font-family: var(--font-title);
     font-size: 1.1rem;
     transition: all 0.3s ease;
     border: none;
@@ -145,7 +145,7 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
     padding: 2rem;
-    background: rgba(10, 10, 10, 0.5);
+    background: color-mix(in srgb, rgb(var(--color-ui-dark-gray)) 50%, transparent);
     border: 1px solid rgba(92, 255, 191, 0.1);
     border-radius: 16px;
   }
@@ -158,7 +158,7 @@
 
   .meta-label {
     font-size: 0.75rem;
-    color: var(--tw-colors-neon-green);
+    color: rgb(var(--color-neon-green));
     text-transform: uppercase;
     letter-spacing: 1px;
     font-family: monospace;
@@ -166,13 +166,13 @@
 
   .meta-value {
     font-size: 1.1rem;
-    color: var(--tw-colors-bone-white);
+    color: rgb(var(--color-bone-white));
     font-weight: 500;
   }
 
   /* SCROLLBAR & PROGRESS */
   #visor-criatura::part(progress-bar) {
-    background-color: var(--tw-colors-neon-green);
+    background-color: rgb(var(--color-neon-green));
     height: 4px;
   }
 </style>
@@ -257,7 +257,7 @@
     </div>
   </div>
 
-  <div class="mt-12 opacity-80 leading-relaxed max-w-4xl">
+  <div class="mt-12 text-prose-text leading-relaxed max-w-4xl">
     {{ .Content }}
   </div>
 

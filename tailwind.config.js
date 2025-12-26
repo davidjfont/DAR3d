@@ -8,11 +8,12 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'fox-red': 'var(--color-fox-red)',
-                'deep-black': 'var(--color-deep-black)',
-                'bone-white': 'var(--color-bone-white)',
-                'neon-green': 'var(--color-neon-green)',
-                'ui-dark-gray': 'var(--color-ui-dark-gray)',
+                'fox-red': 'rgb(var(--color-fox-red) / <alpha-value>)',
+                'deep-black': 'rgb(var(--color-deep-black) / <alpha-value>)',
+                'bone-white': 'rgb(var(--color-bone-white) / <alpha-value>)',
+                'neon-green': 'rgb(var(--color-neon-green) / <alpha-value>)',
+                'ui-dark-gray': 'rgb(var(--color-ui-dark-gray) / <alpha-value>)',
+                'prose-text': 'rgb(var(--color-prose-text) / <alpha-value>)',
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],

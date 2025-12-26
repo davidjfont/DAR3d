@@ -9,7 +9,7 @@
 
     .gadget-card {
         /* Fondo de tarjeta oscura y borde sutil */
-        background-color: var(--tw-colors-ui-dark-gray);
+        background-color: rgb(var(--color-ui-dark-gray));
         border: 1px solid rgba(229, 68, 42, 0.3) !important;
         /* Opacity for subtleness */
         border-radius: 1.25rem;
@@ -26,7 +26,7 @@
     .gadget-card:hover {
         transform: scale(1.03) translateY(-5px);
         box-shadow: 0 0 35px rgba(92, 255, 191, 0.3), 0 15px 35px rgba(0, 0, 0, 0.6);
-        border-color: var(--tw-colors-neon-green) !important;
+        border-color: rgb(var(--color-neon-green)) !important;
     }
 
     /* IMAGEN DEL GADGET */
@@ -55,9 +55,8 @@
 
     .gadget-card h2 {
         font-size: 1.4rem;
-        font-family: 'Orbitron', sans-serif;
-        color: #F5F3EE !important;
-        /* bone-white */
+        font-family: var(--font-title);
+        color: rgb(var(--color-bone-white)) !important;
         background: transparent !important;
         margin-bottom: 0.5rem;
         letter-spacing: 0.05em;
@@ -66,7 +65,7 @@
 
     .gadget-card p {
         font-size: 0.85rem;
-        color: rgba(245, 243, 238, 0.7) !important;
+        color: rgb(var(--color-prose-text)) !important;
         background: transparent !important;
         line-height: 1.5;
     }

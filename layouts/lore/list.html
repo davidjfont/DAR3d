@@ -4,7 +4,8 @@
   :root {
     --wiki-accent: var(--tw-colors-fox-red);
     --wiki-border: rgba(229, 68, 42, 0.3);
-    --wiki-bg-glass: rgba(20, 22, 25, 0.7);
+    /* Dynamic glass background based on theme */
+    --wiki-bg-glass: color-mix(in srgb, var(--color-ui-dark-gray) 80%, transparent);
   }
 
   .wikibody {
@@ -44,7 +45,7 @@
   .wikibody p {
     line-height: 1.7;
     margin-bottom: 1.5rem;
-    color: rgba(245, 243, 238, 0.8);
+    color: var(--color-prose-text);
   }
 
   /* WIKI LIST LINKS */
@@ -175,9 +176,13 @@
   }
 
   .wiki-section li {
-    color: rgba(245, 243, 238, 0.8) !important;
+    color: var(--color-prose-text) !important;
     margin-bottom: 0.75rem !important;
     list-style-type: disc !important;
+  }
+
+  .wiki-section p {
+    color: var(--color-prose-text) !important;
   }
 
   .wiki-section h1 {

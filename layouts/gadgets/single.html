@@ -5,13 +5,13 @@
     max-width: 1100px;
     margin: 0 auto;
     padding: 3rem 1.5rem;
-    color: var(--tw-colors-bone-white);
+    color: rgb(var(--color-bone-white));
   }
 
   .gadget-title {
-    font-family: var(--tw-font-family-title);
+    font-family: var(--font-title);
     font-size: 3rem;
-    color: var(--tw-colors-neon-green);
+    color: rgb(var(--color-neon-green));
     margin-top: 1rem;
     margin-bottom: 2rem;
     text-transform: uppercase;
@@ -20,7 +20,7 @@
 
   /* PREVIEW & VISOR */
   .visual-container {
-    background: rgba(0, 0, 0, 0.4);
+    background: color-mix(in srgb, rgb(var(--color-ui-dark-gray)) 40%, transparent);
     border: 1px solid rgba(229, 68, 42, 0.3);
     border-radius: 20px;
     overflow: hidden;
@@ -52,7 +52,7 @@
     gap: 0.5rem;
     background: transparent;
     border: 1px solid rgba(92, 255, 191, 0.4);
-    color: var(--tw-colors-neon-green);
+    color: rgb(var(--color-neon-green));
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
     font-family: monospace;
@@ -71,13 +71,13 @@
     position: absolute;
     bottom: 2rem;
     left: 2rem;
-    background: var(--tw-colors-fox-red);
+    background: rgb(var(--color-fox-red));
     color: white;
     padding: 0.8rem 1.5rem;
     border-radius: 12px;
     text-decoration: none;
     font-weight: bold;
-    font-family: var(--tw-font-family-title);
+    font-family: var(--font-title);
     font-size: 0.9rem;
     z-index: 1000;
     transition: all 0.3s ease;
@@ -94,7 +94,7 @@
   #panel {
     margin-top: 2rem;
     padding: 1.5rem;
-    background: rgba(32, 35, 38, 0.8);
+    background: color-mix(in srgb, rgb(var(--color-ui-dark-gray)) 80%, transparent);
     border: 1px solid rgba(229, 68, 42, 0.2);
     border-radius: 16px;
     backdrop-filter: blur(10px);
@@ -103,8 +103,8 @@
 
   #panel h3 {
     margin-top: 0;
-    color: var(--tw-colors-fox-red);
-    font-family: var(--tw-font-family-title);
+    color: rgb(var(--color-fox-red));
+    font-family: var(--font-title);
     font-size: 1.1rem;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
@@ -113,10 +113,11 @@
   .panel-label {
     display: block;
     font-size: 0.8rem;
-    color: rgba(245, 243, 238, 0.6);
+    color: rgb(var(--color-prose-text));
     margin-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    opacity: 0.8;
   }
 
   .panel-row {
@@ -126,9 +127,9 @@
   /* FORM ELEMENTS */
   .tech-select,
   .tech-btn {
-    background: rgba(0, 0, 0, 0.5);
+    background: color-mix(in srgb, rgb(var(--color-deep-black)) 50%, transparent);
     border: 1px solid rgba(245, 243, 238, 0.2);
-    color: var(--tw-colors-bone-white);
+    color: rgb(var(--color-bone-white));
     padding: 0.5rem 1rem;
     border-radius: 6px;
     font-family: inherit;
@@ -145,8 +146,8 @@
   }
 
   .tech-btn:hover {
-    border-color: var(--tw-colors-neon-green);
-    color: var(--tw-colors-neon-green);
+    border-color: rgb(var(--color-neon-green));
+    color: rgb(var(--color-neon-green));
   }
 
   .tech-color {
@@ -160,7 +161,7 @@
 
   .gadget-description {
     line-height: 1.8;
-    color: rgba(245, 243, 238, 0.9);
+    color: rgb(var(--color-prose-text));
     margin-top: 3rem;
     font-size: 1.1rem;
   }
@@ -170,7 +171,7 @@
   }
 
   .gadget-description strong {
-    color: var(--tw-colors-fox-red);
+    color: rgb(var(--color-fox-red));
   }
 
   .gadget-description ul {
@@ -184,14 +185,14 @@
   }
 
   .gadget-description a {
-    color: var(--tw-colors-neon-green);
+    color: rgb(var(--color-neon-green));
     text-decoration: none;
-    border-bottom: 1px dashed var(--tw-colors-neon-green);
+    border-bottom: 1px dashed rgb(var(--color-neon-green));
   }
 
   /* PROGRESS BAR STYLING */
   #visor::part(progress-bar) {
-    background-color: var(--tw-colors-neon-green);
+    background-color: rgb(var(--color-neon-green));
     height: 4px;
   }
 </style>
