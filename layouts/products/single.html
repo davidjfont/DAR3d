@@ -1,47 +1,124 @@
 {{ define "main" }}
-<article class="product-single">
-  <header class="product-single__header">
-    <h1>{{ .Title }}</h1>
-  </header>
+<div class="min-h-screen bg-deep-black pt-28 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+  <!-- Red de fondo táctica -->
+  <div class="absolute inset-0 opacity-[0.03] pointer-events-none"
+    style="background-image: radial-gradient(#5CFFBF 1px, transparent 1px); background-size: 30px 30px;"></div>
 
-  <div class="product-single__layout">
+  <article class="max-w-6xl mx-auto relative z-10">
 
-    {{ with .Params.image }}
-    <div class="product-single__image-wrapper">
-      <img src="{{ . }}" alt="{{ $.Title }}" class="product-single__image">
-    </div>
-    {{ end }}
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
-    <!-- GLB AUTOMÁTICO SEGÚN NOMBRE DEL ARCHIVO -->
-    {{ partial "glb_viewer.html" (dict
-    "id" (printf "product-viewer-%s" .File.BaseFileName)
-    "src" (printf "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/%s.glb"
-    .File.BaseFileName)
-    "alt" .Title
-    "height" "30rem"
-    "request_zip" .Params.zip
-    "request_name" .Title
-    ) }}
+      <!-- LATERAL IZQUIERDO: VISUALIZACIÓN -->
+      <div class="space-y-6">
+        <!-- CABECERA MÓVIL (Solo visible en pantallas pequeñas) -->
+        <header class="lg:hidden mb-10">
+          <span class="text-[10px] font-mono text-cyan-400 tracking-[0.4em] uppercase mb-2 block">
+            Supply_Node // {{ .Params.category | default "IDENTIFIED" }}
+          </span>
+          <h1 class="text-4xl font-title text-bone-white tracking-tighter">{{ .Title }}</h1>
+        </header>
 
-    <div class="product-single__content">
+        <div
+          class="bg-ui-dark-gray/30 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden shadow-2xl relative group">
+          <!-- MARCO TÁCTICO -->
+          <div class="absolute inset-0 border border-cyan-400/5 pointer-events-none z-20"></div>
+          <div class="absolute top-6 left-6 w-4 h-4 border-t-2 border-l-2 border-cyan-400/30"></div>
+          <div class="absolute bottom-6 right-6 w-4 h-4 border-b-2 border-r-2 border-cyan-400/30"></div>
 
-      {{ with .Params.price }}
-      <p class="product-single__price">
-        {{ printf "€%.2f" . }}
-      </p>
-      {{ end }}
+          <!-- GLB AUTOMÁTICO -->
+          <div class="relative z-10">
+            {{ partial "glb_viewer.html" (dict
+            "id" (printf "product-viewer-%s" .File.BaseFileName)
+            "src" (printf "https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/%s.glb"
+            .File.BaseFileName)
+            "alt" .Title
+            "height" "35rem"
+            "request_zip" .Params.zip
+            "request_name" .Title
+            ) }}
+          </div>
+        </div>
 
-      <div class="product-single__description">
-        {{ .Content }}
+        {{ with .Params.image }}
+        <div class="grid grid-cols-1 gap-4">
+          <div class="bg-ui-dark-gray/20 rounded-xl overflow-hidden border border-white/5 p-2">
+            <img src="{{ . }}" alt="{{ $.Title }}"
+              class="w-full h-auto opacity-70 hover:opacity-100 transition-opacity rounded-lg">
+          </div>
+        </div>
+        {{ end }}
       </div>
 
-      {{ with .Params.stripe_url }}
-      <a href="{{ . }}" class="product-single__buy" target="_blank" rel="noopener">
-        Comprar ahora
-      </a>
-      {{ end }}
+      <!-- LATERAL DERECHO: DATOS Y ACCIÓN -->
+      <div
+        class="lg:sticky lg:top-32 space-y-8 bg-ui-dark-gray/40 backdrop-blur-md p-8 md:p-12 rounded-2xl border border-white/5 shadow-2xl">
 
+        <!-- CABECERA DESKTOP -->
+        <header class="hidden lg:block border-b border-white/5 pb-8">
+          <span class="text-[10px] font-mono text-cyan-400 tracking-[0.4em] uppercase mb-4 block">
+            Supply_Node // {{ .Params.category | default "ARCHIVE_SUPPLY" }}
+          </span>
+          <h1 class="text-5xl font-title text-bone-white tracking-tighter mb-4">{{ .Title }}</h1>
+          <div class="flex items-center gap-4">
+            {{ with .Params.price }}
+            <span class="text-3xl font-mono text-neon-green">
+              {{ printf "€%.2f" . }}
+            </span>
+            {{ end }}
+            <div class="h-4 w-[1px] bg-white/10"></div>
+            <span class="text-[9px] font-mono text-bone-white/30 uppercase tracking-widest">Digital_Download //
+              Print_Ready</span>
+          </div>
+        </header>
+
+        <!-- PRECIO MÓVIL (Solo visible abajo) -->
+        <div class="lg:hidden flex justify-between items-center border-b border-white/5 pb-6">
+          {{ with .Params.price }}
+          <span class="text-3xl font-mono text-neon-green">
+            {{ printf "€%.2f" . }}
+          </span>
+          {{ end }}
+        </div>
+
+        <!-- CONTENIDO / DESCRIPCIÓN -->
+        <div class="prose prose-invert prose-sm max-w-none text-bone-white/70 font-light leading-relaxed">
+          {{ .Content }}
+        </div>
+
+        <!-- ESPECIFICACIONES TÁCTICAS (Simuladas si no hay params específicos) -->
+        <div class="grid grid-cols-2 gap-4 pt-6 border-t border-white/5">
+          <div class="space-y-1">
+            <span class="block text-[8px] font-mono text-bone-white/30 uppercase tracking-widest">Protocol</span>
+            <span class="block text-[10px] font-mono text-cyan-400">DAR_3042_ARCHIVE</span>
+          </div>
+          <div class="space-y-1 text-right">
+            <span class="block text-[8px] font-mono text-bone-white/30 uppercase tracking-widest">Format</span>
+            <span class="block text-[10px] font-mono text-cyan-400">.GLB / .STL / .OBJ</span>
+          </div>
+        </div>
+
+        <!-- ACCIÓN DE COMPRA -->
+        {{ with .Params.stripe_url }}
+        <div class="pt-6 relative group/btn-container">
+          <a href="{{ . }}" target="_blank" rel="noopener"
+            class="relative z-10 block w-full py-5 px-8 bg-fox-red text-ui-dark-gray font-bold text-center text-sm tracking-[0.2em] uppercase transition-all duration-300 hover:bg-bone-white shadow-[0_10px_40px_rgba(242,107,31,0.2)] hover:shadow-[0_10px_50px_rgba(255,255,255,0.2)]"
+            onclick="darEvent('begin_checkout', { product_name: '{{ $.Title }}', url: '{{ . }}' })">
+            {{ T "store_buy" }}
+          </a>
+
+          <!-- Decoración técnica del botón -->
+          <div class="absolute -bottom-2 -right-2 w-12 h-12 border-b-2 border-r-2 border-fox-red/40 -z-0"></div>
+          <div class="absolute -top-2 -left-2 w-12 h-12 border-t-2 border-l-2 border-fox-red/40 -z-0"></div>
+        </div>
+        {{ end }}
+
+        <!-- AVISO DE DESCARGA -->
+        <p class="text-[9px] font-mono text-bone-white/20 text-center uppercase tracking-widest">
+          Transmisión_Segura // Enlace_Directo_Post_Compra
+        </p>
+      </div>
     </div>
-  </div>
-</article>
+
+  </article>
+</div>
 {{ end }}

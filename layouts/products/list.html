@@ -1,14 +1,56 @@
 {{ define "main" }}
-<section class="products-page">
-  <header class="products-page__header">
-    <h1 style="font-size:3rem;">{{ T "store_title" }}</h1>
-    <p>{{ T "store_subtitle" }}</p>
-  </header>
+<div class="min-h-screen bg-deep-black pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+  <!-- Red de fondo táctica (Dots) -->
+  <div class="absolute inset-0 opacity-[0.3] pointer-events-none"
+    style="background-image: radial-gradient(#5CFFBF 1.5px, transparent 1.5px); background-size: 40px 40px;"></div>
 
-  <div class="products-grid">
-    {{ range .Pages }}
-    {{ partial "product-card.html" . }}
-    {{ end }}
+  <div class="max-w-7xl mx-auto relative z-10">
+    <!-- CABECERA DE LA TIENDA -->
+    <header class="mb-16 text-center">
+      <div class="inline-block relative pt-10">
+        <span
+          class="absolute top-0 left-1/2 -translate-x-1/2 text-[10px] font-mono text-neon-green/40 tracking-[0.5em] uppercase whitespace-nowrap">
+          Terminal_Access // Supplies_Manifest
+        </span>
+        <h1
+          class="text-5xl md:text-7xl font-title text-bone-white tracking-tighter mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+          {{ T "store_title" }}
+        </h1>
+        <div class="h-1 w-24 bg-fox-red mx-auto rounded-full"></div>
+      </div>
+      <p
+        class="mt-6 text-bone-white/60 font-mono text-sm max-w-2xl mx-auto leading-relaxed border-l border-r border-white/5 px-8">
+        {{ T "store_subtitle" }}
+      </p>
+    </header>
+
+    <!-- GRID DE PRODUCTOS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-12 max-w-5xl mx-auto">
+      {{ range $index, $element := .Pages }}
+      <div class="opacity-0 translate-y-4 animate-fade-in-up"
+        style="animation-delay: {{ mul $index 100 }}ms; animation-fill-mode: forwards;">
+        {{ partial "product-card.html" . }}
+      </div>
+      {{ end }}
+    </div>
   </div>
-</section>
+</div>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+</style>
 {{ end }}

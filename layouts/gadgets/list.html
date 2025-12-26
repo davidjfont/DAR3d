@@ -1,112 +1,77 @@
 {{ define "main" }}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    .gallery-container {
+        background-color: var(--tw-colors-deep-black);
+        padding: 5rem 1rem;
+    }
 
-    <title>DAR3D – Gadgets 3D Viewer</title>
+    #gadget-cloud {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+    }
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    .gadget-card {
+        background-color: var(--tw-colors-ui-dark-gray);
+        border: 1px solid rgba(229, 68, 42, 0.2) !important;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
 
-    <!-- CSS del proyecto -->
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/custom.css">
+    .gadget-card:hover {
+        transform: scale(1.03) translateY(-5px);
+        box-shadow: 0 0 30px rgba(92, 255, 191, 0.2), 0 15px 35px rgba(0, 0, 0, 0.6);
+        border-color: var(--tw-colors-neon-green) !important;
+    }
 
-    <!-- Fuentes -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    .gadget-card img {
+        width: calc(100% - 24px);
+        margin: 12px;
+        height: 240px;
+        object-fit: contain;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 1rem;
+        transition: transform 0.4s ease;
+    }
 
-    <style>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'fox-red': '#E5442A',
-                        'deep-black': '#0A0A0A',
-                        'bone-white': '#F5F3EE',
-                        'neon-green': '#5CFFBF',
-                        'ui-dark-gray': '#202326',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        title: ['Orbitron', 'sans-serif'],
-                    },
-                }
-            }
-        };
+    .gadget-card:hover img {
+        transform: scale(1.05);
+    }
 
-        .gallery-container {
-            background-color: var(--tw-colors-bone-white);
-            color: #333;
-            padding: 4rem 1rem;
-        }
+    .gadget-card h2 {
+        font-size: 1.4rem;
+        padding: 0 1.5rem 1.5rem;
+        margin: 0;
+        color: #F5F3EE !important;
+        background: transparent !important;
+        font-family: 'Orbitron', sans-serif;
+        letter-spacing: 0.05em;
+        text-align: center;
+    }
+</style>
 
-        #gadget-cloud {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 24px;
-        }
+<div class="gallery-container">
+    <h1 class="text-4xl md:text-6xl font-title text-center mb-16 tracking-widest text-neon-green/90">
+        // DAR3D <span class="text-fox-red">GADGETS</span>
+    </h1>
 
-        .gadget-card {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        .gadget-card:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 0 25px rgba(92, 255, 191, 0.5), 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .gadget-card img {
-            width: 100%;
-            height: auto;
-            max-height: 160px;
-            object-fit: contain;
-            padding: 20px 0;
-        }
-
-        .gadget-card h2 {
-            font-size: 1.1em;
-            padding: 12px;
-            margin: 0;
-            color: #000;
-            background-color: #eee;
-            border-top: 1px solid #ddd;
-            font-family: var(--tw-font-family-title);
-            letter-spacing: 0.05em;
-        }
-    </style>
-</head>
-
-<body class="antialiased min-h-screen bg-ui-dark-gray text-bone-white">
-
-    <div class="gallery-container">
-        <h1 class="text-4xl md:text-5xl font-title text-deep-black text-center mb-12 tracking-wide">
-            Gadgets [Previsualización y descarga de 3D]
-        </h1>
-
-        <div id="gadget-cloud">
-            {{ range .Pages }}
-            <a href="{{ .RelPermalink }}" class="gadget-card">
-                <img src="{{ .Params.image }}" alt="{{ .Title }}">
-                <h2>{{ .Title }}</h2>
-            </a>
-            {{ end }}
-        </div>
+    <div id="gadget-cloud">
+        {{ range .Pages }}
+        <a href="{{ .RelPermalink }}" class="gadget-card group">
+            <img src="{{ .Params.image }}" alt="{{ .Title }}">
+            <h2>{{ .Title }}</h2>
+        </a>
+        {{ end }}
     </div>
-
-</body>
-</html>
+</div>
 
 {{ end }}

@@ -3,7 +3,7 @@
 
 <title>{{ .Site.Title }} – Creatures From Another Timeline</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/css/tailwind.css">
 
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/custom.css">
@@ -13,28 +13,14 @@
 <link rel="apple-touch-icon" href="/images/favicon.png">
 <meta name="theme-color" content="#000000">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@500;700&display=swap"
+    rel="stylesheet">
 
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
-<style>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    'fox-red': '#E5442A',
-                    'deep-black': '#0A0A0A',
-                    'bone-white': '#F5F3EE',
-                    'neon-green': '#5CFFBF',
-                    'ui-dark-gray': '#202326',
-                },
-                fontFamily: {
-                    sans: ['Inter', 'sans-serif'],
-                    title: ['Orbitron', 'sans-serif'],
-                },
-            }
-        }
-    };
-</style>
+<script>
+    window.addEventListener('load', () => {
+        // Enforce centralized model-viewer
+    });
+</script>
+{{ partial "scripts/model-viewer.html" . }}
 
 {{ partial "ga.html" . }}

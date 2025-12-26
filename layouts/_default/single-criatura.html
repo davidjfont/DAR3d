@@ -27,99 +27,239 @@
 {{ $glbURL = printf "%s%s" $ipfsBase $glbName }}
 {{ end }}
 
-<section class="max-w-6xl mx-auto p-8">
+<style>
+  .creature-single {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    color: var(--tw-colors-bone-white);
+  }
 
-  <!-- TÍTULO -->
-  <h1 class="text-4xl font-title font-bold mb-2 text-deep-black">
-    {{ $found.nombre }}
-  </h1>
-  <p class="text-ui-dark-gray mb-4 text-lg">
-    {{ $found.desc }}
-  </p>
+  .creature-title {
+    font-family: var(--tw-font-family-title);
+    font-size: 3.5rem;
+    color: var(--tw-colors-bone-white);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
 
-  {{ if .Params.description }}
-  <div class="mb-10 max-w-3xl">
-    <p class="text-gray-800 text-xl leading-relaxed font-light italic border-l-4 border-gray-200 pl-6">
-      {{ .Params.description }}
-    </p>
+  .creature-category-badge {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    background: rgba(229, 68, 42, 0.2);
+    border: 1px solid var(--tw-colors-fox-red);
+    color: var(--tw-colors-fox-red);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    font-family: monospace;
+  }
+
+  .creature-description-header {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: rgba(245, 243, 238, 0.8);
+    margin-bottom: 3rem;
+    max-width: 800px;
+    border-left: 3px solid var(--tw-colors-neon-green);
+    padding-left: 1.5rem;
+  }
+
+  /* CARDS */
+  .creature-visual-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .creature-visual-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .visual-card {
+    background: rgba(32, 35, 38, 0.4);
+    border: 1px solid rgba(229, 68, 42, 0.2);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .visual-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  #visor-criatura {
+    width: 100%;
+    height: 600px;
+    background: transparent;
+  }
+
+  /* BUTTONS TECH */
+  .btn-solicitar-criatura {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--tw-colors-fox-red);
+    color: white;
+    text-decoration: none;
+    font-family: var(--tw-font-family-title);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  .btn-solicitar-criatura:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 20px rgba(229, 68, 42, 0.4);
+  }
+
+  .tech-footer-label {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(245, 243, 238, 0.4);
+    font-size: 0.7rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: monospace;
+  }
+
+  /* METADATA PANEL */
+  .meta-panel {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    background: rgba(10, 10, 10, 0.5);
+    border: 1px solid rgba(92, 255, 191, 0.1);
+    border-radius: 16px;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .meta-label {
+    font-size: 0.75rem;
+    color: var(--tw-colors-neon-green);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: monospace;
+  }
+
+  .meta-value {
+    font-size: 1.1rem;
+    color: var(--tw-colors-bone-white);
+    font-weight: 500;
+  }
+
+  /* SCROLLBAR & PROGRESS */
+  #visor-criatura::part(progress-bar) {
+    background-color: var(--tw-colors-neon-green);
+    height: 4px;
+  }
+</style>
+
+<div class="creature-single">
+
+  <div class="creature-category-badge">
+    {{ T "label_system_id" }} // {{ T (printf "cat_%s" $found.categoria) | default $found.categoria }}
   </div>
-  {{ end }}
 
-  <!-- IMAGEN + 3D EN TARJETAS -->
-  <div class="grid md:grid-cols-2 gap-10">
+  <h1 class="creature-title">{{ T $found.nombre | default $found.nombre }}</h1>
 
-    <!-- PNG -->
-    <div class="bg-white rounded-2xl shadow-xl p-4">
-      <img src="{{ $found.img }}" alt="{{ $found.nombre }}" class="w-full rounded-xl object-cover">
+  <div class="creature-description-header">
+    {{ if .Params.description }}
+    {{ .Params.description }}
+    {{ else }}
+    {{ T $found.desc | default $found.desc }}
+    {{ end }}
+  </div>
+
+  <div class="creature-visual-grid">
+
+    <!-- REGISTRO VISUAL (PNG) -->
+    <div class="visual-card">
+      <img src="{{ $found.img }}" alt="{{ $found.nombre }}">
+      <div class="tech-footer-label">{{ T "label_static_capture" }}</div>
     </div>
 
-    <!-- GLB VIEWER -->
-    <div class="bg-white rounded-2xl shadow-xl p-4 flex flex-col">
-      <model-viewer src="{{ $glbURL }}" alt="Modelo 3D de {{ $found.nombre }}" camera-controls auto-rotate
-        auto-rotate-delay="0" shadow-intensity="1" exposure="1" interaction-prompt="none" ar
-        class="w-full h-[500px] rounded-xl bg-gray-900 ">
+    <!-- NÚCLEO 3D (GLB) -->
+    <div class="visual-card">
+      <model-viewer id="visor-criatura" src="{{ $glbURL }}"
+        alt="3D Model: {{ T $found.nombre | default $found.nombre }}" camera-controls auto-rotate auto-rotate-delay="0"
+        shadow-intensity="1" exposure="1" interaction-prompt="none">
 
         <!-- 🧬 LOADER DAR3D -->
         <div slot="poster" class="dar3d-loader">
-          <img src="/svg/dar3d-loader.svg" alt="Cargando DAR3D">
-          <span>Inicializando artefacto 3D…</span>
-          <span>Cargando...</span>
+          <img src="/svg/dar3d-loader.svg" alt="DAR3D Loader">
+          <span>{{ T "loader_sync_core" }}</span>
+          <span>{{ T $found.nombre | default $found.nombre | upper }}</span>
         </div>
 
       </model-viewer>
 
       {{ $zip := index $found "zip" | default (index $found "ZIP") }}
       {{ if $zip }}
-      <div class="mt-6">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q/viewform?entry.1908425380={{ $zip }}"
-          target="_blank"
-          class="group relative flex items-center justify-center gap-3 px-8 py-5 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-1 w-full overflow-hidden"
-          onclick="darEvent('click_request_3d', { model_name: '{{ $found.nombre }}', location: 'single_creature_page', zip: '{{ $zip }}' })">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q/viewform?entry.1908425380={{ $zip }}"
+        target="_blank" class="btn-solicitar-criatura"
+        onclick="darEvent('click_request_3d', { model_name: '{{ $found.nombre }}', location: 'single_creature_page', zip: '{{ $zip }}' })">
 
-          <!-- Efecto de brillo al pasar el ratón -->
-          <div
-            class="absolute inset-0 w-1/2 h-full bg-white/10 skew-x-[-25deg] -translate-x-full group-hover:translate-x-[250%] transition-transform duration-1000">
-          </div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
 
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 16v1a3 3 0 003 3h10a3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>
-
-          <span class="text-xl font-bold tracking-tight">
-            {{ if eq .Language.Lang "es" }}
-            Solicitar 3D Gratis
-            {{ else }}
-            Request Free 3D
-            {{ end }}
-          </span>
-        </a>
-        <p class="text-center text-gray-400 text-xs mt-3 uppercase tracking-widest font-semibold opacity-60">
-          {{ if eq .Language.Lang "es" }}
-          Formato .OBJ compatible con Impresión 3D y Entornos Digitales
-          {{ else }}
-          .OBJ format compatible with 3D Printing & Digital Environments
-          {{ end }}
-        </p>
-      </div>
+        <span>{{ T "btn_request_3d" }}</span>
+      </a>
+      <div class="tech-footer-label">{{ T "label_obj_compatible" }}</div>
+      {{ else }}
+      <div class="tech-footer-label">{{ T "label_holographic_active" }}</div>
       {{ end }}
     </div>
 
   </div>
 
-  <!-- INFO -->
-  <div class="mt-12 text-gray-700 text-lg leading-relaxed">
-    <p><strong>Categoría:</strong> {{ $found.categoria }}</p>
-    <p><strong>Subcategoría:</strong> {{ $found.subcategoria }}</p>
-    <p><strong>Tipo:</strong> {{ $found.tipo }}</p>
+  <!-- ESPECIFICACIONES TÉCNICAS -->
+  <div class="meta-panel">
+    <div class="meta-item">
+      <span class="meta-label">{{ T "meta_category" }}</span>
+      <span class="meta-value">{{ T (printf "cat_%s" $found.categoria) | default $found.categoria }}</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">{{ T "meta_subcategory" }}</span>
+      <span class="meta-value">{{ T (printf "subcat_%s" $found.subcategoria) | default $found.subcategoria }}</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">{{ T "meta_type" }}</span>
+      <span class="meta-value">{{ T $found.tipo | default $found.tipo }}</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">{{ T "meta_artifact_id" }}</span>
+      <span class="meta-value">{{ $glbName | default "N/A" }}</span>
+    </div>
   </div>
 
-  {{/* DEBUG opcional: quita esto cuando veas que funciona */}}
-  <!--
-    <p style="margin-top:2rem;color:red;">
-      DEBUG GLB URL: {{ $glbURL }}
-    </p>
-    -->
+  <div class="mt-12 opacity-80 leading-relaxed max-w-4xl">
+    {{ .Content }}
+  </div>
 
-</section>
+</div>
 {{ end }}

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --tw-colors-fox-red: #E5442A;
+        --tw-colors-deep-black: #0A0A0A;
+        --tw-colors-bone-white: #F5F3EE;
+        --tw-colors-neon-green: #5CFFBF;
+        --tw-colors-ui-dark-gray: #202326;
+        --tw-font-family-title: 'Orbitron', sans-serif;
+    }
+}

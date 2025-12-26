@@ -5,13 +5,10 @@
 {{- $height := .height | default "100%" -}}
 {{- $src := .src -}}
 
-<!-- Carga de model-viewer (solo hace efecto la primera vez que se incluye) -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">
-</script>
 
 <model-viewer id="{{ $id }}" src="{{ $src }}" alt="{{ $alt }}" camera-controls auto-rotate auto-rotate-delay="0"
-    shadow-intensity="1" exposure="1" interaction-prompt="none" interaction-prompt-style="none" disable-zoom
-    touch-action="none" style="width:100%; height:{{ $height }}; z-index:1000;">
+    shadow-intensity="1" exposure="1" interaction-prompt="none" interaction-prompt-style="none" touch-action="pan-y"
+    style="width:100%; height:{{ $height }}; z-index:1000;">
 
     <!-- 🧬 LOADER DAR3D -->
     <div slot="poster" class="dar3d-loader">
@@ -37,6 +34,19 @@
         let interacted = false; // Local state per instantiation
 
         if (mv) {
+            // Optimización Móvil: Interacción con dos dedos
+            // Con un dedo permitimos scroll nativo (pan-y), con dos permitimos rotar/zoom
+            const handleTouch = (e) => {
+                if (e.touches.length > 1) {
+                    mv.setAttribute('camera-controls', '');
+                } else {
+                    mv.removeAttribute('camera-controls');
+                }
+            };
+
+            mv.addEventListener('touchstart', handleTouch, { passive: true });
+            mv.addEventListener('touchend', handleTouch, { passive: true });
+
             mv.addEventListener('load', () => {
                 // Read current src from element in case it was set dynamically (random mode)
                 // mv.src returns full URL, so it might differ slightly from {{ $src }} but is accurate for tracking

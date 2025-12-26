@@ -14,7 +14,7 @@ other = "Organicos"
 other = "Sinteticas"
 
 [search_placeholder]
-other = "Buscar criaturas..."
+other = "Buscar criatura..."
 [search_no_results]
 other = "No se encontraron resultados"
 
@@ -24,6 +24,43 @@ other = "Nuestras Criaturas"
 other = "Acceder al árbol de criaturas →"
 [creature_type_label]
 other = "TIPO"
+[meta_category]
+other = "Categoría"
+[meta_subcategory]
+other = "Subcategoría"
+[meta_type]
+other = "Tipo"
+[meta_artifact_id]
+other = "ID_Artefacto"
+[btn_request_3d]
+other = "SOLICITAR 3D GRATIS"
+[label_static_capture]
+other = "CAPTURA_ESTÁTICA_REFERÈNCIA"
+[label_obj_compatible]
+other = "FORMATO .OBJ COMPATIBLE // READY_FOR_PRINT"
+[label_holographic_active]
+other = "VISUALIZACIÓN_HOLOGRÁFICA_ACTIVA"
+[loader_sync_core]
+other = "SINCRONIZANDO NÚCLEO_..."
+[label_system_id]
+other = "SISTEMA_IDENTIFICACIÓN"
+
+[subcat_Humanoides]
+other = "Humanoides"
+[subcat_Roboticas]
+other = "Robóticas"
+[subcat_Alienigenas]
+other = "Alienígenas"
+[subcat_Humanas]
+other = "Humanas"
+[subcat_Mutantes]
+other = "Mutantes"
+[subcat_Adeptas]
+other = "Adeptas"
+[subcat_Disidentes]
+other = "Disidentes"
+[subcat__Errores]
+other = "Errores"
 
 [tipo_organico]
 other = "Orgánico"

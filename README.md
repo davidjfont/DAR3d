@@ -40,8 +40,15 @@ Para inicializar una instancia local del portal y contribuir al archivo:
 
 2.  **Iniciar el servidor de desarrollo:**
     ```bash
-    hugo server
+    hugo server 
+    
     ```
+
+**o bien para un entorno de desarrollo más lento pero más estable:**
+    ```bash     
+    ./hugo server --disableFastRender --cleanDestinationDir --ignoreCache
+    
+    ``` 
 
 3.  **Acceder al portal:**
     Navega a `http://localhost:1313` en tu navegador.

@@ -1,51 +1,86 @@
-<footer class="bg-deep-black mt-20 py-12 border-t-4 border-neon-green/10">
+<footer class="bg-deep-black mt-20 py-16 border-t border-neon-green/20 relative overflow-hidden">
+    <!-- Glassmorphism layer -->
+    <div class="absolute inset-0 bg-ui-dark-gray/10 backdrop-blur-md -z-10"></div>
 
-    <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 relative z-10">
 
-        <div>
-            <p class="text-3xl font-title text-fox-red">DAR3D</p>
-            <p class="text-sm opacity-70">Bestias que no existen todavía.</p>
+        <!-- LOGO & SLOGAN -->
+        <div class="flex flex-col space-y-4">
+            <a href="{{ "/" | relLangURL }}" class="inline-block group">
+                <span
+                    class="text-4xl font-title text-fox-red group-hover:text-neon-green transition-all duration-300 tracking-tighter">DAR3D</span>
+                <div class="h-1 w-0 group-hover:w-full bg-neon-green transition-all duration-500"></div>
+                <p class="text-[10px] font-mono tracking-[0.2em] text-bone-white/40 uppercase mt-2">Nucleo_Vivo //
+                    3042_Archive</p>
+            </a>
+            <p class="text-sm text-bone-white/60 leading-relaxed max-w-[200px]">
+                {{ T "about_subtitle" | default "Archivo Vivo del Universo 3042" }}
+            </p>
         </div>
 
+        <!-- NAVIGATION: PRINCIPAL -->
         <div>
-            <h4 class="font-title text-bone-white mb-3">Principal</h4>
-            <ul class="space-y-2 text-sm opacity-80">
-                <li><a href="{{ "/#about" | relLangURL }}"
-                        onclick="darEvent('click_nav', { label: 'About', location: 'footer' })">About</a>
-                </li>
+            <h4
+                class="font-title text-xs text-neon-green uppercase tracking-widest mb-6 border-b border-neon-green/20 pb-2 inline-block">
+                Prototipos</h4>
+            <ul class="space-y-3 text-sm font-medium">
                 <li><a href="{{ "/#creatures" | relLangURL }}"
-                        onclick="darEvent('click_nav', { label: 'Creatures', location: 'footer' })">Creatures</a></li>
-                <li><a href="{{ "/#contact" | relLangURL }}"
-                        onclick="darEvent('click_nav', { label: 'Contact', location: 'footer' })">Contact</a></li>
+                        class="text-bone-white/70 hover:text-fox-red transition-colors flex items-center gap-2">
+                        <span class="text-[8px] opacity-30">▶</span> {{ T "criaturas" | default "Criaturas" }}
+                    </a></li>
+                <li><a href="{{ "/#gadgets" | relLangURL }}"
+                        class="text-bone-white/70 hover:text-fox-red transition-colors flex items-center gap-2">
+                        <span class="text-[8px] opacity-30">▶</span> {{ T "gadgets" | default "Gadgets" }}
+                    </a></li>
             </ul>
         </div>
 
+        <!-- NAVIGATION: TIENDA -->
         <div>
-            <h4 class="font-title text-bone-white mb-3">Tienda</h4>
-            <ul class="space-y-2 text-sm opacity-80">
+            <h4
+                class="font-title text-xs text-neon-green uppercase tracking-widest mb-6 border-b border-neon-green/20 pb-2 inline-block">
+                Suministros</h4>
+            <ul class="space-y-3 text-sm font-medium">
                 <li><a href="{{ "/products/" | relLangURL }}"
-                        onclick="darEvent('click_nav', { label: '3D Models', location: 'footer' })">3D
-                        Models</a></li>
-                <li><a href="{{ "/products/3dprint/" | relLangURL }}"
-                        onclick="darEvent('click_nav', { label: 'Bundles', location: 'footer' })">Bundles</a></li>
-                <li><a href="{{ "/#nft" | relLangURL }}"
-                        onclick="darEvent('click_nav', { label: 'NFT Keys', location: 'footer' })">NFT
-                        Keys</a></li>
+                        class="text-bone-white/70 hover:text-fox-red transition-colors flex items-center gap-2">
+                        <span class="text-[8px] opacity-30">▶</span> {{ T "tienda" | default "Tienda" }}
+                    </a></li>
+                <li><a href="{{ "/#fanart" | relLangURL }}"
+                        class="text-bone-white/70 hover:text-fox-red transition-colors flex items-center gap-2">
+                        <span class="text-[8px] opacity-30">▶</span> {{ T "fanart" | default "Fanart" }}
+                    </a></li>
             </ul>
         </div>
 
+        <!-- NAVIGATION: INFO -->
         <div>
-            <h4 class="font-title text-bone-white mb-3">Información</h4>
-            <ul class="space-y-2 text-sm opacity-80">
+            <h4
+                class="font-title text-xs text-neon-green uppercase tracking-widest mb-6 border-b border-neon-green/20 pb-2 inline-block">
+                Terminal</h4>
+            <ul class="space-y-3 text-sm font-medium">
                 <li><a href="{{ "/lore" | relLangURL }}"
-                        onclick="darEvent('click_nav', { label: 'Wiki', location: 'footer' })">Wiki</a>
-                </li>
-                <li><a href="#"
-                        onclick="darEvent('click_nav', { label: 'Tutorials', location: 'footer' })">Tutorials</a></li>
+                        class="text-bone-white/70 hover:text-fox-red transition-colors flex items-center gap-2">
+                        <span class="text-[8px] opacity-30">▶</span> {{ T "wiki" | default "Wiki" }}
+                    </a></li>
+                <li><a href="https://github.com/davidjfont" target="_blank"
+                        class="text-bone-white/70 hover:text-fox-red transition-colors flex items-center gap-2">
+                        <span class="text-[8px] opacity-30">▶</span> GITHUB_ROOT
+                    </a></li>
             </ul>
         </div>
 
     </div>
 
-    <p class="mt-10 text-xs text-center opacity-60">&copy; 20251214 - DAR3D.</p>
+    <!-- COPYRIGHT FOOTER -->
+    <div
+        class="max-w-7xl mx-auto px-6 md:px-12 mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-[10px] font-mono text-bone-white/30 uppercase tracking-widest">
+            &copy; 2026 - DAR3D // INNOVATION_ARCHITECT_LAB
+        </p>
+        <div class="flex gap-6">
+            <div class="h-1 w-8 bg-fox-red/40"></div>
+            <div class="h-1 w-8 bg-neon-green/40"></div>
+            <div class="h-1 w-8 bg-bone-white/20"></div>
+        </div>
+    </div>
 </footer>

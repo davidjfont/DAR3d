@@ -7,7 +7,7 @@
 </section>
 
 <div class="flex justify-center mb-12">
-    <a href="{{ "/" | relLangURL }}">
+    <a href="{{ "" | relLangURL }}">
         <img src="/images/dar3D-logo.jpg" class="w-64 rounded-xl border border-fox-red" />
     </a>
 </div>
@@ -47,9 +47,6 @@ $i.tipo))) -}}
     window.CRIATURAS = {{ $r | jsonify | safeJS }};
 </script>
 
-<!-- 2) Cargar model-viewer -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.3.0/dist/model-viewer.min.js">
-</script>
 
 <!-- 3) Cargar la lógica del árbol -->
 <script src="/js/arbol-criaturas-v2.js" defer></script>

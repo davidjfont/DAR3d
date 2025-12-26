@@ -10,71 +10,65 @@
     .gadget-card {
         /* Fondo de tarjeta oscura y borde sutil */
         background-color: var(--tw-colors-ui-dark-gray);
-        border: 1px solid var(--tw-colors-fox-red) !important;
-        border-radius: 1rem;
-        /* Borde más pronunciado */
+        border: 1px solid rgba(229, 68, 42, 0.3) !important;
+        /* Opacity for subtleness */
+        border-radius: 1.25rem;
         overflow: hidden;
-        transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         position: relative;
         display: flex;
         flex-direction: column;
+        height: 100%;
     }
 
     /* EFECTO GLOW FUTURISTA (Neon Green) */
     .gadget-card:hover {
-        transform: scale(1.05) translateY(-8px);
-        box-shadow: 0 0 35px rgba(92, 255, 191, 0.6), 0 8px 20px rgba(0, 0, 0, 0.5);
-        /* Sombra + Resplandor */
+        transform: scale(1.03) translateY(-5px);
+        box-shadow: 0 0 35px rgba(92, 255, 191, 0.3), 0 15px 35px rgba(0, 0, 0, 0.6);
         border-color: var(--tw-colors-neon-green) !important;
-    }
-
-    .gadget-card:active {
-        transform: scale(0.98);
-        /* Feedback táctil */
     }
 
     /* IMAGEN DEL GADGET */
     .gadget-card img {
-        /* La imagen debe ocupar la mayor parte, con un fondo limpio */
-        width: 100%;
-        max-height: 250px;
+        width: calc(100% - 24px);
+        margin: 12px;
+        height: 220px;
         object-fit: contain;
-        padding: 24px;
-        background-color: var(--tw-colors-bone-white);
-        /* Fondo blanco para contraste con la imagen */
-        border-bottom: 1px solid var(--tw-colors-ui-dark-gray);
+        padding: 20px;
+        background-color: #ffffff;
+        /* Explicit white for consistency */
+        border-radius: 1rem;
         transition: transform 0.4s ease;
     }
 
     .gadget-card:hover img {
-        transform: scale(1.03);
-        /* Zoom sutil en la imagen al hacer hover */
+        transform: scale(1.05);
     }
 
-    /* TÍTULO Y DESCRIPCIÓN */
     .gadget-info {
-        padding: 1rem;
-        color: var(--tw-colors-bone-white);
+        padding: 1.25rem;
         text-align: left;
         flex-grow: 1;
-        /* Asegura que el contenido se extienda */
+        background: transparent !important;
     }
 
     .gadget-card h2 {
-        font-size: 1.5rem;
-        font-family: var(--tw-font-family-title);
-        color: var(--tw-colors-fox-red);
+        font-size: 1.4rem;
+        font-family: 'Orbitron', sans-serif;
+        color: #F5F3EE !important;
+        /* bone-white */
+        background: transparent !important;
         margin-bottom: 0.5rem;
         letter-spacing: 0.05em;
+        line-height: 1.2;
     }
 
     .gadget-card p {
-        font-size: 0.9rem;
-        color: #b0b0b0;
-        /* Gris más claro */
-        line-height: 1.4;
-        opacity: 0.8;
+        font-size: 0.85rem;
+        color: rgba(245, 243, 238, 0.7) !important;
+        background: transparent !important;
+        line-height: 1.5;
     }
 </style>
 

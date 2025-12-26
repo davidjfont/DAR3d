@@ -14,7 +14,7 @@ other = "Organics"
 other = "Synthetics"
 
 [search_placeholder]
-other = "Search creatures..."
+other = "Search creature..."
 [search_no_results]
 other = "No results found"
 
@@ -24,6 +24,43 @@ other = "Our Creatures"
 other = "Access the creature tree →"
 [creature_type_label]
 other = "TYPE"
+[meta_category]
+other = "Category"
+[meta_subcategory]
+other = "Subcategory"
+[meta_type]
+other = "Type"
+[meta_artifact_id]
+other = "ARTIFACT_ID"
+[btn_request_3d]
+other = "REQUEST FREE 3D"
+[label_static_capture]
+other = "STATIC_REFERENCE_CAPTURE"
+[label_obj_compatible]
+other = ".OBJ FORMAT COMPATIBLE // READY_FOR_PRINT"
+[label_holographic_active]
+other = "HOLOGRAPHIC_VISUALIZATION_ACTIVE"
+[loader_sync_core]
+other = "SYNCING CORE_..."
+[label_system_id]
+other = "SYSTEM_IDENTIFICATION"
+
+[subcat_Humanoides]
+other = "Humanoids"
+[subcat_Roboticas]
+other = "Robotics"
+[subcat_Alienigenas]
+other = "Aliens"
+[subcat_Humanas]
+other = "Humans"
+[subcat_Mutantes]
+other = "Mutants"
+[subcat_Adeptas]
+other = "Adepts"
+[subcat_Disidentes]
+other = "Dissidents"
+[subcat__Errores]
+other = "Errors"
 
 [tipo_organico]
 other = "Organic"

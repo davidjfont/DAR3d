@@ -42,16 +42,15 @@
 .subcategoria {
   @apply bg-ui-dark-gray text-white px-4 py-2 rounded-lg font-semibold transition hover:bg-fox-red;
 }
-a.wireframe-border.text-center.px-8.py-3.bg-fox-red.text-white.rounded-lg.shadow-lg.hover\:bg-fox-red\/90
-Specificity: (0,9,1)
- {
-    color: black;
+
+a.wireframe-border {
+  color: black;
 }
 
 .dar3d-loader {
   position: absolute;
   inset: 0;
-  z-index: 1000;          /* 👈 AQUÍ */
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,7 +59,7 @@ Specificity: (0,9,1)
   width: 100%;
   height: 100%;
   background: #000;
-  color: #ff3b3b;
+  color: #5CFFBF;
   font-family: monospace;
 }
 
@@ -70,7 +69,7 @@ Specificity: (0,9,1)
 }
 
 .dar3d-loader span {
-  color: #ff3b3b;
+  color: #5CFFBF;
   font-family: monospace;
   font-size: 13px;
   letter-spacing: 1px;
