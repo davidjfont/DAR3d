@@ -4,11 +4,34 @@
 
 @layer base {
     :root {
-        --tw-colors-fox-red: #E5442A;
-        --tw-colors-deep-black: #0A0A0A;
-        --tw-colors-bone-white: #F5F3EE;
-        --tw-colors-neon-green: #5CFFBF;
-        --tw-colors-ui-dark-gray: #202326;
-        --tw-font-family-title: 'Orbitron', sans-serif;
+        /* Default (Dark Mode) */
+        --color-fox-red: #E5442A;
+        --color-deep-black: #0A0A0A;
+        --color-bone-white: #F5F3EE;
+        --color-neon-green: #5CFFBF;
+        --color-ui-dark-gray: #202326;
+
+        --font-title: 'Orbitron', sans-serif;
+
+        /* Icon Toggles (Dark Default) */
+        --theme-sun-display: block;
+        --theme-moon-display: none;
+    }
+
+    [data-theme="light"] {
+        /* Light Mode Overrides (Premium Tech-Day) */
+        --color-deep-black: #F4F4F5;
+        /* Technical archival white/gray */
+        --color-bone-white: #18181B;
+        /* Sharp dark heavy-industry text */
+        --color-neon-green: #059669;
+        /* Darker emerald for visibility on light */
+        --color-ui-dark-gray: #FFFFFF;
+        /* Pure clean white for panels */
+        /* Fox-Red remains constant as the alert color */
+
+        /* Icon Toggles (Light Mode) */
+        --theme-sun-display: none;
+        --theme-moon-display: block;
     }
 }

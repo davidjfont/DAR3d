@@ -8,11 +8,11 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'fox-red': '#E5442A',
-                'deep-black': '#0A0A0A',
-                'bone-white': '#F5F3EE',
-                'neon-green': '#5CFFBF',
-                'ui-dark-gray': '#202326',
+                'fox-red': 'var(--color-fox-red)',
+                'deep-black': 'var(--color-deep-black)',
+                'bone-white': 'var(--color-bone-white)',
+                'neon-green': 'var(--color-neon-green)',
+                'ui-dark-gray': 'var(--color-ui-dark-gray)',
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
