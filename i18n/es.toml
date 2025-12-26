@@ -82,6 +82,9 @@ other = "No hay gadgets disponibles en esta dimensión."
 [nav_github]
 other = "Github"
 
+[gadgets]
+other = "Gadgets"
+
 [gadgets_title]
 other = "Gadgets"
 

@@ -85,16 +85,42 @@
             </div>
         </nav>
 
-        <button id="menu-toggle" class="md:hidden text-fox-red focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-        </button>
+        <!-- MOBILE ACTIONS (THEME + MENU) -->
+        <div class="flex items-center md:hidden gap-4">
+            <!-- MOBILE THEME TOGGLE -->
+            <button onclick="window.toggleTheme()"
+                class="p-2 rounded-full hover:bg-white/5 transition-colors group relative" aria-label="Toggle Theme">
+                <!-- Sun Icon (Show in Dark) -->
+                <svg class="w-5 h-5 text-bone-white group-hover:text-fox-red transition-colors"
+                    style="display: var(--theme-sun-display, block);" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                    </path>
+                </svg>
+                <!-- Moon Icon (Show in Light) -->
+                <svg class="w-5 h-5 text-bone-white group-hover:text-fox-red transition-colors"
+                    style="display: var(--theme-moon-display, none);" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                    </path>
+                </svg>
+            </button>
+
+            <button id="menu-toggle" class="text-fox-red focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+        </div>
     </div>
 
     <!-- MENÚ MÓVIL -->
     <div id="mobile-menu" class="hidden md:hidden bg-ui-dark-gray border-t border-fox-red/30 py-2">
-        <a href="{{ "/#creatures" | relLangURL }}" class="block px-4 py-2 hover:bg-fox-red/20">{{ T "criaturas" }}</a>
+        <a href="{{ "/#creatures" | relLangURL }}" class="block px-4 py-2 hover:bg-fox-red/20">{{ T "criaturas"
+            }}</a>
         <a href="{{ "/#gadgets" | relLangURL }}" class="block px-4 py-2 hover:bg-fox-red/20">{{ T "gadgets" }}</a>
         <a href="{{ "/#fanart" | relLangURL }}" class="block px-4 py-2 hover:bg-fox-red/20">{{ T "fanart" }}</a>
         <a href="{{ "/lore/" | relLangURL }}" class="block px-4 py-2 hover:bg-fox-red/20">{{ T "wiki" }}</a>

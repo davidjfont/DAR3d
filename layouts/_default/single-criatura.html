@@ -129,7 +129,7 @@
 
   .tech-footer-label {
     padding: 1rem;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 1);
     color: rgba(245, 243, 238, 0.4);
     font-size: 0.7rem;
     text-align: center;
@@ -259,6 +259,139 @@
 
   <div class="mt-12 text-prose-text leading-relaxed max-w-4xl">
     {{ .Content }}
+  </div>
+
+  {{/* --- NARRATIVE NAVIGATION LOGIC --- */}}
+  {{ $flatCreatures := slice }}
+
+  {{/* Get and sort Categories */}}
+  {{ $cats := slice }}
+  {{ range $k, $v := $data }}
+  {{ $cats = $cats | append $k }}
+  {{ end }}
+  {{ $cats = sort $cats }}
+
+  {{ range $cKey := $cats }}
+  {{ $subsMap := index $data $cKey }}
+
+  {{/* Get and sort Subcategories */}}
+  {{ $subs := slice }}
+  {{ range $k, $v := $subsMap }}
+  {{ $subs = $subs | append $k }}
+  {{ end }}
+  {{ $subs = sort $subs }}
+
+  {{ range $sKey := $subs }}
+  {{ $itemsMap := index $subsMap $sKey }}
+
+  {{/* Get and sort Items */}}
+  {{ $items := slice }}
+  {{ range $k, $v := $itemsMap }}
+  {{ $items = $items | append $k }}
+  {{ end }}
+  {{ $items = sort $items }}
+
+  {{ range $iName := $items }}
+  {{ $itemData := index $itemsMap $iName }}
+  {{ $itemSlug := urlize $iName }}
+  {{ $flatCreatures = $flatCreatures | append (merge $itemData (dict "name" $iName "slug" $itemSlug)) }}
+  {{ end }}
+  {{ end }}
+  {{ end }}
+
+  {{/* Find current index */}}
+  {{ $currentIndex := -1 }}
+  {{ range $idx, $el := $flatCreatures }}
+  {{ if eq $el.slug $slug }}
+  {{ $currentIndex = $idx }}
+  {{ end }}
+  {{ end }}
+
+  {{/* Calc Neighbors */}}
+  {{ $prev := dict }}
+  {{ $next := dict }}
+  {{ $total := len $flatCreatures }}
+
+  {{ if ge $currentIndex 0 }}
+  {{ if gt $currentIndex 0 }}
+  {{ $prev = index $flatCreatures (sub $currentIndex 1) }}
+  {{ end }}
+  {{ if lt $currentIndex (sub $total 1) }}
+  {{ $next = index $flatCreatures (add $currentIndex 1) }}
+  {{ end }}
+  {{ end }}
+
+  <!-- NARRATIVE SEO FOOTER -->
+  <div class="mt-20 pt-10 border-t border-fox-red/20">
+
+    <!-- NETWORK NAVIGATION -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 items-center mb-12">
+      <!-- PREV -->
+      <div class="text-left">
+        {{ if $prev }}
+        <a href="{{ printf "/criaturas/%s/" $prev.slug | relLangURL }}" class="group flex flex-col">
+          <span
+            class="text-[0.65rem] font-mono text-neon-green uppercase tracking-widest mb-1 group-hover:text-fox-red transition-colors">
+            &larr; {{ T "prev_entity" | default "ANTERIOR" }}
+          </span>
+          <span class="font-title text-sm text-bone-white group-hover:text-white transition-colors">
+            {{ $prev.name }}
+          </span>
+        </a>
+        {{ else }}
+        <div class="opacity-20 cursor-not-allowed">
+          <span class="text-[0.65rem] font-mono uppercase tracking-widest">&larr; END_OF_LOG</span>
+        </div>
+        {{ end }}
+      </div>
+
+      <!-- CENTER HUB -->
+      <div class="hidden md:flex flex-col items-center justify-center text-center">
+        <a href="{{ "/lore/" | relLangURL }}"
+          class="w-12 h-12 flex items-center justify-center rounded-full bg-ui-dark-gray border border-fox-red/30 hover:bg-fox-red hover:border-white transition-all duration-300 group shadow-[0_0_20px_rgba(229,68,42,0.2)]">
+          <svg class="w-5 h-5 text-fox-red group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+          </svg>
+        </a>
+        <span class="mt-2 text-[0.6rem] font-mono text-bone-white/40 uppercase tracking-widest">DAR3D_ARCHIVE</span>
+      </div>
+
+      <!-- NEXT -->
+      <div class="text-right">
+        {{ if $next }}
+        <a href="{{ printf "/criaturas/%s/" $next.slug | relLangURL }}" class="group flex flex-col items-end">
+          <span
+            class="text-[0.65rem] font-mono text-neon-green uppercase tracking-widest mb-1 group-hover:text-fox-red transition-colors">
+            {{ T "next_entity" | default "SIGUIENTE" }} &rarr;
+          </span>
+          <span class="font-title text-sm text-bone-white group-hover:text-white transition-colors">
+            {{ $next.name }}
+          </span>
+        </a>
+        {{ else }}
+        <div class="opacity-20 cursor-not-allowed flex flex-col items-end">
+          <span class="text-[0.65rem] font-mono uppercase tracking-widest">END_OF_LOG &rarr;</span>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- SEO NARRATIVE BLOCK -->
+    <div class="bg-deep-black/30 border border-white/5 rounded-xl p-6 backdrop-blur-sm">
+      <p class="text-sm md:text-base text-center leading-relaxed text-bone-white/70 font-light max-w-3xl mx-auto">
+        {{ T "seo_narrative_prefix" | default "Esta criatura pertenece al universo DAR3D." }} <a href="{{ "/#creatures"
+          | relLangURL }}"
+          class="text-neon-green hover:text-fox-red border-b border-neon-green/30 hover:border-fox-red transition-all ml-1">{{
+          T "seo_narrative_link_creatures" | default "Descubre más entidades" }}</a> {{ T "seo_narrative_connector" |
+        default "y" }} <a href="{{ "/gadgets/" | relLangURL }}"
+          class="text-neon-green hover:text-fox-red border-b border-neon-green/30 hover:border-fox-red transition-all mx-1">{{
+          T "seo_narrative_link_gadgets" | default "tecnología emergente" }}</a>. {{ T "seo_narrative_suffix" | default
+        "Explora la convergencia entre biología sintética y diseño 3D en nuestros archivos." }}
+      </p>
+    </div>
+
   </div>
 
 </div>
