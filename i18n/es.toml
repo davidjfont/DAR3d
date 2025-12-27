@@ -190,3 +190,12 @@ other = "Legal & Copyright"
 
 [legal_cookies]
 other = "Cookies"
+
+[newsletter_text]
+other = "Exploro la intersección entre el diseño, la tecnología y el futuro."
+[newsletter_question]
+other = "¿Quieres unirte a mi viaje?"
+[newsletter_button]
+other = "Suscribirse"
+[newsletter_note]
+other = "Sin Spam // Date de baja en cualquier momento"

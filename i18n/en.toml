@@ -259,3 +259,12 @@ other = "Legal & Copyright"
 
 [legal_cookies]
 other = "Cookies"
+
+[newsletter_text]
+other = "I explore the intersection between design, technology, and the future."
+[newsletter_question]
+other = "Want to join me on my journey?"
+[newsletter_button]
+other = "Subscribe"
+[newsletter_note]
+other = "No Spam // Unsubscribe Anytime"
