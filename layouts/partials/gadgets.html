@@ -83,7 +83,7 @@
     {{ if $gadgets }}
     {{ range $gadgets.Pages }}
 
-    <a href="{{ .RelPermalink }}" class="gadget-card group relative">
+    <a id="gadget-{{ .File.TranslationBaseName }}" href="{{ .RelPermalink }}" class="gadget-card group relative">
 
         <div class="w-full">
             <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="rounded-t-lg">
@@ -104,4 +104,35 @@
     <p class="text-center text-gray-500 col-span-full">{{ T "gadgets_no_results" }}</p>
     {{ end }}
 </div>
+
+<script>
+    const handleGadgetHash = () => {
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#gadget-')) {
+            const targetId = hash.substring(1); // 'gadget-slug'
+            const target = document.getElementById(targetId);
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Visual feedback highlight
+                    target.style.transition = 'all 0.5s ease';
+                    target.style.borderColor = '#5CFFBF';
+                    target.style.borderWidth = '2px';
+                    target.style.boxShadow = '0 0 50px rgba(92, 255, 191, 0.5)';
+                    target.style.transform = 'scale(1.05)';
+
+                    // Reset highlight after a while
+                    setTimeout(() => {
+                        target.style.borderColor = 'rgba(229, 68, 42, 0.3)';
+                        target.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+                        target.style.transform = 'scale(1)';
+                    }, 3000);
+                }, 600);
+            }
+        }
+    };
+
+    window.addEventListener('load', handleGadgetHash);
+    window.addEventListener('hashchange', handleGadgetHash);
+</script>
 </div>

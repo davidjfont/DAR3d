@@ -208,6 +208,16 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // --- PRE-IDENTIFY LINKS FOR ANCHORS ---
+      const loreLinks = document.querySelectorAll(".wikibody li a[href*='/lore/']");
+      loreLinks.forEach(link => {
+        const slug = link.href.split('/').filter(Boolean).pop();
+        if (slug) {
+          const li = link.closest("li");
+          if (li && !li.id) li.id = slug;
+        }
+      });
+
       document.body.addEventListener("click", async function (e) {
         const link = e.target.closest("a[href^='/lore/'], a[href^='/en/lore/']");
         if (!link) return;
@@ -221,8 +231,12 @@
         e.preventDefault();
 
         const url = link.href;
-        const id = "section-" + btoa(url).replace(/=/g, "");
+        const slug = url.split('/').filter(Boolean).pop();
+        const id = "section-" + slug;
+
+        // Ensure the li has an id for direct jumping
         const li = link.closest("li") || link.parentElement;
+        if (!li.id) li.id = slug;
 
         let existing = document.getElementById(id);
 
@@ -237,8 +251,6 @@
           }
           return;
         }
-
-        // Deactivate others maybe? User said "don't break", usually better to allow multi-expand in wiki
 
         // Create Section
         const section = document.createElement("div");
@@ -276,6 +288,28 @@
           section.innerHTML = "<p>ERROR_DE_SINCRONIZACIÓN</p>";
         }
       });
+
+      // --- AUTO-EXPAND BY ANCHOR ---
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#')) {
+        const slug = hash.substring(1);
+        // Find the link that points to this slug
+        const links = document.querySelectorAll("a[href^='/lore/'], a[href^='/en/lore/']");
+        let targetLink = null;
+        for (const link of links) {
+          if (link.href.split('/').filter(Boolean).pop() === slug) {
+            targetLink = link;
+            break;
+          }
+        }
+
+        if (targetLink) {
+          setTimeout(() => {
+            targetLink.click();
+            targetLink.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 500);
+        }
+      }
     });
   </script>
 </article>

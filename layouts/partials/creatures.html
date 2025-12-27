@@ -22,19 +22,23 @@
   <!-- GRID CRIATURAS -->
   <div class="grid md:grid-cols-3 gap-8">
 
-    {{/* Lista de criaturas */}}
+    {{/* Lista de criaturas originales */}}
     {{ $criaturas := slice
-    (dict "nombre" "DE DA" "tipo" (T "tipo_organico") "descripcion" (T "david_desc_short") "img" "de-da.png" "glb"
+    (dict "nombre" "DE DA" "tipo" (T "tipo_organico") "descripcion" (T "david_desc_short") "img" "/images/de-da.png"
+    "glb"
     "david%20mutante.glb" "color" "text-fox-red")
     (dict "nombre" "MR-3042" "tipo" (T "tipo_inorganico") "descripcion" (T "mr3042_desc_short") "img"
-    "mr-3042-v3.png" "glb" "mr-3042_v3.glb" "color" "text-fox-red")
-    (dict "nombre" "ALEFAR" "tipo" (T "tipo_sintetico") "descripcion" (T "alefar_desc_short") "img" "sintetica.jpg"
+    "/images/mr-3042-v3.png" "glb" "mr-3042_v3.glb" "color" "text-fox-red")
+    (dict "nombre" "ALEFAR" "tipo" (T "tipo_sintetico") "descripcion" (T "alefar_desc_short") "img"
+    "/images/sintetica.jpg"
     "glb"
     "sintetica-pistola2.glb" "color" "text-fox-red")
     }}
 
     {{ range $index, $c := $criaturas }}
-    <div class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20 criatura-container"
+    {{ $cSlug := urlize $c.nombre }}
+    <div id="creature-{{ $cSlug }}"
+      class="bg-deep-black rounded-xl p-6 shadow-xl border border-fox-red/20 criatura-container"
       data-src="https://w3s.link/ipfs/bafybeia72hosqwsvmoj3knqp3ihe5dmuiwbayhyrvalsd3gv4ktmoit7oa/{{ $c.glb }}"
       data-name="{{ $c.nombre }}" data-type="{{ $c.tipo }}" data-t-volver="{{ T " shadow_back" }}"
       data-t-loading="{{ T " shadow_loading_artifact" }}">
@@ -43,7 +47,7 @@
                   rounded-xl overflow-hidden shadow-xl">
 
         <!-- IMAGEN PREVIA -->
-        <img src="/images/{{ $c.img }}" alt="{{ $c.nombre }}" class="criatura-ficha w-full h-full object-cover
+        <img src="{{ $c.img | relURL }}" alt="{{ $c.nombre }}" class="criatura-ficha w-full h-full object-cover
                     rounded-lg border border-fox-red/50
                     shadow-xl cursor-pointer">
 
@@ -200,6 +204,22 @@
           .replace(/\-\-+/g, '-')
           .replace(/^-+/, '')
           .replace(/-+$/, '');
+      }
+
+      // --- AUTO-OPEN BY HASH ---
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#creature-')) {
+        const targetId = hash.substring(1);
+        const container = document.getElementById(targetId);
+        if (container) {
+          const img = container.querySelector('.criatura-ficha');
+          if (img) {
+            setTimeout(() => {
+              img.click();
+              container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
+          }
+        }
       }
 
     });

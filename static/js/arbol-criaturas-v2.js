@@ -4,6 +4,15 @@
 // LOADER REAL CON model-viewer (slot="poster")
 // -------------------------------------------------------
 
+// Helper slugify GLOBAL
+const slugify = text => text.toString().toLowerCase()
+  .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  .replace(/\s+/g, '-')
+  .replace(/[^\w\-]+/g, '')
+  .replace(/\-\-+/g, '-')
+  .replace(/^-+/, '')
+  .replace(/-+$/, '');
+
 document.addEventListener("DOMContentLoaded", () => {
 
   if (typeof CRIATURAS === "undefined") {
@@ -29,9 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
   Object.keys(DATA).forEach((categoria, i) => {
 
     const id = `cat_${i}`;
+    const slug = slugify(categoria);
 
     nivel1.insertAdjacentHTML("beforeend", `
       <button class="btn-rama border border-fox-red/40 p-3 rounded-xl hover:bg-fox-red/10 transition"
+              id="tree-cat-${slug}"
               data-target="#${id}" data-category="${categoria}">
         <img src="/images/${categoria.toLowerCase()}.png"
              class="mx-auto mb-2 w-320 h-320  object-contain">
@@ -73,18 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------------------------------------------------
   // NIVEL 2 y 3
   // ---------------------------------------------------
-  // Helper slugify
-  const slugify = text => text.toString().toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g, '-')
-    .replace(/[^\w\-]+/g, '')
-    .replace(/\-\-+/g, '-')
-    .replace(/^-+/, '')
-    .replace(/-+$/, '');
-
-  // ---------------------------------------------------
-  // NIVEL 2 y 3
-  // ---------------------------------------------------
   Object.entries(DATA).forEach(([categoria, subcats], i) => {
 
     const nivel2 = document.querySelector(`#cat_${i} .nivel2`);
@@ -93,12 +92,14 @@ document.addEventListener("DOMContentLoaded", () => {
     Object.entries(subcats).forEach(([subcategoria, criaturas]) => {
 
       const subId = `sub_${categoria}_${subcategoria}`.replace(/\s+/g, "_");
+      const subSlug = slugify(subcategoria);
       const first = Object.keys(criaturas)[0];
       const preview = criaturas[first].img;
 
       // NIVEL 2
       nivel2.insertAdjacentHTML("beforeend", `
         <div class="criatura-node cursor-pointer"
+             id="tree-subcat-${subSlug}"
              data-subtarget="#${subId}"
              data-category="${categoria}"
              data-subcategory="${subcategoria}">
@@ -116,6 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const slug = slugify(name);
         return `
         <div class="criatura-node"
+             id="tree-item-${data.slug}"
              data-src="${data.glb || ""}"
              data-name="${name}"
              data-wiki-url="${data.wiki_url}" 
@@ -129,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div class="relative mt-3 rounded-xl overflow-hidden" style="height:32rem">
               <img src="${data.img}"
-                   class="criatura-ficha w-full h-full object-contain bg-black rounded">
+                   class="criatura-ficha w-full h-full object-contain bg-black rounded cursor-pointer">
 
               <div class="criatura-3d hidden absolute inset-0"></div>
 
@@ -177,11 +179,11 @@ function activarInteracciones() {
     const img = node.querySelector(".criatura-ficha");
     const viewer = node.querySelector(".criatura-3d");
     const volver = node.querySelector(".volver-btn");
-    const wiki = node.querySelector(".wiki-btn"); // Nuevo
+    const wiki = node.querySelector(".wiki-btn");
 
     const glb = node.dataset.src;
     const name = node.dataset.name;
-    const wikiUrl = node.dataset.wikiUrl; // Lectura URL correcta
+    const wikiUrl = node.dataset.wikiUrl;
     const type = node.dataset.type;
     const category = node.dataset.category;
     const subcategory = node.dataset.subcategory;
@@ -202,24 +204,16 @@ function activarInteracciones() {
       viewer.classList.remove("hidden");
       viewer.style.minHeight = "32rem";
 
-      // DEBUG LOGS
       console.log("Activando visor para:", name);
 
       volver.style.display = "block";
 
-      // Restaurar lógica para botón estático (ya presente en el HTML del usuario)
       if (wiki) {
-        wiki.style.display = "flex"; // Usar flex para centrado
-        console.log("Wiki button mostrado (static)");
-      } else {
-        console.warn("Wiki button static selector returned null");
+        wiki.style.display = "flex";
       }
 
-      // Eliminar lógica dinámica anterior para evitar duplicados
       const existingWikiDyn = viewer.parentElement.querySelector('.wiki-dynamic-btn');
       if (existingWikiDyn) existingWikiDyn.remove();
-
-      // (No creamos botón dinámico, usamos el estático del HTML)
 
       const mv = document.createElement("model-viewer");
       mv.setAttribute("src", glb);
@@ -233,7 +227,6 @@ function activarInteracciones() {
 
       if (isMobile) mv.setAttribute("disable-zoom", "");
 
-      // 🧬 LOADER ARAFURI REAL
       const poster = document.createElement("div");
       poster.slot = "poster";
       poster.className = "dar3d-loader";
@@ -252,13 +245,11 @@ function activarInteracciones() {
         creature_name: name
       });
 
-      // 📥 BOTÓN SOLICITAR 3D (Si tiene ZIP)
       const zip = node.dataset.zip;
       if (zip && zip.length > 1) {
         const btnRequest = document.createElement("a");
         btnRequest.href = `https://docs.google.com/forms/d/e/1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q/viewform?entry.1908425380=${zip}`;
         btnRequest.target = "_blank";
-        // Position: bottom-3 left-3
         btnRequest.className = "btn-solicitar-3d absolute bottom-3 left-3 bg-black/70 text-white px-3 py-2 rounded z-[1000] text-sm hover:bg-black transition";
         btnRequest.innerText = "Solicitar 3D Gratuito ->";
         btnRequest.onclick = () => darEvent('click_request_3d', { creature_name: name });
@@ -289,29 +280,23 @@ function activarInteracciones() {
       viewer.classList.add("hidden");
       volver.style.display = "none";
 
-      // Ocultar botón estático
       if (wiki) wiki.style.display = "none";
 
-      // (Limpieza legacy dinámica por si acaso)
       const dynWiki = node.querySelector('.wiki-dynamic-btn');
       if (dynWiki) dynWiki.remove();
 
       img.classList.remove("hidden");
       interacted = false;
 
-      // Limpiar botón solicitar si existe
       const btnReq = viewer.querySelector(".btn-solicitar-3d");
       if (btnReq) btnReq.remove();
     });
   });
 
-  // SUBCATEGORÍAS
   document.querySelectorAll(".criatura-node[data-subtarget]").forEach(node => {
-
     const target = document.querySelector(node.dataset.subtarget);
 
     node.addEventListener("click", () => {
-
       darEvent("enter_subcategory", {
         category: node.dataset.category,
         subcategory: node.dataset.subcategory
@@ -330,4 +315,73 @@ function activarInteracciones() {
       }
     });
   });
+
+  // --- AUTO-OPEN BY HASH (TREE) ---
+  const handleTreeHash = () => {
+    const hash = window.location.hash;
+    if (hash && hash.startsWith('#tree-')) {
+      const slug = slugify(hash.substring(6));
+      console.log("Tree deep-linking target:", slug);
+
+      let found = null;
+      // Usamos CRIATURAS global
+      Object.entries(CRIATURAS).forEach(([cat, subcats]) => {
+        Object.entries(subcats).forEach(([subcat, creatures]) => {
+          Object.keys(creatures).forEach(name => {
+            const c = creatures[name];
+            if (slugify(name) === slug || c.slug === slug) {
+              found = { cat, subcat, name };
+            }
+          });
+        });
+      });
+
+      if (found) {
+        console.log("Found creature match for deep-link:", found.name);
+
+        // 1. Expandir Nivel 1 (Categoría)
+        const catSlug = slugify(found.cat);
+        const catBtn = document.getElementById(`tree-cat-${catSlug}`);
+        if (catBtn && !catBtn.classList.contains('active-branch')) {
+          catBtn.click();
+        }
+
+        // 2. Expandir Nivel 2 (Subcategoría)
+        setTimeout(() => {
+          const subSlug = slugify(found.subcat);
+          const subcatNode = document.getElementById(`tree-subcat-${subSlug}`);
+          if (subcatNode) {
+            const subTarget = document.querySelector(subcatNode.dataset.subtarget);
+            if (subTarget && (subTarget.classList.contains('hidden') || subTarget.style.display === 'none')) {
+              subcatNode.click();
+            }
+          }
+
+          // 3. Abrir Nivel 3 (Criatura)
+          setTimeout(() => {
+            const finalNode = document.getElementById(`tree-item-${slug}`);
+            if (finalNode) {
+              const img = finalNode.querySelector('.criatura-ficha');
+              if (img) {
+                // img.click(); // Abrir visor 3D
+
+                // Efecto visual de resaltado
+                const inner = finalNode.querySelector('.bg-deep-black');
+                if (inner) {
+                  inner.style.transition = "all 0.5s ease";
+                  inner.style.borderColor = "#5CFFBF";
+                  inner.style.boxShadow = "0 0 40px rgba(92, 255, 191, 0.4)";
+                  inner.style.transform = "scale(1.05)";
+                }
+              }
+              finalNode.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          }, 600);
+        }, 600);
+      }
+    }
+  };
+
+  window.addEventListener('load', handleTreeHash);
+  window.addEventListener('hashchange', handleTreeHash);
 }

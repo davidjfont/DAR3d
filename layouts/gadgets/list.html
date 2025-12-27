@@ -66,12 +66,41 @@
 
     <div id="gadget-cloud">
         {{ range .Pages }}
-        <a href="{{ .RelPermalink }}" class="gadget-card group">
+        <a id="gadget-{{ .File.TranslationBaseName }}" href="{{ .RelPermalink }}" class="gadget-card group">
             <img src="{{ .Params.image }}" alt="{{ .Title }}">
             <h2>{{ .Title }}</h2>
         </a>
         {{ end }}
     </div>
 </div>
+
+<script>
+    const handleGadgetHash = () => {
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#gadget-')) {
+            const targetId = hash.substring(1);
+            const target = document.getElementById(targetId);
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    target.style.transition = 'all 0.5s ease';
+                    target.style.borderColor = '#5CFFBF';
+                    target.style.borderWidth = '2px';
+                    target.style.boxShadow = '0 0 50px rgba(92, 255, 191, 0.5)';
+                    target.style.transform = 'scale(1.05)';
+
+                    setTimeout(() => {
+                        target.style.borderColor = 'rgba(229, 68, 42, 0.2)';
+                        target.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+                        target.style.transform = 'scale(1)';
+                    }, 3000);
+                }, 600);
+            }
+        }
+    };
+
+    window.addEventListener('load', handleGadgetHash);
+    window.addEventListener('hashchange', handleGadgetHash);
+</script>
 
 {{ end }}

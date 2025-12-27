@@ -222,3 +222,11 @@ a.block.mt-6.bg-fox-red.text-white.px-6.py-3.rounded.text-center.text-lg.font-bo
   transform: translateY(-2px);
   color: #fff;
 }
+
+.relative.w-full.md\:w-\[255px\].shrink-0.bg-white\/5.border.border-white\/10.rounded-xl.overflow-hidden.group-hover\:border-fox-red\/40.transition-all.duration-500.p-4.flex.items-center.justify-center {
+  max-width: 255px;
+}
+
+.relative.w-full.md\:w-\[255px\].shrink-0.bg-white.border.border-white\/10.rounded-xl.overflow-hidden.group-hover\:border-fox-red\/40.transition-all.duration-500.p-4.flex.items-center.justify-center {
+  max-width: 255px;
+}

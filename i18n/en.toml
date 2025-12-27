@@ -1,6 +1,16 @@
 [criaturas]
 other = "Creatures"
 
+[classified_popup_title]
+other = "// ACCESS <span class=\"text-fox-red\">DENIED</span>"
+[classified_popup_main]
+other = "YOU ARE ATTEMPTING TO ACCESS CLASSIFIED RECORDS FROM <span class=\"text-neon-green font-bold text-shadow-neon\">ERA 4032</span>."
+[classified_popup_gamification]
+other = "\"Incredible... you've found something, but the veil of reality is still too thick. Keep exploring the archive to unlock this timeline.\""
+[classified_popup_btn]
+other = "RETURN TO ARCHIVE"
+
+
 [arbol_criaturas]
 other = "CREATURE TREE"
 
@@ -175,6 +185,22 @@ other = "Let's build something strange and beautiful."
 other = "Want an original creature or collaboration?"
 [contact_button]
 other = "Contact DAR3D"
+
+# Transmissions Section
+[transmissions_title]
+other = "Latest Transmissions"
+[transmissions_subtitle]
+other = "New entries from the DAR3D archive."
+[transmissions_subtitle_2]
+other = "Creatures, systems, experiments — added as they emerge."
+[transmissions_status_archived]
+other = "Status: archived"
+[transmissions_status_logged]
+other = "Design iteration logged"
+[transmissions_status_future]
+other = "Stored for future reconstruction"
+[transmissions_load_more]
+other = "EXPAND ARCHIVE"
 
 # Store Section
 [store_title]

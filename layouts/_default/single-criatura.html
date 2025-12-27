@@ -218,8 +218,12 @@
 
       {{ $zip := index $found "zip" | default (index $found "ZIP") }}
       {{ if $zip }}
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q/viewform?entry.1908425380={{ $zip }}"
-        target="_blank" class="btn-solicitar-criatura"
+      {{ $formID := "1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q" }}
+      {{ if eq site.Language.Lang "en" }}
+      {{ $formID = "1FAIpQLSfY0dRA6ILvP7PaR_eDLGYg3zB3IkQNkciaploVTgqtNtN-lA" }}
+      {{ end }}
+      <a href="https://docs.google.com/forms/d/e/{{ $formID }}/viewform?entry.1908425380={{ $zip }}" target="_blank"
+        class="btn-solicitar-criatura"
         onclick="darEvent('click_request_3d', { model_name: '{{ $found.nombre }}', location: 'single_creature_page', zip: '{{ $zip }}' })">
 
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -329,7 +333,7 @@
       <!-- PREV -->
       <div class="text-left">
         {{ if $prev }}
-        <a href="{{ printf "/criaturas/%s/" $prev.slug | relLangURL }}" class="group flex flex-col">
+        <a href="{{ relLangURL (printf "/criaturas/%s/" $prev.slug) }}" class="group flex flex-col">
           <span
             class="text-[0.65rem] font-mono text-neon-green uppercase tracking-widest mb-1 group-hover:text-fox-red transition-colors">
             &larr; {{ T "prev_entity" | default "ANTERIOR" }}
@@ -347,12 +351,12 @@
 
       <!-- CENTER HUB -->
       <div class="hidden md:flex flex-col items-center justify-center text-center">
-        <a href="{{ "/lore/" | relLangURL }}"
+        <a href="{{ relLangURL " /lore/" }}"
           class="w-12 h-12 flex items-center justify-center rounded-full bg-ui-dark-gray border border-fox-red/30 hover:bg-fox-red hover:border-white transition-all duration-300 group shadow-[0_0_20px_rgba(229,68,42,0.2)]">
           <svg class="w-5 h-5 text-fox-red group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
           </svg>
         </a>
         <span class="mt-2 text-[0.6rem] font-mono text-bone-white/40 uppercase tracking-widest">DAR3D_ARCHIVE</span>
@@ -361,7 +365,7 @@
       <!-- NEXT -->
       <div class="text-right">
         {{ if $next }}
-        <a href="{{ printf "/criaturas/%s/" $next.slug | relLangURL }}" class="group flex flex-col items-end">
+        <a href="{{ relLangURL (printf " /criaturas/%s/" $next.slug) }}" class="group flex flex-col items-end">
           <span
             class="text-[0.65rem] font-mono text-neon-green uppercase tracking-widest mb-1 group-hover:text-fox-red transition-colors">
             {{ T "next_entity" | default "SIGUIENTE" }} &rarr;
@@ -380,16 +384,28 @@
 
     <!-- SEO NARRATIVE BLOCK -->
     <div class="bg-deep-black/30 border border-white/5 rounded-xl p-6 backdrop-blur-sm">
-      <p class="text-sm md:text-base text-center leading-relaxed text-bone-white/70 font-light max-w-3xl mx-auto">
-        {{ T "seo_narrative_prefix" | default "Esta criatura pertenece al universo DAR3D." }} <a href="{{ "/#creatures"
-          | relLangURL }}"
+      {{ $archiveURL := relLangURL "/#creatures" }}
+      {{ $gadgetsURL := relLangURL "/gadgets/" }}
+      <p class="text-sm md:text-base text-center leading-relaxed text-bone-white/70 font-light max-w-3xl mx-auto mb-6">
+        {{ T "seo_narrative_prefix" | default "Esta criatura pertenece al universo DAR3D." }}
+        <a href="{{ $archiveURL }}"
           class="text-neon-green hover:text-fox-red border-b border-neon-green/30 hover:border-fox-red transition-all ml-1">{{
-          T "seo_narrative_link_creatures" | default "Descubre más entidades" }}</a> {{ T "seo_narrative_connector" |
-        default "y" }} <a href="{{ "/gadgets/" | relLangURL }}"
+          T "seo_narrative_link_creatures" | default "Descubre más entidades" }}</a>
+        {{ T "seo_narrative_connector" | default "y" }}
+        <a href="{{ $gadgetsURL }}"
           class="text-neon-green hover:text-fox-red border-b border-neon-green/30 hover:border-fox-red transition-all mx-1">{{
-          T "seo_narrative_link_gadgets" | default "tecnología emergente" }}</a>. {{ T "seo_narrative_suffix" | default
-        "Explora la convergencia entre biología sintética y diseño 3D en nuestros archivos." }}
+          T "seo_narrative_link_gadgets" | default "tecnología emergente" }}</a>.
+        {{ T "seo_narrative_suffix" | default `Explora la convergencia entre biología sintética y diseño 3D en nuestros
+        archivos.` }}
       </p>
+
+      <div class="flex justify-center">
+        {{ $treeHash := printf "/#tree-%s" $slug | relLangURL }}
+        <a href="{{ $treeHash }}"
+          class="px-8 py-3 bg-neon-green text-deep-black font-title font-bold rounded-lg hover:bg-fox-red hover:text-white transition-all transform hover:scale-105 shadow-lg uppercase tracking-widest text-sm">
+          {{ T "goto_archive" | default "VER EN ARCHIVO" }} →
+        </a>
+      </div>
     </div>
 
   </div>

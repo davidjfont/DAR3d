@@ -1,8 +1,18 @@
 {{ define "main" }}
 <div class="max-w-3xl mx-auto py-16">
     <h1 class="text-5xl font-title mb-6">{{ .Title }}</h1>
-    <article class="prose prose-invert max-w-none">
+    <article class="prose prose-invert max-w-none mb-12">
         {{ .Content }}
     </article>
+
+    {{ if eq .Section "lore" }}
+    {{ $loreURL := printf "/lore/#%s" .File.TranslationBaseName | relLangURL }}
+    <div class="mt-12 pt-8 border-t border-white/10 flex justify-center">
+        <a href="{{ $loreURL }}"
+            class="px-8 py-3 bg-fox-red text-white font-title font-bold rounded-lg hover:bg-neon-green hover:text-black transition-all transform hover:scale-105 shadow-lg uppercase tracking-widest text-sm">
+            {{ T "goto_lore" | default "VER EN EL LOTE / WIKI" }} →
+        </a>
+    </div>
+    {{ end }}
 </div>
 {{ end }}

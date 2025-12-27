@@ -18,12 +18,16 @@
     </div>
 
     {{ if .request_zip }}
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q/viewform?entry.1908425380={{ .request_zip }}"
+    {{ $formID := "1FAIpQLScBuTaFwUSKo8T5ld5BZ7UCb-1blyQcp504YxjiZy-KIlEI1Q" }}
+    {{ if eq site.Language.Lang "en" }}
+    {{ $formID = "1FAIpQLSfY0dRA6ILvP7PaR_eDLGYg3zB3IkQNkciaploVTgqtNtN-lA" }}
+    {{ end }}
+    <a href="https://docs.google.com/forms/d/e/{{ $formID }}/viewform?entry.1908425380={{ .request_zip }}"
         target="_blank"
         style="position:absolute; bottom:12px; left:12px; background:rgba(0,0,0,0.7); color:white; padding:8px 12px; border-radius:4px; text-decoration:none; font-size:14px; z-index:1000;"
         onclick="darEvent('click_request_3d', { model_name: '{{ .request_name | default " Unknown" }}',
         location: 'generic_viewer' })">
-        Solicitar 3D Gratuito ->
+        {{ T "btn_request_3d" | default "Solicitar 3D Gratuito ->" }}
     </a>
     {{ end }}
 </model-viewer>

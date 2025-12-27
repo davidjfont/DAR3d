@@ -1,0 +1,223 @@
+<section id="transmissions"
+    class="py-20 bg-deep-black/50 border-y border-white/5 backdrop-blur-sm relative overflow-hidden">
+    <!-- Ecos de fondo -->
+    <div class="absolute inset-0 pointer-events-none opacity-20">
+        <div
+            class="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-fox-red/30 to-transparent">
+        </div>
+        <div
+            class="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-neon-green/30 to-transparent">
+        </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto px-6 relative z-10">
+        <!-- HEADER -->
+        <div class="mb-12 border-l-4 border-fox-red pl-6">
+            <h2 class="text-3xl md:text-5xl font-title font-bold text-bone-white uppercase tracking-tighter mb-4">
+                {{ T "transmissions_title" }}
+            </h2>
+            <p class="text-lg text-bone-white/60 font-mono">
+                {{ T "transmissions_subtitle" }}<br>
+                <span class="text-xs opacity-50">{{ T "transmissions_subtitle_2" }}</span>
+            </p>
+        </div>
+
+        <!-- LOG LIST -->
+        <div id="transmissions-log" class="space-y-4 font-mono">
+            {{/* Mix de secciones para un pool mas grande */}}
+            {{ $pool_c := first 20 (where .Site.RegularPages "Section" "criaturas") }}
+            {{ $pool_l := first 20 (where .Site.RegularPages "Section" "lore") }}
+            {{ $pool_g := first 20 (where .Site.RegularPages "Section" "gadgets") }}
+            {{ $pagesPool := $pool_c | append $pool_l | append $pool_g }}
+            {{ $display_items := $pagesPool | shuffle | first 40 }}
+
+            {{ range $idx, $item := $display_items }}
+            {{ $targetURL := "" }}
+            {{ if eq $item.Section "lore" }}
+            {{ $is4042 := or (in $item.RelPermalink "/4042/") (in $item.Params.categories "4042") }}
+            {{ if $is4042 }}
+            {{ $targetURL = "javascript:openClassifiedPopup()" }}
+            {{ else }}
+            {{ $targetURL = printf `/lore/#%s` $item.File.TranslationBaseName | relLangURL }}
+            {{ end }}
+            {{ else if eq $item.Section "criaturas" }}
+            {{ $targetURL = printf `/#tree-%s` (or $item.Params.slug $item.File.TranslationBaseName) | relLangURL }}
+            {{ else if eq $item.Section "gadgets" }}
+            {{ $targetURL = printf `/#gadget-%s` $item.File.TranslationBaseName | relLangURL }}
+            {{ else }}
+            {{ $targetURL = $item.RelPermalink }}
+            {{ end }}
+
+            {{ $img := "" }}
+            {{ if eq $item.Section "criaturas" }}
+            {{ $slug := $item.Params.slug | default (urlize $item.Title) }}
+            {{ range $cat, $subs := site.Data.criaturas }}
+            {{ range $sub, $items := $subs }}
+            {{ range $name, $itemData := $items }}
+            {{ if eq (urlize $name) $slug }} {{ $img = $itemData.img }} {{ end }}
+            {{ end }}
+            {{ end }}
+            {{ end }}
+            {{ else }}
+            {{ $img = $item.Params.image | default $item.Params.img }}
+            {{ end }}
+
+            {{/* Normalizamos el path de imagen */}}
+            {{ if and $img (not (hasPrefix $img "http")) }}
+            {{ if not (hasPrefix $img "/") }} {{ $img = printf "/images/%s" $img }} {{ end }}
+            {{ if hasPrefix $img "/images/images/" }} {{ $img = replace $img "/images/images/" "/images/" }} {{ end }}
+            {{ end }}
+
+            <div class="transmission-item border border-white/10 rounded-lg hover:bg-white/5 transition-all duration-300 group {{ if ge $idx 3 }}hidden transmission-hidden{{ end }} cursor-pointer"
+                onclick="window.location.href='{{ $targetURL }}'">
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-8 p-6 md:p-10">
+                    <!-- THUMBNAIL -->
+                    <div
+                        class="relative w-full md:w-[255px] shrink-0 {{ if $img }}bg-white{{ else }}bg-white/5{{ end }} border border-white/10 rounded-xl overflow-hidden group-hover:border-fox-red/40 transition-all duration-500 p-4 flex items-center justify-center">
+                        {{ if $img }}
+                        <img src="{{ $img }}" alt="{{ $item.Title }}"
+                            class="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                        {{ else }}
+                        <div
+                            class="w-full h-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                            <svg class="w-16 h-16 text-white/10 group-hover:text-fox-red/40 transition-colors"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                </path>
+                            </svg>
+                        </div>
+                        {{ end }}
+                        <!-- SCAN LINE EFFECT -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-b from-transparent via-fox-red/20 to-transparent h-1/2 w-full -translate-y-full group-hover:animate-scanner pointer-events-none">
+                        </div>
+                    </div>
+
+                    <div class="flex-1 min-w-0 pt-2 text-center md:text-left">
+                        <div class="flex flex-wrap justify-center md:justify-start items-center gap-3 mb-4">
+                            <span
+                                class="text-[10px] px-2 py-0.5 bg-fox-red/20 text-fox-red border border-fox-red/30 rounded uppercase tracking-tighter">
+                                {{ if eq $item.Section "criaturas" }}UNIT{{ else if eq $item.Section "gadgets" }}TECH{{
+                                else
+                                }}DATA{{ end }}
+                            </span>
+                            <span class="text-white/40 text-[10px] font-mono">
+                                [{{ $item.Date.Format "3042-01" | default "3042-12" }}]
+                            </span>
+                            <span
+                                class="ml-auto hidden md:inline-block text-[10px] uppercase tracking-widest text-fox-red/60 group-hover:text-fox-red transition-colors font-mono">
+                                // {{ if eq $item.Section "criaturas" }}{{ T "transmissions_status_archived" }}{{ else
+                                if eq $item.Section "gadgets" }}{{ T "transmissions_status_logged" }}{{ else }}{{ T
+                                "transmissions_status_future" }}{{ end }} ★ WIKI
+                            </span>
+                        </div>
+                        <h3
+                            class="text-2xl md:text-4xl font-title font-bold text-bone-white group-hover:text-neon-green transition-colors mb-4 flex items-center justify-center md:justify-start gap-4">
+                            {{ $item.Title }}
+                            <svg class="w-8 h-8 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300 text-neon-green hidden md:block"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </h3>
+                        <p
+                            class="text-base md:text-lg text-bone-white/80 leading-relaxed opacity-80 line-clamp-4 md:line-clamp-none">
+                            {{ $item.Description | default $item.Summary }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+
+        <!-- LOAD MORE -->
+        <div class="mt-12 flex justify-center" id="load-more-container">
+            <button id="btn-load-transmissions"
+                class="group flex flex-col items-center gap-1 px-10 py-5 border-2 border-white/10 text-white/40 font-title text-[10px] font-bold tracking-[0.3em] rounded-2xl hover:border-fox-red/50 hover:text-fox-red hover:bg-fox-red/5 transition-all uppercase"
+                onclick="expandTransmissions()">
+                <span>{{ T "transmissions_load_more" }}</span>
+                <span
+                    class="text-xl leading-none opacity-20 group-hover:opacity-100 group-hover:animate-bounce mt-1">︾</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<style>
+    .transmission-item {
+        border-left: 2px solid transparent;
+    }
+
+    .transmission-item:hover {
+        border-left-color: var(--color-fox-red);
+        transform: translateX(4px);
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes scanner {
+        0% {
+            transform: translateY(-100%);
+        }
+
+        100% {
+            transform: translateY(200%);
+        }
+    }
+
+    .animate-scanner {
+        animation: scanner 2s linear infinite;
+    }
+
+    .transmission-hidden:not(.hidden) {
+        animation: slideIn 0.4s ease forwards;
+    }
+</style>
+
+<script>
+    let expansionClicks = 0;
+    // Límite aleatorio entre 5 y 7 clicks según solicitado por el usuario
+    const MAX_EXPANSION_CLICKS = Math.floor(Math.random() * 3) + 5;
+
+    function expandTransmissions() {
+        const hiddens = document.querySelectorAll('.transmission-hidden.hidden');
+        const btn = document.getElementById('btn-load-transmissions');
+        const container = document.getElementById('load-more-container');
+
+        if (hiddens.length === 0) {
+            if (container) container.remove();
+            return;
+        }
+
+        expansionClicks++;
+
+        // Desplegamos un bloque de registros (ej. 4 por click)
+        const BATCH_SIZE = 4;
+        for (let i = 0; i < BATCH_SIZE && i < hiddens.length; i++) {
+            hiddens[i].classList.remove('hidden');
+        }
+
+        // Si alcanzamos el límite aleatorio o no quedan más por mostrar
+        if (expansionClicks >= MAX_EXPANSION_CLICKS || hiddens.length <= BATCH_SIZE) {
+            if (btn) {
+                btn.style.opacity = '0';
+                btn.style.transform = 'scale(0.9)';
+                btn.style.pointerEvents = 'none';
+            }
+            setTimeout(() => {
+                if (container) container.remove();
+            }, 500);
+        }
+    }
+</script>

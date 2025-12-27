@@ -1,0 +1,89 @@
+<div id="classified-overlay"
+    class="fixed inset-0 z-[9999] hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-6 opacity-0 transition-opacity duration-500">
+    <div class="relative max-w-2xl w-full border-2 border-fox-red/30 bg-deep-black p-8 md:p-12 rounded-2xl shadow-[0_0_100px_rgba(229,68,42,0.15)] overflow-hidden scale-90 transition-transform duration-500"
+        id="classified-modal">
+
+        <!-- Background Effects -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div
+                class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-fox-red to-transparent animate-pulse">
+            </div>
+            <div class="absolute bottom-0 left-0 w-full h-px bg-fox-red/20"></div>
+            <div class="absolute inset-0 bg-[url('/images/ui/grid.png')] opacity-5"></div>
+        </div>
+
+        <div class="relative z-10 text-center">
+            <!-- Icon -->
+            <div class="mb-8 flex justify-center">
+                <div class="relative">
+                    <div class="absolute inset-0 animate-ping bg-fox-red/20 rounded-full"></div>
+                    <svg class="w-20 h-20 text-fox-red relative" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+            </div>
+
+            <h2 class="text-3xl md:text-5xl font-title font-bold text-bone-white uppercase tracking-tighter mb-6">
+                {{ T "classified_popup_title" | safeHTML }}
+            </h2>
+
+            <div class="space-y-4 mb-10 text-lg md:text-xl font-mono text-bone-white/80 leading-relaxed">
+                <p>
+                    {{ T "classified_popup_main" | safeHTML }}
+                </p>
+                <p class="text-sm border-y border-white/5 py-4 opacity-60">
+                    ERROR_CODE: SPOILER_PREVENTION_PROTOCOL_V4.0
+                </p>
+                <p class="text-neon-green/90 italic">
+                    {{ T "classified_popup_gamification" }}
+                </p>
+            </div>
+
+            <button onclick="closeClassifiedPopup()"
+                class="group relative inline-flex items-center justify-center px-12 py-4 bg-transparent border-2 border-fox-red text-fox-red font-title font-bold rounded-full overflow-hidden transition-all hover:bg-fox-red hover:scale-105 shadow-[0_0_20px_rgba(229,68,42,0.1)] hover:shadow-[0_0_30px_rgba(229,68,42,0.3)]">
+                <span style="padding: 0 2rem;"
+                    class="relative z-10 tracking-widest uppercase transition-colors duration-300 group-hover:text-white">{{
+                    T "classified_popup_btn" }}</span>
+                <div
+                    class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 pointer-events-none opacity-10">
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openClassifiedPopup() {
+        const overlay = document.getElementById('classified-overlay');
+        const modal = document.getElementById('classified-modal');
+
+        overlay.classList.remove('hidden');
+        // Force reflow
+        overlay.offsetHeight;
+
+        overlay.classList.remove('opacity-0');
+        modal.classList.remove('scale-90');
+
+        // Efecto sonido opcional si tienes alguno global
+        if (window.darEvent) darEvent('classified_intercepted');
+    }
+
+    function closeClassifiedPopup() {
+        const overlay = document.getElementById('classified-overlay');
+        const modal = document.getElementById('classified-modal');
+
+        overlay.classList.add('opacity-0');
+        modal.classList.add('scale-90');
+
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+        }, 500);
+    }
+</script>
+
+<style>
+    .text-shadow-neon {
+        text-shadow: 0 0 10px rgba(92, 255, 191, 0.5);
+    }
+</style>

@@ -1,6 +1,16 @@
 [criaturas]
 other = "Criaturas"
 
+[classified_popup_title]
+other = "// ACCESS <span class=\"text-fox-red\">DENIED</span>"
+[classified_popup_main]
+other = "ESTAS INTENTANDO ACCEDER A REGISTROS CLASIFICADOS DE LA <span class=\"text-neon-green font-bold text-shadow-neon\">ERA 4032</span>."
+[classified_popup_gamification]
+other = "“Increíble... has dado con algo, pero el velo de la realidad aún es demasiado espeso. Sigue explorando el archivo para desbloquear esta línea temporal.”"
+[classified_popup_btn]
+other = "REGRESAR AL ARCHIVO"
+
+
 [arbol_criaturas]
 other = "ÁRBOL DE CRIATURAS"
 
@@ -176,6 +186,22 @@ other = "Construyamos algo raro y hermoso."
 other = "¿Quieres una criatura original o colaboración?"
 [contact_button]
 other = "Contactar a DAR3D"
+
+# Transmissions Section
+[transmissions_title]
+other = "Latest Transmissions"
+[transmissions_subtitle]
+other = "Nuevas entradas del archivo DAR3D."
+[transmissions_subtitle_2]
+other = "Criaturas, sistemas, experimentos — añadidos a medida que emergen."
+[transmissions_status_archived]
+other = "Estado: archivado"
+[transmissions_status_logged]
+other = "Iteración de diseño registrada"
+[transmissions_status_future]
+other = "Almacenado para futura reconstrucción"
+[transmissions_load_more]
+other = "AMPLIAR REGISTROS"
 
 # Store Section
 [store_title]
