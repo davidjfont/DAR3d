@@ -1,0 +1,262 @@
+{{ define "main" }}
+<div class="min-h-screen bg-white dark:bg-deep-black flex flex-col pt-32 pb-20">
+    <div class="container mx-auto px-6 md:px-12 max-w-4xl">
+        <!-- Header -->
+        <header class="mb-12 border-b border-gray-200 dark:border-white/10 pb-8">
+            <h1
+                class="text-4xl md:text-5xl font-title text-gray-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-bone-white dark:to-white mb-4">
+                {{ .Title }}
+            </h1>
+            <p class="font-mono text-emerald-600 dark:text-neon-green/80 text-sm tracking-widest uppercase">
+                DAR3D // LEGAL_DOCS // {{ .Date.Format "2006" }}
+            </p>
+        </header>
+
+        <!-- Content -->
+        {{ if eq .Language.Lang "es" }}
+        <!-- CONTENIDO ESPAÑOL -->
+        <div class="font-sans leading-relaxed text-gray-800 dark:text-gray-200">
+
+            <div class="mb-12 pb-8 border-b border-gray-200 dark:border-white/10">
+                <strong class="text-orange-600 dark:text-orange-500 uppercase tracking-widest">Aviso Legal:</strong>
+                <span class="text-gray-900 dark:text-white ml-2">Todo el material de este archivo está protegido.</span>
+            </div>
+
+            <p class="mb-8 text-lg">
+                Bienvenido a <strong class="text-gray-900 dark:text-white">DAR3D (Nucleo_Vivo // 3042_Archive)</strong>.
+                Este sitio es un portafolio vivo y un archivo de exploración creativa. A continuación, detallamos las
+                reglas de juego para el uso de nuestros recursos.
+            </p>
+
+            <br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">1. Titularidad
+                (Copyright)</h2>
+
+            <p class="mb-6">
+                Todo el contenido presente en este sitio web, incluyendo pero no limitado a:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div
+                    class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg text-center border border-gray-200 dark:border-white/10">
+                    Modelos 3D (.glb)</div>
+                <div
+                    class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg text-center border border-gray-200 dark:border-white/10">
+                    Imágenes y Renders</div>
+                <div
+                    class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg text-center border border-gray-200 dark:border-white/10">
+                    Código Fuente</div>
+                <div
+                    class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg text-center border border-gray-200 dark:border-white/10">
+                    Lore y Narrativa</div>
+            </div>
+
+            <p class="mb-8">
+                Son propiedad intelectual exclusiva de <strong class="text-orange-600 dark:text-orange-500">David J.
+                    Font (DAR3D)</strong>, salvo que se indique lo contrario.
+            </p>
+
+            <br>
+            <hr class="border-gray-200 dark:border-white/10 my-12"><br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">2. Uso Personal y
+                Educativo (Permitido)</h2>
+
+            <p class="mb-6">
+                Queremos inspirarte. Por eso, permitimos y fomentamos:
+            </p>
+
+            <ul class="list-none pl-0 mb-8 space-y-4">
+                <li class="pl-6 border-l-2 border-emerald-600 dark:border-neon-green">
+                    <strong class="text-emerald-600 dark:text-neon-green">Descarga de Modelos:</strong><br>
+                    Puedes bajar los modelos disponibles para estudiarlos, imprimirlos en 3D para tu casa o usarlos en
+                    proyectos personales <strong>sin ánimo de lucro</strong>.
+                </li>
+                <li class="pl-6 border-l-2 border-emerald-600 dark:border-neon-green">
+                    <strong class="text-emerald-600 dark:text-neon-green">Fanart:</strong><br>
+                    Puedes crear obras derivadas siempre que nos atribuyas y no las comercialices.
+                </li>
+                <li class="pl-6 border-l-2 border-emerald-600 dark:border-neon-green">
+                    <strong class="text-emerald-600 dark:text-neon-green">Educación:</strong><br>
+                    El uso en aulas y talleres está permitido.
+                </li>
+            </ul>
+
+            <br>
+            <hr class="border-gray-200 dark:border-white/10 my-12"><br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">3. Uso Comercial
+                (Requiere Licencia)</h2>
+
+            <div
+                class="bg-red-50 dark:bg-orange-500/10 border border-red-200 dark:border-orange-500/30 p-8 rounded-lg mb-8">
+                <p class="text-gray-900 dark:text-white text-lg mb-6">
+                    <strong class="text-red-600 dark:text-orange-500 text-xl">NO</strong> está permitido el uso
+                    comercial de ningún asset sin una licencia explícita.
+                </p>
+                <ul class="list-disc pl-6 text-red-700 dark:text-red-300 space-y-2">
+                    <li><strong>Prohibido:</strong> Revender los modelos 3D (digital o impresos).</li>
+                    <li><strong>Prohibido:</strong> Incluir los modelos en videojuegos, películas o publicidad comercial
+                        sin permiso.</li>
+                    <li><strong>Prohibido:</strong> Vender NFTs basados en nuestro trabajo.</li>
+                </ul>
+            </div>
+
+            <p class="mb-8">
+                Si deseas utilizar una criatura, gadget o diseño para un proyecto comercial, por favor
+                <a href="/contact"
+                    class="text-emerald-600 dark:text-neon-green underline hover:text-emerald-500">contacta con
+                    nosotros</a>
+                para obtener una licencia de uso. Estamos abiertos a colaboraciones.
+            </p>
+
+            <br>
+            <hr class="border-gray-200 dark:border-white/10 my-12"><br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">4. Licencia de
+                Atribución</h2>
+
+            <p class="mb-6">
+                Si compartes contenido de DAR3D en redes sociales o proyectos personales, te pedimos que nos atribuyas
+                de la siguiente manera:
+            </p>
+
+            <div
+                class="bg-gray-900 dark:bg-black p-6 border-l-4 border-emerald-600 dark:border-white font-mono text-emerald-400 dark:text-neon-green">
+                "Diseño original de DAR3D / David J. Font - www.dar3d.com"
+            </div>
+
+            <br><br>
+
+            <p class="text-center opacity-50 italic mt-16">
+                Respetar el trabajo creativo nos permite seguir construyendo este universo.
+            </p>
+
+        </div>
+        {{ else }}
+        <!-- ENGLISH CONTENT -->
+        <div class="font-sans leading-relaxed text-gray-800 dark:text-gray-200">
+
+            <div class="mb-12 pb-8 border-b border-gray-200 dark:border-white/10">
+                <strong class="text-orange-600 dark:text-orange-500 uppercase tracking-widest">Legal
+                    Disclaimer:</strong>
+                <span class="text-gray-900 dark:text-white ml-2">All material in this archive is protected.</span>
+            </div>
+
+            <p class="mb-8 text-lg">
+                Welcome to <strong class="text-gray-900 dark:text-white">DAR3D (Nucleo_Vivo // 3042_Archive)</strong>.
+                This site is a living portfolio and a creative exploration archive. Below, we detail the rules of
+                engagement for using our resources.
+            </p>
+
+            <br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">1. Ownership
+                (Copyright)</h2>
+
+            <p class="mb-6">
+                All content present on this website, including but not limited to:
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div
+                    class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg text-center border border-gray-200 dark:border-white/10">
+                    3D Models (.glb)</div>
+                <div
+                    class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg text-center border border-gray-200 dark:border-white/10">
+                    Images and Renders</div>
+                <div
+                    class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg text-center border border-gray-200 dark:border-white/10">
+                    Source Code</div>
+                <div
+                    class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg text-center border border-gray-200 dark:border-white/10">
+                    Lore and Narrative</div>
+            </div>
+
+            <p class="mb-8">
+                Are the exclusive intellectual property of <strong class="text-orange-600 dark:text-orange-500">David J.
+                    Font (DAR3D)</strong>, unless otherwise stated.
+            </p>
+
+            <br>
+            <hr class="border-gray-200 dark:border-white/10 my-12"><br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">2. Personal &
+                Educational Use (Allowed)</h2>
+
+            <p class="mb-6">
+                We want to inspire you. Therefore, we allow and encourage:
+            </p>
+
+            <ul class="list-none pl-0 mb-8 space-y-4">
+                <li class="pl-6 border-l-2 border-emerald-600 dark:border-neon-green">
+                    <strong class="text-emerald-600 dark:text-neon-green">Model Downloads:</strong><br>
+                    You may download available models to study them, 3D print them for your home, or use them in
+                    personal <strong>non-profit</strong> projects.
+                </li>
+                <li class="pl-6 border-l-2 border-emerald-600 dark:border-neon-green">
+                    <strong class="text-emerald-600 dark:text-neon-green">Fanart:</strong><br>
+                    You may create derivative works as long as you attribute us and do not comercialise them.
+                </li>
+                <li class="pl-6 border-l-2 border-emerald-600 dark:border-neon-green">
+                    <strong class="text-emerald-600 dark:text-neon-green">Education:</strong><br>
+                    Classroom and workshop usage is permitted.
+                </li>
+            </ul>
+
+            <br>
+            <hr class="border-gray-200 dark:border-white/10 my-12"><br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">3. Commercial Use
+                (License Required)</h2>
+
+            <div
+                class="bg-red-50 dark:bg-orange-500/10 border border-red-200 dark:border-orange-500/30 p-8 rounded-lg mb-8">
+                <p class="text-gray-900 dark:text-white text-lg mb-6">
+                    <strong class="text-red-600 dark:text-orange-500 text-xl">NO</strong> commercial use of any asset is
+                    allowed without an explicit license.
+                </p>
+                <ul class="list-disc pl-6 text-red-700 dark:text-red-300 space-y-2">
+                    <li><strong>Prohibited:</strong> Reselling 3D models (digital or printed).</li>
+                    <li><strong>Prohibited:</strong> Including models in video games, movies, or commercial advertising
+                        without permission.</li>
+                    <li><strong>Prohibited:</strong> Selling NFTs based on our work.</li>
+                </ul>
+            </div>
+
+            <p class="mb-8">
+                If you wish to use a creature, gadget, or design for a commercial project, please
+                <a href="/contact"
+                    class="text-emerald-600 dark:text-neon-green underline hover:text-emerald-500">contact us</a>
+                to obtain a usage license. We are open to collaborations.
+            </p>
+
+            <br>
+            <hr class="border-gray-200 dark:border-white/10 my-12"><br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">4. Attribution
+                License</h2>
+
+            <p class="mb-6">
+                If you share DAR3D content on social media or personal projects, we ask that you attribute us as
+                follows:
+            </p>
+
+            <div
+                class="bg-gray-900 dark:bg-black p-6 border-l-4 border-emerald-600 dark:border-white font-mono text-emerald-400 dark:text-neon-green">
+                "Original Design by DAR3D / David J. Font - www.dar3d.com"
+            </div>
+
+            <br><br>
+
+            <p class="text-center opacity-50 italic mt-16">
+                Respecting creative work allows us to keep building this universe.
+            </p>
+
+        </div>
+        {{ end }}
+
+    </div>
+</div>
+{{ end }}

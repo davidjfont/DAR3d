@@ -1,0 +1,212 @@
+{{ define "main" }}
+<div class="min-h-screen bg-white dark:bg-deep-black flex flex-col pt-32 pb-20">
+    <div class="container mx-auto px-6 md:px-12 max-w-4xl">
+        <!-- Header -->
+        <header class="mb-12 border-b border-gray-200 dark:border-white/10 pb-8">
+            <h1
+                class="text-4xl md:text-5xl font-title text-gray-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-bone-white dark:to-white mb-4">
+                {{ .Title }}
+            </h1>
+            <p class="font-mono text-emerald-600 dark:text-neon-green/80 text-sm tracking-widest uppercase">
+                DAR3D // LEGAL_DOCS // {{ .Date.Format "2006" }}
+            </p>
+        </header>
+
+        <!-- Content -->
+        <!-- Content -->
+        {{ if eq .Language.Lang "es" }}
+        <!-- CONTENIDO ESPAÑOL -->
+        <div class="font-sans leading-relaxed text-gray-800 dark:text-gray-200">
+
+            <div class="mb-12 pb-8 border-b border-gray-200 dark:border-white/10">
+                <strong class="text-emerald-600 dark:text-neon-green uppercase tracking-widest">Última
+                    actualización:</strong>
+                <span class="text-gray-900 dark:text-white ml-2">Diciembre 2025</span>
+            </div>
+
+            <p class="mb-8 text-lg">
+                En <strong class="text-gray-900 dark:text-white">DAR3D</strong>, nos tomamos tu privacidad en serio.
+                Esta web ha sido diseñada siguiendo un principio de
+                <strong class="text-emerald-600 dark:text-neon-green">"Privacidad por Diseño"</strong>.
+            </p>
+
+            <br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">1. Modelo de
+                Consentimiento Estricto</h2>
+
+            <p class="mb-6">
+                A diferencia de la mayoría de webs, <strong class="text-orange-600 dark:text-orange-500">DAR3D NO carga
+                    ninguna cookie de rastreo por defecto</strong>.
+                Utilizamos un sistema de <strong>"Consentimiento Explícito (Opt-In)"</strong>:
+            </p>
+
+            <ul class="list-none pl-0 mb-8 space-y-4">
+                <li class="pl-6 border-l-2 border-orange-500 dark:border-orange-500">
+                    <strong>ENTRADA:</strong> Al entrar, <strong>NO</strong> te rastreamos.
+                </li>
+                <li class="pl-6 border-l-2 border-emerald-600 dark:border-neon-green">
+                    <strong>ACEPTAR:</strong> Solo si pulsas el botón <strong>"Aceptar todas"</strong> en nuestro
+                    banner, cargaremos el script de <strong>Google Analytics (GA4)</strong>.
+                </li>
+                <li class="pl-6 border-l-2 border-gray-300 dark:border-gray-600">
+                    <strong>RECHAZAR:</strong> Si pulsas <strong>"Solo necesarias"</strong> o ignoras el banner, Google
+                    Analytics <strong>NUNCA</strong> se cargará.
+                </li>
+            </ul>
+
+            <br>
+            <hr class="border-gray-200 dark:border-white/10 my-12"><br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">2. ¿Qué cookies
+                utilizamos?</h2>
+
+            <div class="mb-8">
+                <h3 class="text-emerald-600 dark:text-neon-green mb-4 font-bold">A. Cookies Técnicas (Necesarias)</h3>
+                <p class="mb-4">Estas cookies son esenciales para el funcionamiento básico de la web y no guardan
+                    información personal identificable.</p>
+                <div class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg border border-gray-200 dark:border-white/10">
+                    <code class="text-emerald-600 dark:text-neon-green font-mono">cookieConsent</code>
+                    <p class="text-sm mt-2 mb-0 opacity-80">Guarda tu preferencia ("all" o "necessary") para no
+                        mostrarte el banner en cada visita. <br><strong>Duración:</strong> 1 año.</p>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-orange-600 dark:text-orange-500 mb-4 font-bold">B. Cookies de Análisis (Opcionales)</h3>
+                <p class="mb-4">Solo se activan si nos das permiso. Nos ayudan a entender qué criaturas o gadgets son
+                    los más visitados.</p>
+                <div class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg border border-gray-200 dark:border-white/10">
+                    <code class="text-orange-600 dark:text-orange-500 font-mono">_ga</code> / <code
+                        class="text-orange-600 dark:text-orange-500 font-mono">_ga_MYM83H0X5Q</code>
+                    <p class="text-sm mt-2 mb-0 opacity-80">Identificadores de Google Analytics 4 para distinguir
+                        sesiones y usuarios de forma anónima.</p>
+                </div>
+            </div>
+
+            <br>
+            <hr class="border-gray-200 dark:border-white/10 my-12"><br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">3. Tus Derechos</h2>
+
+            <p class="mb-6">
+                Tienes control total sobre tus datos. Dado que nuestra implementación es estricta, si decides no
+                aceptar, simplemente no existes para nuestras métricas.
+            </p>
+
+            <div class="bg-emerald-50 dark:bg-neon-green/10 border-l-4 border-emerald-600 dark:border-neon-green p-6">
+                <h4 class="text-gray-900 dark:text-white font-bold mb-2 mt-0">Revocar Consentimiento</h4>
+                <p class="mb-0 text-gray-700 dark:text-gray-300">
+                    Si aceptaste las cookies y cambias de opinión, puedes revocar el permiso en cualquier momento
+                    <strong>borrando los datos de navegación</strong> (cookies y almacenamiento local) de tu navegador
+                    para este dominio. Al recargar la página, volverás a ver el banner y podrás rechazar.
+                </p>
+            </div>
+
+            <br><br>
+
+            <p class="text-center opacity-50 italic mt-16">
+                Hecho con ❤️ y privacidad en Barcelona.
+            </p>
+
+        </div>
+        {{ else }}
+        <!-- ENGLISH CONTENT -->
+        <div class="font-sans leading-relaxed text-gray-800 dark:text-gray-200">
+
+            <div class="mb-12 pb-8 border-b border-gray-200 dark:border-white/10">
+                <strong class="text-emerald-600 dark:text-neon-green uppercase tracking-widest">Last Updated:</strong>
+                <span class="text-gray-900 dark:text-white ml-2">December 2025</span>
+            </div>
+
+            <p class="mb-8 text-lg">
+                At <strong class="text-gray-900 dark:text-white">DAR3D</strong>, we take your privacy seriously. This
+                website follows a
+                <strong class="text-emerald-600 dark:text-neon-green">"Privacy by Design"</strong> principle.
+            </p>
+
+            <br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">1. Strict Consent
+                Model</h2>
+
+            <p class="mb-6">
+                Unlike most websites, <strong class="text-orange-600 dark:text-orange-500">DAR3D does NOT load any
+                    tracking cookies by default</strong>.
+                We use an <strong>"Explicit Consent (Opt-In)"</strong> system:
+            </p>
+
+            <ul class="list-none pl-0 mb-8 space-y-4">
+                <li class="pl-6 border-l-2 border-orange-500 dark:border-orange-500">
+                    <strong>ENTRY:</strong> Upon entry, we do <strong>NOT</strong> track you.
+                </li>
+                <li class="pl-6 border-l-2 border-emerald-600 dark:border-neon-green">
+                    <strong>ACCEPT:</strong> Only if you click <strong>"Accept All"</strong> on our banner, we will load
+                    the <strong>Google Analytics (GA4)</strong> script.
+                </li>
+                <li class="pl-6 border-l-2 border-gray-300 dark:border-gray-600">
+                    <strong>REJECT:</strong> If you click <strong>"Necessary Only"</strong> or ignore the banner, Google
+                    Analytics will <strong>NEVER</strong> run.
+                </li>
+            </ul>
+
+            <br>
+            <hr class="border-gray-200 dark:border-white/10 my-12"><br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">2. Which cookies do
+                we use?</h2>
+
+            <div class="mb-8">
+                <h3 class="text-emerald-600 dark:text-neon-green mb-4 font-bold">A. Technical Cookies (Necessary)</h3>
+                <p class="mb-4">These are essential for the website's basic function and do not store personally
+                    identifiable information.</p>
+                <div class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg border border-gray-200 dark:border-white/10">
+                    <code class="text-emerald-600 dark:text-neon-green font-mono">cookieConsent</code>
+                    <p class="text-sm mt-2 mb-0 opacity-80">Stores your preference ("all" or "necessary") so we don't
+                        show the banner on every visit. <br><strong>Duration:</strong> 1 year.</p>
+                </div>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-orange-600 dark:text-orange-500 mb-4 font-bold">B. Analytics Cookies (Optional)</h3>
+                <p class="mb-4">These activate only if you give permission. They help us understand which creatures or
+                    gadgets are most visited.</p>
+                <div class="bg-gray-100 dark:bg-white/5 p-4 rounded-lg border border-gray-200 dark:border-white/10">
+                    <code class="text-orange-600 dark:text-orange-500 font-mono">_ga</code> / <code
+                        class="text-orange-600 dark:text-orange-500 font-mono">_ga_MYM83H0X5Q</code>
+                    <p class="text-sm mt-2 mb-0 opacity-80">Google Analytics 4 identifiers to distinguish sessions and
+                        users anonymously.</p>
+                </div>
+            </div>
+
+            <br>
+            <hr class="border-gray-200 dark:border-white/10 my-12"><br>
+
+            <h2 class="font-title text-gray-900 dark:text-white mb-6 uppercase text-xl md:text-2xl">3. Your Rights</h2>
+
+            <p class="mb-6">
+                You have full control over your data. Since our implementation is strict, if you choose not to accept,
+                you simply do not exist in our metrics.
+            </p>
+
+            <div class="bg-emerald-50 dark:bg-neon-green/10 border-l-4 border-emerald-600 dark:border-neon-green p-6">
+                <h4 class="text-gray-900 dark:text-white font-bold mb-2 mt-0">Revoking Consent</h4>
+                <p class="mb-0 text-gray-700 dark:text-gray-300">
+                    If you accepted cookies and changed your mind, you can revoke permission at any time by
+                    <strong>clearing your browser data</strong> (cookies and local storage) for this domain. Upon
+                    reloading, you will see the banner again and can reject them.
+                </p>
+            </div>
+
+            <br><br>
+
+            <p class="text-center opacity-50 italic mt-16">
+                Made with ❤️ and privacy in Barcelona.
+            </p>
+
+        </div>
+        {{ end }}
+
+    </div>
+</div>
+{{ end }}

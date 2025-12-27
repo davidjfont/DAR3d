@@ -184,3 +184,9 @@ other = "Colección DAR3D"
 other = "Modelos 3D, criaturas y arte digital listos para descargar e imprimir."
 [store_buy]
 other = "Comprar ahora"
+
+[legal_copyright]
+other = "Legal & Copyright"
+
+[legal_cookies]
+other = "Cookies"

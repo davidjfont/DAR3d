@@ -1,0 +1,150 @@
+<!-- COOKIE CONSENT (GDPR OPTION 2 - ROBUST & SAFE) -->
+<script>
+    // 0. Initialize Event Tracking Safeguard (Prevents Console Errors)
+    (function () {
+        const eventThrottle = {};
+
+        // Globally define darEvent so the site doesn't crash
+        window.darEvent = function (name, params = {}) {
+            // Strict GDPR: If tracking is NOT consented, do nothing.
+            const consent = localStorage.getItem("cookieConsent");
+            if (consent !== "all") {
+                // Optional: Log intent to track for debugging
+                // console.debug(`🚫 tracking blocked for: ${name}`);
+                return;
+            }
+
+            const now = Date.now();
+
+            // 1. Session-wide gate for interact_3d_model (Human intent)
+            if (name === "interact_3d_model") {
+                if (sessionStorage.getItem("dar_interact_3d_fired")) {
+                    return;
+                }
+                sessionStorage.setItem("dar_interact_3d_fired", "true");
+            }
+
+            // 2. Global Throttle: limit same event to once per 1000ms (Safety)
+            if (eventThrottle[name] && (now - eventThrottle[name] < 1000)) {
+                return;
+            }
+            eventThrottle[name] = now;
+
+            // 3. Send to GA4 if available
+            if (typeof gtag === "function") {
+                gtag("event", name, {
+                    ...params,
+                    page_location: window.location.href,
+                    page_title: document.title
+                });
+            }
+        };
+    })();
+
+    (function () {
+
+        // 1. Check if user has already decided
+        try {
+            if (localStorage.getItem("cookieConsent")) {
+                // If they already accepted "all" previously, trigger the event immediately
+                if (localStorage.getItem("cookieConsent") === "all") {
+                    window.dispatchEvent(new Event("cookiesAccepted"));
+                }
+                return;
+            }
+        } catch (e) {
+            // LocalStorage access restricted
+        }
+
+
+        // 2. Create Banner Element
+        const banner = document.createElement("div");
+        // Generic ID to avoid AdBlockers
+        banner.id = "sys-notification-layer";
+
+        // NUCLEAR OPTION: Inline styles with !important to force visibility
+        banner.style.cssText = "position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; z-index: 2147483647 !important; display: flex !important; justify-content: center !important; padding: 20px !important; pointer-events: none !important;";
+
+        // Inner container
+        banner.innerHTML = `
+    <div style="pointer-events: auto !important; max-width: 1200px; width: 100%; background-color: #050505; color: white; border: 1px solid rgba(74, 222, 128, 0.3); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 0 50px rgba(0,0,0,0.9); backdrop-filter: blur(10px);">
+      
+      <!-- Flex Container for Desktop -->
+      <div style="display: flex; flex-direction: column; gap: 16px; md:flex-direction: row; align-items: center; justify-content: space-between;">
+          
+          <!-- Text -->
+          <div style="flex: 1; margin-bottom: 16px; margin-right: 20px;">
+             <h3 style="color: #4ade80; font-weight: bold; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; font-family: monospace;">Privacidad y Cookies</h3>
+             <p style="color: #d1d5db; font-size: 14px; line-height: 1.6;">
+               Usamos cookies para mejorar la experiencia en <span style="color: #fca5a5;">DAR3D</span>. Solo activamos Analytics con tu permiso explícito.
+               <a href="/legal/cookies/" style="text-decoration: underline; color: #86efac; margin-left: 4px;">Ver política</a>.
+             </p>
+          </div>
+
+          <!-- Buttons -->
+          <div style="display: flex; gap: 12px; flex-shrink: 0; flex-wrap: wrap;">
+            <button data-consent="necessary" 
+              style="padding: 10px 16px; font-size: 12px; font-family: monospace; text-transform: uppercase; color: #9ca3af; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; cursor: pointer;">
+              Solo necesarias
+            </button>
+            <button data-consent="all" 
+              style="padding: 10px 24px; font-size: 12px; font-family: monospace; text-transform: uppercase; font-weight: bold; color: white; background-color: #ea580c; border: none; border-radius: 4px; cursor: pointer; box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.2);">
+              Aceptar todas
+            </button>
+          </div>
+
+      </div>
+
+    </div>
+  `;
+
+        document.body.appendChild(banner);
+
+        // 3. Handle Button Clicks
+        document.querySelectorAll("[data-consent]").forEach(btn => {
+            btn.onclick = () => {
+                const consentType = btn.dataset.consent;
+
+                try {
+                    localStorage.setItem("cookieConsent", consentType);
+                } catch (e) {
+                    // Could not save to localStorage
+                }
+
+                // Animation for removal
+                const container = document.getElementById('sys-notification-layer');
+                if (container) {
+                    container.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    container.style.opacity = '0';
+                    container.style.transform = 'translateY(20px)';
+
+                    setTimeout(() => {
+                        container.remove();
+                    }, 500);
+                }
+
+                // Trigger Analytics if accepted
+                if (consentType === "all") {
+                    window.dispatchEvent(new Event("cookiesAccepted"));
+                }
+            };
+        });
+    })();
+
+    // 4. Load Analytics ONLY on Consent
+    window.addEventListener("cookiesAccepted", function () {
+        // Replace G-XXXXXXX with your actual GA4 ID
+        const GA_ID = 'G-MYM83H0X5Q';
+
+
+        const s = document.createElement("script");
+        s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+        s.async = true;
+        document.head.appendChild(s);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+    });
+</script>

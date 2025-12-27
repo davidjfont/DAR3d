@@ -1,0 +1,80 @@
+<style>
+    /* Robust Theme Logic for Newsletter Bar */
+    #newsletter-bar {
+        transition: all 0.5s ease;
+    }
+
+    /* Day Mode (Light Site) -> Dark Bar */
+    [data-theme="light"] #newsletter-bar {
+        background-color: #1e1e1e !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    [data-theme="light"] #newsletter-bar .message-text {
+        color: #ffffff !important;
+    }
+
+    [data-theme="light"] #newsletter-bar .protocol-note {
+        color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    /* Night Mode (Dark Site) -> Light Bar */
+    [data-theme="dark"] #newsletter-bar {
+        background-color: #e5e5e5 !important;
+        border-color: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    [data-theme="dark"] #newsletter-bar .message-text {
+        color: #000000 !important;
+    }
+
+    [data-theme="dark"] #newsletter-bar .protocol-note {
+        color: rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* Constant Input Styling */
+    #newsletter-bar input {
+        color: #111827 !important;
+    }
+
+    #newsletter-bar input::placeholder {
+        color: #6b7280 !important;
+    }
+</style>
+
+<section id="newsletter-bar" class="w-full py-16 border-t border-b">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col lg:flex-row items-center justify-between gap-10">
+
+        <!-- Left Section: Message -->
+        <div class="flex-1 text-center lg:text-left">
+            <p class="message-text text-lg md:text-xl font-sans leading-relaxed tracking-tight max-w-2xl font-medium">
+                I explore the intersection between design, technology, and the future.
+                <span class="block lg:inline font-bold">Want to join me on my journey?</span>
+            </p>
+        </div>
+
+        <!-- Right Section: Form Container -->
+        <div class="w-full lg:w-auto min-w-[320px] md:min-w-[480px]">
+            <form action="https://dar3dbyfdfont.substack.com/api/v1/free" method="post" target="_blank"
+                class="flex flex-row w-full items-stretch rounded-md overflow-hidden shadow-2xl">
+
+                <input type="email" name="email" required placeholder="tu@email.com"
+                    style="background-color: rgb(247, 253, 254) !important;"
+                    class="flex-1 px-5 py-4 focus:ring-0 border-none outline-none font-sans text-lg w-full">
+
+                <button type="submit"
+                    class="bg-fox-red hover:bg-orange-600 text-white font-title text-sm tracking-[0.2em] uppercase py-4 px-10 transition-colors duration-300 whitespace-nowrap active:scale-95">
+                    Subscribe
+                </button>
+
+                <!-- Hidden inputs -->
+                <input type="hidden" name="first_url" value="https://dar3dbyfdfont.substack.com/">
+                <input type="hidden" name="first_referrer" value="https://dar3dbyfdfont.substack.com/">
+            </form>
+
+            <p class="protocol-note mt-3 text-[9px] font-mono uppercase tracking-[0.4em] text-center lg:text-right">
+                No Spam // Unsubscribe Anytime
+            </p>
+        </div>
+    </div>
+</section>

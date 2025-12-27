@@ -253,3 +253,9 @@ other = "Organic"
 other = "Inorganic"
 ["Sintética"]
 other = "Synthetic"
+
+[legal_copyright]
+other = "Legal & Copyright"
+
+[legal_cookies]
+other = "Cookies"
